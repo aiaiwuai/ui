@@ -1,7 +1,7 @@
 {
-  "server":"ws://127.0.0.1:9001",
+  "server":"ws://127.0.0.1:9001/mqtt",
   "username":"username",
   "password":"password",
-  "clientId":"MQTT_ZH_Medicine_UI",
-  "subscribe":"MQTT_ZH_Medicine_UI"
+  "clientId":"H5UI",
+  "subscribe":"HUICOBUS_MQTT_TOPIC_TUP2UIR"
 }

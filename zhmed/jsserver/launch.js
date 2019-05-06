@@ -357,8 +357,8 @@ function realtimepic(){
     setInterval(function(){
         //console.log("what is calimode:"+req.is_calibration());
         if(!req.is_calibration()) return;
-        let x = req.GetRandomNum(0,22);
-        let msg = {
+        var x = req.GetRandomNum(0,22);
+        var msg = {
             action : "ZH_Medicine_Realtime_Picture_Update",
             msg: "./jpg/"+x+".jpg"
         }
@@ -368,12 +368,12 @@ function realtimepic(){
 }
 function fakelog(){
     setInterval(function(){
-        let x = req.GetRandomNum(5,50);
-        let str = "["+x+"]:";
-        for(let i=0;i<x;i++){
+        var x = req.GetRandomNum(5,50);
+        var str = "["+x+"]:";
+        for(var i=0;i<x;i++){
             str = str + "y ";
         }
-        let msg = {
+        var msg = {
             action : "ZH_Medicine_Log_Update",
             msg: str
         }

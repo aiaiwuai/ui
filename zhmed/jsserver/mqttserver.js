@@ -5,7 +5,7 @@ var mosca = require('mosca');
 var MqttServer = new mosca.Server({
 
     http:{
-        port:3000,
+        port:1883,
         bundle:true,
         static:'./'
     },
