@@ -1,0 +1,28 @@
+{
+  "name": "debug",
+  "owner": "system",
+  "parameter": {
+    "groups":[
+      {
+        "groupname": "group1",
+        "list": [
+          {"paraname":"Move1","type":"button","action":"Move1"},
+          {"paraname":"Move2","type":"button","action":"Move2"},
+          {"paraname":"Move3","type":"button","action":"Move3"},
+          {"paraname":"Move4","type":"button","action":"Move4"},
+          {"paraname":"Move5","type":"button","action":"Move5"},
+          {"paraname":"Move6","type":"button","action":"Move6"}
+                  ]
+      },{
+        "groupname": "group2",
+        "list": [
+          {"paraname":"focus1","type":"button","action":"focus1"},
+          {"paraname":"focus2","type":"button","action":"focus2"},
+          {"paraname":"focus3","type":"button","action":"focus3"},
+          {"paraname":"focus4","type":"button","action":"focus4"},
+          {"paraname":"focus5","type":"button","action":"focus5"},
+          {"paraname":"focus6","type":"button","action":"focus6"}
+        ]
+      }]
+  }
+}
