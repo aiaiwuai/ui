@@ -1,5 +1,6 @@
 ﻿
     var fs = require('fs');
+    var mqtt=require('mqtt');
     var msg;
     var baseconf;
     var sysconf;
@@ -12,6 +13,26 @@
     var if_cali = "false";
     function database(data){
     var key = data.action;
+    prepareconf()
+    console.log(mqttconfig)
+    var client  = mqtt.connect(mqttconfig.server,{
+        username:'username',
+        password:'password',
+        clientId:'HUICOBUS_MQTT_CLIENTID_H5UI'
+    });
+    client.on('connect', function () {
+  client.subscribe('presence', function (err) {
+    if (!err) {
+      client.publish('presence', 'Hello mqtt')
+    }
+  })
+})
+ 
+client.on('message', function (topic, message) {
+  // message is Buffer
+  console.log(message.toString())
+  client.end()
+})
     switch(key){
         case "ZH_Medicine_Login":
             var usr = data.body.username;
@@ -240,9 +261,14 @@
             ret.status="true";
             return JSON.stringify(ret);
         case "ZH_Medicine_sys_config":
+            client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP', "HUICOBUS_MQTT_TOPIC_UIR2TUP try",0,function(){
+                console.log("RECEIVE")
+
+            })
             var ret = msg.ZH_Medicine_sys_config;
             ret.ret=sysconf;
             ret.status="true";
+            // sleep(1000)
             return JSON.stringify(ret);
         case "ZH_Medicine_sys_config_save":
             var ret = msg.ZH_Medicine_sys_config_save;
