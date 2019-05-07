@@ -32,21 +32,21 @@ http.createServer(function(request, response) {
 
     switch(ext){
         case ".css":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             Data = fs.readFileSync(".."+pathname,'utf-8');
             response.writeHead(200, {"Content-Type": "text/css"});
             response.write(Data);
             response.end();
             break;
         case ".js":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             Data = fs.readFileSync(".."+pathname,'utf-8');
             response.writeHead(200, {"Content-Type": "application/javascript"});
             response.write(Data);
             response.end();
             break;
         case ".map":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             Data = fs.readFileSync(".."+pathname,'utf-8');
             response.writeHead(200, {"Content-Type": "application/javascript"});
             response.write(Data);
@@ -54,7 +54,7 @@ http.createServer(function(request, response) {
             break;
         case ".ico":
 
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "image/x-ico"});
             //response.write(Data);
@@ -68,7 +68,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".png":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "image/png"});
 
@@ -84,7 +84,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".jpg":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "image/jpg"});
 
@@ -100,7 +100,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".gif":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "image/gif"});
 
@@ -116,7 +116,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".swf":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             //response.writeHead(200, {"Content-Type": "application/x-shockwave-flash"});
 
@@ -132,7 +132,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".woff":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "application/x-font-woff"});
             //response.write(Data);
@@ -146,7 +146,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".woff2":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "font/woff2"});
             //response.write(Data);
@@ -160,7 +160,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".ttf":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "video/mpeg4"});
             //response.write(Data);
@@ -174,7 +174,7 @@ http.createServer(function(request, response) {
             });
             break;
         case ".mp4":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             //Data = fs.readFileSync(".."+pathname,'binary');
             response.writeHead(200, {"Content-Type": "application/x-font-ttf"});
             //response.write(Data);
@@ -188,14 +188,14 @@ http.createServer(function(request, response) {
             });
             break;
         case ".html":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             Data = fs.readFileSync(".."+pathname,'utf-8');
             response.writeHead(200, {"Content-Type": "text/html"});
             response.write(Data);
             response.end();
             break;
         case ".svg":
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
             Data = fs.readFileSync(".."+pathname,'utf-8');
             response.writeHead(200, {"Content-Type": "image/svg+xml"});
             response.write(Data);
@@ -206,7 +206,7 @@ http.createServer(function(request, response) {
             var filename = pathname.replace(/^.*\/|\..*$/g, "");
             console.log("Client require PHP file :"+filename);
             if(filename == "request"){
-                console.log("Client require :"+pathname);
+                // console.log("Client require :"+pathname);
                 var str="";
                 request.on("data",function(chunk){
                     str+=chunk;
@@ -214,7 +214,7 @@ http.createServer(function(request, response) {
                     //var arg=querystring.parse(str);
                     //console.log(arg);
                     var ret = req.database(JSON.parse(str));
-                    console.log("Server response :"+ret);
+                    // console.log("Server response :"+ret);
                     response.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
                     response.write(ret);
                     response.end();
@@ -302,7 +302,7 @@ http.createServer(function(request, response) {
             }
             break;
         default:
-            console.log("Client require :"+pathname);
+            // console.log("Client require :"+pathname);
                 Data = fs.readFileSync('../index.html','utf-8');
                 response.writeHead(200, {"Content-Type": "text/html"});
                 response.write(Data);
