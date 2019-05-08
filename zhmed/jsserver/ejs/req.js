@@ -10,30 +10,52 @@ var identifyparameter;
 var mqttconfig;
 var calibration;
 var if_cali = "false";
-var localmqtt = {
+const {
+    AsyncClient
+} = require("async-mqtt");
+
+    var localmqtt = {
     "server": "mqtt://mqtt:1883"
 }
-console.log(localmqtt)
-
-function database(data) {
-    var key = data.action;
     var client = mqtt.connect(localmqtt.server, {
-    username: 'username',
-    password: 'password',
-    clientId: 'HUICOBUS_MQTT_CLIENTID_H5UI'
-});
-client.on("error",function(){
-    console.log("connect mqtt error");
-})
+        username: 'username',
+        password: 'password',
+        clientId: 'HUICOBUS_MQTT_CLIENTID_H5UI'
+    });
+    const asyncClient = new AsyncClient(client);
+    client.on("error", function() {
+        console.log("connect mqtt error");
+    })
     client.on('connect', function() {
         console.log("connect okkdd")
-        client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function(err) {
-            if (!err) {
-                client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP',JSON.stringify(data))
-            }
-        })
     })
+    client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function(err) {
+        console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
+        console.log(err);
+        if (!err) {
+          
+        }
+    })
+client.subscribe('HUICOBUS_MQTT_TOPIC_UIR2TUP', function(err) {
+        console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
+        console.log(err);
+        if (!err) {
+          
+        }
+    })
+ client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP', JSON.stringify({"HELLP":"SSS"}),function(Error){
+
+             console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP")
+             console.log(Error)
+         })
+ var ret = {}
+
+
+function database(data,client) {
+    var key = data.action;
+
     switch (key) {
+
         case "ZH_Medicine_Login":
             var usr = data.body.username;
             var ret = msg.ZH_Medicine_Login;
@@ -251,18 +273,20 @@ client.on("error",function(){
             ret.status = "true";
             return JSON.stringify(ret);
         case "ZH_Medicine_sys_config":
-            console.log('ZH_Medicine_sys_config');
-            var ret;
-            async function watimessage(topic, message){
-                ret = msg.ZH_Medicine_sys_config;
-                ret.ret = message;
-                ret.status = "true";
+            // console.log('ZH_Medicine_sys_config');
+            // var ret;
+            // var flag = false;
+            // var whilerun = true;
+            // ret = msg.ZH_Medicine_sys_config;
+            
+            // while (whilerun) {
+            //     if (flag) {
+            //         console.log("DS")
+            //         whilerun = false;
 
-            }
-            client.on('message', watimessage)
-            watimessage.then(function(){
-                return JSON.stringify(ret);
-            })
+            //     }
+            // }
+            // return JSON.stringify(ret);
             break;
         case "ZH_Medicine_sys_config_save":
             var ret = msg.ZH_Medicine_sys_config_save;
@@ -446,3 +470,4 @@ exports.prepareconf = prepareconf;
 exports.mqttdatabase = mqttdatabase;
 exports.GetRandomNum = GetRandomNum;
 exports.is_calibration = is_calibration;
+exports.client = asyncClient;
