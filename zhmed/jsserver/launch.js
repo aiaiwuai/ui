@@ -5,6 +5,15 @@ const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
 const querystring = require('querystring');
+const {
+    AsyncClient
+} = require("async-mqtt");
+
+
+var localmqtt = {
+    "server": "mqtt://mqtt:1883"
+}
+
 
 
 var sio = require('socket.io');
@@ -22,13 +31,11 @@ var client = mqtt.connect('mqtt://127.0.0.1', {
 });
 
 req.prepareconf();
-
 http.createServer(function(request, response) {
     //console.log(request.url);
     var pathname = url.parse(request.url, false).pathname;
     var ext = pathname.match(/(\.[^.]+|)$/)[0];
     var Data = "";
-
     switch (ext) {
         case ".css":
             // console.log("Client require :"+pathname);
@@ -234,8 +241,10 @@ http.createServer(function(request, response) {
                 // console.log("Client require :"+pathname);
 
                 var str = "";
+                var res = req.msg;
                 request.on("data", function(chunk) {
                     str += chunk;
+                    var timestamp = new Date().getTime();
                     console.log("post data:" + str);
                     requestObj = JSON.parse(str);
                     console.log(requestObj)
@@ -247,25 +256,73 @@ http.createServer(function(request, response) {
                         jsonInput['destId'] = 'HUICOBUS_MQTT_CLIENTID_TUPENTRY';
                         jsonInput['topicId'] = 'HUICOBUS_MQTT_TOPIC_UIR2TUP';
                         jsonInput['hlContent'] = str;
-                        jsonInput['cmdValue'] = "111";
-                        jsonInput['cmdId'] = 0x0A86
-                        req.client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP', JSON.stringify(jsonInput),
+                        jsonInput['cmdValue'] = 30;
+                        jsonInput['cmdId'] = 0x0A86;
+                        var client = mqtt.connect(localmqtt.server, {
+                            username: 'username',
+                            password: 'password'
+                        });
+
+
+                        client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function(err) {
+                            console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
+                            console.log(err);
+                            if (!err) {
+
+                            }
+                        })
+                        client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP', JSON.stringify(jsonInput),
                             function(Error) {
                                 console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP")
-                                console.log(Error)
+                                Error ? console.log(Error) : null;
                             })
-                        req.client.on("error", function() {
+                        client.on("error", function() {
                             console.log("connect mqtt error");
                         })
-                        req.client.on("message", function(topic, message) {
-                            console.log(topic)
-                            console.log(message)
+                        client.on("message", function(topic, message) {
+                            console.log("ON message:" + topic)
                             if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIR') {
+                                var resfromtup = JSON.parse(message.toString());
                                 response.writeHead(200, {
                                     'Content-Type': 'text/html;charset=utf-8'
                                 });
-                                response.write(message.toString());
-                                response.end();
+                                console.log(resfromtup)
+                                var ret = res[requestObj.action];
+                                console.log(resfromtup.src)
+                                console.log(requestObj.action)
+                                // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
+                                if (resfromtup.src && resfromtup.src == requestObj.action) {
+                                    console.log("DDD");
+                                    ret.ret = resfromtup.hlContent;
+                                    ret.status = true;
+                                    // response.send(JSON.stringify(ret));
+                                    response.write(JSON.stringify(ret));
+                                    response.end();
+                                    client.end();
+                                    // req.mqttclient.end(true);
+
+
+                                } else {
+                                    // response.end();
+                                }
+                                // if(resfromtup.msg=="Hello, World"){
+                                //      response.end();
+                                // }
+                                // } else {
+                                //     ret.status = false;
+                                //     try {
+                                //         response.write(JSON.stringify(ret));
+                                //         response.end();
+                                //     } catch (e) {
+                                //         // statements
+                                //         console.log(e);
+                                //          response.end();
+                                //     }
+
+
+                                // }
+
+
                             }
 
                         })

@@ -1,6 +1,6 @@
 ﻿var fs = require('fs');
 var mqtt = require('mqtt');
-var msg;
+var msg=JSON.parse(jsReadFiles("../msg/message.json"));
 var baseconf;
 var sysconf;
 var languagelist;
@@ -350,7 +350,8 @@ function GetRandomNum(Min, Max) {
 function prepareconf() {
     console.log("Start to prepare the configuration structure.");
 
-    msg = JSON.parse(jsReadFiles("../msg/message.json"));
+    // msg = JSON.parse(jsReadFiles("../msg/message.json"));
+    // console.log(msg)
     baseconf = {};
     var templist = getfilelist("../baseconf/plateconf/");
     for (var i = 0; i < templist.length; i++) {
@@ -463,6 +464,7 @@ function is_calibration() {
     if (if_cali === "false") return false;
     return true;
 }
+exports.msg=msg;
 exports.req_test = req_test;
 exports.database = database;
 exports.check_usr = check_usr;
@@ -471,3 +473,4 @@ exports.mqttdatabase = mqttdatabase;
 exports.GetRandomNum = GetRandomNum;
 exports.is_calibration = is_calibration;
 exports.client = asyncClient;
+exports.mqttclient = client;
