@@ -138,6 +138,22 @@
     },
     "msg":"12345"
   },
+  "ZH_Medicine_history_list":{
+    "status":"false",
+    "auth":"true",
+    "ret":[],
+    "msg":"12345"
+  },
+  "ZH_Medicine_history_task_info":{
+    "status":"",
+    "auth":"true",
+    "ret":{
+      "parameter":{},
+      "configure":{},
+      "running": "false"
+    },
+    "msg":"12345"
+  },
   "ZH_Medicine_default":{
     "status":"false",
     "auth":"true",

@@ -57,6 +57,9 @@
       "locationinfo":"位置校准",
       "buttoncalimodeyes":"进入校准模式",
       "buttoncalimodeno":"离开校准模式"
+    },
+    "history":{
+      "historyinfo":"操作历史"
     }
   },
   "alarmview":{

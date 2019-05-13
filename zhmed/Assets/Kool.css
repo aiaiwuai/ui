@@ -1,0 +1,1460 @@
+.Kool__Root {
+	font-family : "Malgun Gothic", Dotum, Verdana;
+	font-size : 12px;
+	font-style : normal;
+	font-weight : normal;
+	font-variant : normal;
+	line-height : normal;
+	text-align : left;
+	cursor : default;
+
+	-moz-box-sizing : border-box;
+	-webkit-box-sizing : border-box;
+	box-sizing : border-box;
+}
+.Kool__Root * {
+	-moz-box-sizing : border-box;
+	-webkit-box-sizing : border-box;
+	box-sizing : border-box;
+}
+
+.Kool__Button {
+	padding : 3px 8px 3px 8px;
+	margin : 0;
+	border : #AAB3B3 solid 1px;
+	display : block;
+	cursor : pointer;
+	text-decoration : none;
+	outline : none;
+	white-space : nowrap;
+	overflow : visible;
+	font-weight : bold;
+	border-radius : 4px;
+	font-family : inherit;
+	transition : background-color 0.2s;
+}
+.Kool__Button:hover {
+	background-color : #BDBDBD;
+}
+.Kool__Button .Kool__Table {
+	display : inline-block;
+}
+.Kool__Button .Kool__Label {
+	white-space : pre;
+	vertical-align : middle;
+}
+.Kool__Button .Kool__Image {
+	vertical-align : middle;
+}
+
+.Kool__ComboBox {
+	margin : 0;
+}
+
+.Kool__ToolTip {
+	font-family : "Malgun Gothic", Dotum, Verdana;
+	font-size : 11px;
+	padding : 2px 5px 2px 5px;
+	margin : 0;
+	color : #FFFFFF;
+	background-color : #000000;
+	border : #222222 solid 1px;
+	display : block;
+	overflow : hidden;
+	border-radius : 3px;
+	cursor : default;
+	text-align : center;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+
+.Kool__ErrorTip {
+	font-family : "Malgun Gothic", Dotum, Verdana;
+	font-size : 11px;
+	padding : 1px 5px 3px 5px;
+	margin : 0;
+	color : #FFFFFF;
+	background-color : #FF0000;
+	border : #F54444 solid 1px;
+	display : block;
+	overflow : hidden;
+	border-radius : 3px;
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+
+.Kool__BrowserScrollBarH {
+	background-color : rgba(0,0,0,0);
+	-ms-filter : "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+.Kool__Box, .Kool__HBox, .Kool__VBox {
+	-webkit-overflow-scrolling : touch;
+}
+
+.Kool__HBrowserScrollBar, .Kool__VBrowserScrollBar {
+	-webkit-overflow-scrolling : touch;
+}
+
+/* If the scroll bar does not appear, apply "auto" to "webkit-overflow-scrolling".
+.Kool__HBrowserScrollBar_Auto {
+	-webkit-overflow-scrolling : auto;
+	min-height : 3px;
+}
+.Kool__HBrowserScrollBar_Auto::-webkit-scrollbar {
+	-webkit-appearance : none;
+}
+.Kool__HBrowserScrollBar_Auto::-webkit-scrollbar:horizontal {
+	height : 3px;
+}
+.Kool__HBrowserScrollBar_Auto::-webkit-scrollbar-thumb {
+	border-radius : 1px;
+	background-color : rgba(0, 0, 0, 0.5);
+	min-width : 3px;
+}
+
+.Kool__VBrowserScrollBar_Auto {
+	-webkit-overflow-scrolling : auto;
+	min-width : 3px;
+}
+.Kool__VBrowserScrollBar_Auto::-webkit-scrollbar {
+	-webkit-appearance : none;
+}
+.Kool__VBrowserScrollBar_Auto::-webkit-scrollbar:vertical {
+	width : 3px;
+}
+.Kool__VBrowserScrollBar_Auto::-webkit-scrollbar-thumb {
+	border-radius : 1px;
+	background-color : rgba(0, 0, 0, 0.5);
+	min-height : 3px;
+}
+*/
+
+.Kool__TextInput {
+	padding : 1px;
+	border : #999999 solid 1px;
+}
+
+.Kool__AutocompleteTextInput {
+	padding : 0;
+}
+
+.Kool__ContextMenu {
+	font-family : "Malgun Gothic", Dotum, Verdana;
+	font-size : 12px;
+	padding : 4px;
+	border: #AAB3B3 solid 1px;
+	cursor : default;
+	background-color : #EEEEEE;
+	color : #31393F;
+	text-align : center;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__ContextMenu span {
+	padding : 2px 8px 2px 8px;
+	white-space : nowrap;
+}
+.Kool__ContextMenu hr {
+	margin : 7px 1px 1px 1px;
+}
+
+.Kool__Preloader {
+	top : 0;
+	left : 0;
+	z-index : 2;
+	width : 100%;
+	height : 100%;
+	background : url("./loader.gif") 50% 50% no-repeat #FFF;
+
+	opacity : 0.7;
+	filter : progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+
+.Kool__CalendarLayout {
+	text-align : center;
+	color : #443344;
+	cursor : default;
+	padding : 0;
+	outline : 0;
+	font-weight : normal;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__CalendarLayout td {
+	white-space : nowrap;
+}
+.Kool__CalendarLayout_WeekDay {
+	font-weight : bold;
+}
+.Kool__CalendarLayout_WeekDay td {
+	padding-left : 3px;
+	padding-right : 3px;
+	font-weight : bold;
+}
+.Kool__CalendarLayout_Today {
+	color : #9450ff;
+	font-weight : bold;
+	background-color : #EEEEEE;
+}
+.Kool__CalendarLayout_RollOver {
+	color : #2069f0;
+	font-weight : bold;
+	background-color : #f0f0f0;
+}
+.Kool__CalendarLayout_Selected {
+	background-color : #9ccb00;
+	color : #fff;
+	font-weight : bold;
+}
+.Kool__CalendarLayout_Disabled {
+	color : #CCCCCC;
+}
+
+.Kool__DateChooser {
+	font-family : Tahoma, Arial, Helvetica, sans-serif;
+	font-size : 12px;
+	padding : 3px 3px 0 3px;
+	text-align : center;
+	color : #443344;
+	cursor : default;
+	border-spacing : 0;
+	border : #AAAAAA solid 1px;
+	background-color : #FFFFFF;
+	outline : 0;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__DateChooser table {
+	font-size : 12px;
+}
+.Kool__DateChooser td {
+	white-space : nowrap;
+}
+.Kool__DateChooser img {
+	cursor : pointer;
+}
+.Kool__DateChooser_Header {
+}
+.Kool__DateChooser_Year {
+	color : gray;
+	font-weight : bold;
+	white-space : nowrap;
+}
+.Kool__DateChooser_Month {
+	color : gray;
+	font-weight : bold;
+	white-space : nowrap;
+}
+.Kool__DateChooser_Line {
+	border-bottom : gray solid 1px;
+}
+
+.Kool__DateField {
+	background-color : #FFFFFF;
+}
+
+.Kool__DateEditor {
+	background-color : #FFFFFF;
+}
+
+.Kool__ProgressBar {
+	padding : 0;
+	font-weight : bold;
+	position : absolute;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__ProgressBar .Kool__BarDiv {
+	overflow : hidden;
+	position : absolute;
+	border-radius : 5px;
+	border-style : solid;
+	border-width : 4px;
+	border-color : #2a2e32;
+
+	background : -o-linear-gradient(180deg, #2a2e32, #2a2e32);
+	background : -moz-linear-gradient(180deg, #2a2e32, #2a2e32);
+	background : -webkit-gradient(180deg, #2a2e32, #2a2e32);
+	background : -webkit-linear-gradient(180deg, #2a2e32, #2a2e32);
+	background : linear-gradient(180deg, #2a2e32, #2a2e32);
+	filter : progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#2a2e32', EndColorStr='#2a2e32');
+}
+.Kool__ProgressBar .Kool__GaugeDiv {
+	-moz-box-sizing : border-box;
+	-webkit-box-sizing : border-box;
+	box-sizing : border-box;
+	position : absolute;
+	border-radius : 4px;
+
+	background : -o-linear-gradient(180deg, #ff4a5c, #ff1842);
+	background : -moz-linear-gradient(180deg, #ff4a5c, #ff1842);
+	background : -webkit-gradient(180deg, #ff4a5c, #ff1842);
+	background : -webkit-linear-gradient(180deg, #ff4a5c, #ff1842);
+	background : linear-gradient(180deg, #ff4a5c, #ff1842);
+	filter : progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ff4a5c', EndColorStr='#ff1842');
+}
+.Kool__ProgressBar .Kool__UITextField {
+	padding : 0;
+	position : absolute;
+	border : solid;
+	border-width : 0;
+	color : #ffffff;
+	font-style : normal;
+	font-family : verdana, Sans-serif;
+	font-size : 13px;
+	font-weight : bold;
+}
+﻿.Kool__Accordion {
+	background-color : #FFFFFF;
+	border-top : 0;
+	border-left : 1px solid #AAB3B3;
+	border-right : 1px solid #AAB3B3;
+	border-bottom : 1px solid #AAB3B3;
+}
+.Kool__AccordionHeader {
+	border-top : 1px solid #AAB3B3;
+	border-left : 0;
+	border-right : 0;
+	border-bottom : 1px solid #AAB3B3;
+	cursor : pointer;
+}
+.Kool__AccordionHeader:hover {
+	background-color : #D1E3FA;
+	color : #BBBBBB;
+}
+.KoolActiveAccordionStyle {
+	background-color : #5D9CEC;
+	color : #FFFFFF;
+}
+
+.Kool__ButtonBar {
+	background-color : #FFFFFF;
+	text-align : center;
+	vertical-align : middle;
+}
+.Kool__ButtonBarButton {
+	font-family : inherit;
+	margin : 0;
+	cursor : pointer;
+	text-align : center;
+}
+.Kool__ButtonBarButton .Kool__Table, .Kool__TabBar .Kool__Table, .Kool__Tab .Kool__Table {
+	display : inline-block;
+}
+.Kool__ButtonBarButton .Kool__Label, .Kool__TabBar .Kool__Label {
+	white-space : pre;
+	vertical-align : middle;
+}
+
+.Kool__ToggleButtonBar {
+	background-color : #FFFFFF;
+	border : 1px solid #5D9CEC;
+	font-weight : normal;
+	border-radius : 4px;
+	text-align : center;
+}
+.Kool__ToggleButtonBar .Kool__ButtonBarButton {
+	background-color : transparent;
+	font-family : inherit;
+	font-weight : normal;
+	color : #5D9CEC;
+	border : 0 none;
+}
+.Kool__ToggleButtonBar .Kool__ButtonBarButton:hover {
+	background-color : #D1E3FA;
+	color : #BBBBBB;
+}
+.Kool__ToggleButtonBar .Kool__ButtonBarButton .Kool__Label {
+	padding-left : 6px;
+	padding-right : 6px;
+}
+.KoolActiveToggleButton {
+	background-color : #5D9CEC !important;
+	color : #FFFFFF !important;
+}
+
+.Kool__TabBar {
+	background-color : #FFFFFF;
+	font-weight : normal;
+	text-align : center;
+	vertical-align : top;
+}
+.Kool__Tab {
+	font-family : inherit;
+	background-color : transparent;
+	cursor : pointer;
+	border-top : 1px solid #5D9CEC;
+	border-left : 1px solid #5D9CEC;
+	border-right : 1px solid #5D9CEC;
+	border-bottom : 0 none;
+	font-weight : normal;
+	color : #5D9CEC;
+	outline : 0;
+}
+.Kool__Tab:hover {
+	background-color : #D1E3FA;
+	color : #888888;
+}
+.Kool__Tab .Kool__Label {
+	white-space : pre;
+	vertical-align : middle;
+	padding : 3px 6px 3px 2px;
+}
+.KoolActiveTabStyle {
+	background-color : #5D9CEC;
+	color : #FFFFFF;
+}
+
+.Kool__TabNavigator {
+	background-color : #FFFFFF;
+	font-weight : normal;
+}
+.Kool__TabNavigator > .Kool__ContentPane {
+	border : 1px solid #555555;
+}
+.Kool__TabNavigator .Kool__Tab {
+	background-color : transparent;
+	border-top : 1px solid #555555;
+	border-left : 1px solid #555555;
+	border-right : 1px solid #555555;
+	border-bottom : 0 none;
+	color : #555555;
+}
+.Kool__TabNavigator .Kool__Tab:hover {
+	background-color : #BFBFBF;
+}
+.Kool__TabNavigator .KoolActiveTabStyle {
+	background-color : #555555;
+	color : #FFFFFF;
+}
+
+.Kool__CheckBoxSlideSkin {
+	color:#ffffff;
+	font-weight:bold;
+	background-color:#A6A6A6;
+	transition:background-color 0.5s;
+	border-radius:3px;
+}
+.Kool__CheckBoxSlideSkin:hover {
+	background-color:#bdbdbd;
+}
+
+.Kool__Slider, .Kool__HSlider, .Kool__VSlider {
+	position : absolute;
+	cursor : default;
+	font-size : 11px;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__Slider_Track {
+	width : 200px;
+	height : 4px;
+	border-width : 1px;
+	border-style : inset;
+	border-color : #DDDDDD;
+	position : absolute;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__Slider_HighlightTrack {
+	width : 1px;
+	height : 2px;
+	border-width : 1px;
+	border-style : inset;
+	border-color : #FF0000;
+	position : absolute;
+}
+.Kool__Slider_TrackHitArea {
+	position : absolute;
+}
+.Kool__Slider_Thumbs {
+}
+.Kool__Slider_Ticks {
+	position : absolute;
+}
+.Kool__Slider_Tick {
+	position : absolute;
+	border-width : 1px;
+	border-left-style : solid;
+}
+.Kool__Slider_Labels .Kool__Label {
+	position : absolute;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__SliderThumb {
+	display : inline-block;
+	position : absolute;
+	width : 12px;
+	height : 12px;
+	background-color : #666666;
+	border-radius : 12px;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__SliderThumb:hover {
+	background-color : #BBBBBB;
+}
+
+.Kool__ComboBox2 {
+	background-color:#1a7bb9;
+	border:0px none;
+	border-radius:3px;
+	color:#ffffff;
+	cursor:pointer;
+	transition:background-color 0.2s;
+}
+.Kool__ComboBox2 :hover {
+	background-color:#1c84c6;
+}
+.Kool__ComboBox2 .Kool__Button {
+	color:#ffffff;
+}
+.Kool__ComboBox2 .Kool__ComboBox2List {
+	border:1px solid #d7d9df;
+	border-radius:3px;
+	overflow: hidden;
+	background-color:#ffffff;
+	color:#333333;
+}
+.Kool__ComboBox2 .Kool__ComboBox2List .Kool__Label {
+	padding:0px;
+	left:4px;
+}
+.Kool__ComboBox_Dropdown {
+	border:1px solid #d7d9df;
+	border-radius:3px;
+	overflow: hidden;
+	background-color:#ffffff;
+	color:#333333;
+}
+
+.Kool__ExComboBox {
+	background-color : #D1E3FA;
+	border : 0 none;
+	position : absolute;
+}
+.Kool__ExComboBox[disabled] {
+	background-color : #DDDDDD;
+}
+.KoolComboTextInput {
+	padding-left : 5px;
+	
+	border-radius : 0;
+	border-right-style : none;
+}
+.KoolComboDownArrowButton {
+	background-color : transparent;
+	position : absolute;
+	padding : 0;
+	border : #999999 solid 1px;
+	border-radius : 0;font-weight : normal;
+	text-align : center;
+}
+.KoolComboDownArrowButton .Kool__Label {
+	white-space : pre;
+	vertical-align : middle;
+	padding-bottom : 0;
+}
+.KoolComboDownArrowButton .Kool__Table {
+	display : table;
+}
+
+.Kool__MonthChooser {
+	font-family : Tahoma, Arial, Helvetica, sans-serif;
+	font-size : 12px;
+	font-weight : normal;
+	padding : 3px 3px 0 3px;
+	text-align : center;
+	color : #443344;
+	cursor : default;
+	border-spacing : 0;
+	border : #AAAAAA solid 1px;
+	background-color : #FFFFFF;
+	outline : 0;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__MonthChooser td {
+	white-space : nowrap;
+}
+.Kool__MonthChooser img {
+	cursor : pointer;
+}
+.Kool__MonthChooser .Kool__Table {
+	font-size : 12px;
+	padding-bottom: 5px;
+}
+.Kool__MonthChooser .Kool__Table td {
+	padding : 5px;
+}
+.Kool__MonthChooser_ThisMonth {
+	color : #9450ff;
+	font-weight : bold;
+	background-color : #EEEEEE;
+}
+.Kool__MonthChooser_RollOver {
+	color : #2069f0;
+	font-weight : bold;
+	background-color : #f0f0f0;
+}
+.Kool__MonthChooser_Selected {
+	background-color : #9ccb00;
+	color : #fff;
+	font-weight : bold;
+}
+.Kool__MonthChooser_Disabled {
+	color : #CCCCCC;
+}
+.Kool__MonthChooser_Header {
+}
+.Kool__MonthChooser_Year {
+	color : gray;
+	font-weight : bold;
+	white-space : nowrap;
+}
+.Kool__MonthChooser_Month {
+	white-space : nowrap;
+}
+.Kool__MonthChooser_Line {
+	border-bottom : gray solid 1px;
+}
+
+.Kool__MonthField {
+	background-color : #FFFFFF;
+}
+
+.Kool__MonthEditor {
+	background-color : #FFFFFF;
+}
+
+.Kool__NumericStepper .Kool__TextInput {
+	padding-left : 3px;
+	border : #AAB3B3 solid 1px;
+	
+	border-radius : 0;
+	line-height: 100%;
+}
+.Kool__NumericStepper .Kool__UpButton {
+	position : absolute;
+	cursor : pointer;
+	background-color : white;
+	display : inline-block;
+	text-align : center;
+	border-top-right-radius : 0;
+	border-top:#AAB3B3 solid 1px;
+	border-right:#AAB3B3 solid 1px;
+	border-bottom: none;
+}
+.Kool__NumericStepper .Kool__DownButton {
+	position : absolute;
+	cursor : pointer;
+	background-color : white;
+	display : inline-block;
+	text-align : center;
+	border-bottom-right-radius : 0;
+	border : #AAB3B3 solid 1px;
+	border-left:none;
+}
+.Kool__NumericStepper .Kool__UpArrow {
+	display : inline-block;
+	border-style : solid;
+	position : absolute;
+	width : 0;
+	height : 0;
+	border-width : 4px;
+	border-color : transparent transparent #000000 transparent;
+}
+.Kool__NumericStepper .Kool__DownArrow {
+	display : inline-block;
+	border-style : solid;
+	position : absolute;
+	width : 0;
+	height : 0;
+	border-width : 4px;
+	border-color : #000000 transparent transparent transparent;
+}
+
+.Kool__IconContextMenu {
+	position : absolute;
+	padding : 8px;
+	/* margin: 2px 0 0; */
+	font-size : 14px;
+	text-align : left;
+	list-style : none;
+	background-color : #FFFFFF;
+	border : #ccc solid 1px;
+	border : rgba(0,0,0,.15) solid 1px;
+	border-radius : 4px;
+
+	-webkit-background-clip : padding-box;
+	background-clip : padding-box;
+
+	-webkit-box-shadow : 0 6px 12px rgba(0,0,0,.175);
+	-moz-box-shadow : 0 6px 12px rgba(0,0,0,.175);
+	box-shadow : 0 6px 12px rgba(0,0,0,.175);
+}
+
+.Kool__BoxDivider_Hknob {
+	background : url('h_divider.png') no-repeat 50% 50%;
+}
+
+.Kool__BoxDivider_Vknob {
+	background : url('v_divider.png') no-repeat 50% 50%;
+}
+
+.Kool__Grid .Kool__GridItem {
+ 	padding : 0;
+	border : 0 solid;
+	margin : 0;
+}
+.Kool__Grid .Kool__GridRow {
+ 	padding : 0;
+	border : 0 solid;
+	margin : 0;
+}
+.Kool__Grid .Kool__Tbody {
+ 	padding : 0;
+	border : 0 solid;
+	margin : 0;
+}
+.Kool__Grid {
+	position : absolute;
+	border-collapse : separate;
+}
+
+.Kool__SlideButton {
+	position : absolute;
+	cursor : pointer;
+	padding : 5px;
+	border-radius : 20px;
+	background-color : #00FF00;
+	color : #FFFFFF;
+
+	-webkit-box-shadow : 1px 1px 5px rgba(0,0,0,.25) inset;
+	-moz-box-shadow : 1px 1px 5px rgba(0,0,0,.25) inset;
+	box-shadow : 1px 1px 5px rgba(0,0,0,.25) inset;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__SlideButton_Thumb {
+	position : absolute;
+	display : inline-block;
+	border-radius : 20px;
+	background-color : #EEEEEE;
+
+	-webkit-transition : left 0.4s ease;
+	-moz-transition : left 0.4s ease;
+	-o-transition : left 0.4s ease;
+	transition : left 0.4s ease;
+
+	-webkit-box-shadow : 1px 1px 3px rgba(0,0,0,0.4);
+	-moz-box-shadow : 1px 1px 3px rgba(0,0,0,0.4);
+	box-shadow : 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+.Kool__Menu {
+	position : absolute;
+	text-align : center;
+	background-color : #FFFFFF;
+	border : 1px solid #A6A6A6;
+	vertical-align : top;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+.Kool__MenuItemRenderer {
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+
+.Kool__ColorPicker {
+	position : absolute;
+	background-color : #FFFFFF;
+	box-shadow : 0 2px 8px #AAAAAA;
+	border-radius : 5px;
+	padding : 5px;
+}
+.Kool__ColorPicker_UpperDiv {
+	padding : 10px 10px 7px 10px;
+}
+.Kool__ColorPicker_LowerDiv {
+	padding : 3px 10px 25px 10px;
+}
+.Kool__ColorPicker_ColorCircleDiv {
+	background-image:url('color_circle.png');
+	background-color : #FFFFFF;
+	background-position : center;
+}
+.Kool__ColorPicker_DarknessDiv {
+	background-image : url('darkness.png');
+	margin-bottom : 10px;
+}
+.Kool__ColorPicker_TextInputDiv {
+	width : 95px;
+	height: 22px;
+	border : 1px solid #DDDDDD;
+	border-radius : 2px;
+	float : left;
+}
+.Kool__ColorPicker_TextInputDiv .Kool__Label {
+	text-align : center;
+	float : left;
+}
+.Kool__ColorPicker .Kool__ColorPickerTextInput {
+	width : 73px; /* 95에서 #추가로 73로 변경 */
+	height : 20px;
+	/*border : 1px solid #DDDDDD;
+	border-radius : 2px;*/
+	text-align : center;
+	float : left;
+	border : none;
+}
+.Kool__ColorPicker .Kool__Button {
+	top : 1px;
+	position : relative;
+	padding : 0 8px 0 8px;
+	border : 1px solid #A6A6A6;
+	border-radius : 2px;
+	color : #FFFFFF;
+	font-size : 13px;
+	background-color : #A6A6A6;
+	float : right;
+}
+.Kool__ColorPicker .Kool__Button:hover {
+	background-color : #BDBDBD;
+}
+.Kool__ColorPicker_ColorSelector {
+	position : relative;
+	border-style : solid;
+	border-width : 1px;
+	border-radius : 5px;
+}
+.Kool__ColorPicker_DarknessSelector {
+	position : relative;
+	background-color : #888888;
+	opacity : 0.9;
+}
+
+.Kool__ColorPalette_PaletteDiv {
+	position : absolute;
+	background-color : #D3D3D3;
+	border-radius : 5px;
+	overflow : auto;
+	padding : 3px;
+}
+.Kool__ColorPalette_PaletteItem {
+	float : left;
+	cssFloat : left;
+	margin : 3px;
+	border-radius : 100%;
+	border-color : #FFFF00;
+	border-width : 2px;
+	box-sizing : border-box;
+}
+.Kool__ColorPalette_PaletteItemDeleteButton {
+	position : relative;
+	background-color : #FFFFFF;
+	background-image : url('palette_item_delete.png');
+	left : 17px;
+	top : -7px;
+	background-color : transparent;
+}
+.Kool__ColorPalette_Plusitem {
+	float : left;
+	cssFloat : left;
+	margin : 3px;
+	border-radius : 100%;
+	border-color : #FFFF00;
+	border-width : 2px;
+	box-sizing : border-box;
+	background-color : #FFFFFF;
+	background-position : center;
+	border-color : #888888;
+	background-image : url('palette_item_plus.png')
+}
+
+.Kool__ColorSelector {
+	border: #DDDDDD solid 2px;
+}
+
+.Kool__ColorField {
+	background-color : #FFFFFF;
+}
+
+.Kool__Panel {
+}
+.Kool__PanelSkin {
+	border-style : solid;
+	border-width : 10px 10px 5px 10px;
+	
+	border-top-right-radius : 0;
+	border-color : #EEEEEE;
+}
+.KoolPanelStatus {
+	color : #666666;
+	overflow : hidden;
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+.KoolPanelTitle {
+	font-weight : bold;
+	white-space : nowrap;
+	overflow : hidden;
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+
+.Kool__List {
+	position : absolute;
+	text-align : left;
+	background-color : #FFFFFF;
+	border : 1px solid #A6A6A6;
+	vertical-align : top;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+.Kool__ListBaseContentHolder {
+	text-align : left;
+}
+.Kool__ListBaseContentHolder_SelectionLayer .Kool__HTMLObject {
+	position : absolute;
+}
+.Kool__ListItemRenderer {
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+.Kool__ListItemRenderer .Kool__UITextField {
+	position : absolute
+}
+
+.Kool__TileList {
+	position : absolute;
+	text-align : center;
+	background-color : #FFFFFF;
+	border : 1px solid #A6A6A6;
+	vertical-align : top;
+	outline : none;
+}
+.Kool__TileListItemRenderer {
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+
+.Kool__Tree {
+	position : absolute;
+	text-align : left;
+	background-color : #FFFFFF;
+	border : 1px solid #A6A6A6;
+	vertical-align : middle;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+.Kool__TreeItemRenderer {
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select : none;
+}
+
+.Kool__MenuBar {
+	position : absolute;
+	text-align : center;
+	background-color : #FFFFFF;
+	border : 1px solid #A6A6A6;
+	vertical-align : top;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+.Kool__MenuBarItem {
+	cursor : default;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+.Kool__MenuBarItemUp {
+	background-color : transparent;
+}
+.Kool__MenuBarItemDown {
+	background-color : #DDDDDD;
+}
+.Kool__MenuBarItemOver {
+	background-color : #5D9CEC;
+}
+
+.Kool__PopUp_ModalDiv {
+	left : 0;
+	top : 0;
+	width : 100%;
+	height : 100%;
+	position : fixed;
+	background-color : rgba(0, 0, 0, 0.4);
+}
+
+.Kool__ImageRadioButton input[type="radio"] {
+	width : 0;
+}
+.Kool__ImageRadioButton input[type="radio"]:checked + .Kool__ImageRadioButton_Button {
+	background : url("./radioButtonCheck.png") no-repeat;
+}
+.Kool__ImageRadioButton input[type="radio"]:disabled + .Kool__ImageRadioButton_Button {
+	background : url("./radioButtonDisable.png") no-repeat;
+}
+.Kool__ImageRadioButton input[type="radio"]:disabled ~ .Kool__ImageRadioButton_Label {
+	color : #dbdbdb;
+}
+.Kool__ImageRadioButton_Button {
+	width : 19px;
+	height : 19px;
+	display : inline-block;
+	transition : border 0.3s;
+	position : absolute;
+	cursor : pointer;
+	background : url("./radioButtonUnCheck.png") no-repeat;
+}
+.Kool__ImageRadioButton_Label {
+	position : absolute;
+	cursor : pointer;
+	white-space : nowrap;
+}
+
+.Kool__ImageCheckBox input[type="checkbox"] {
+	width : 0;
+}
+.Kool__ImageCheckBox input[type="checkbox"]:checked + .Kool__ImageCheckBox_Button {
+	background : url("./checkBoxCheck.png") no-repeat;
+}
+.Kool__ImageCheckBox input[type="checkbox"]:disabled + .Kool__ImageCheckBox_Button {
+	background : url("./checkBoxDisable.png") no-repeat;
+}
+.Kool__ImageCheckBox input[type="checkbox"]:disabled ~ .Kool__ImageCheckBox_Label {
+	color : #dbdbdb;
+}
+.Kool__ImageCheckBox_Button {
+	width : 21px;
+	height : 19px;
+	display : inline-block;
+	transition : border 0.3s;
+	position : absolute;
+	cursor : pointer;
+	background : url("./checkBoxUnCheck.png") no-repeat;
+}
+.Kool__ImageCheckBox_Label {
+	position : absolute;
+	cursor : pointer;
+	white-space : nowrap;
+}
+
+
+.Kool__DataGrid {
+	font-family : "Malgun Gothic", Dotum, Verdana;
+	font-size : 13px;
+	background-color : #F2F2F2;
+	border : #DDDDDD solid 1px;
+	border-top-color : #555555;
+	color : #31393F;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+
+.Kool__PivotDataGrid {
+	font-family : "Malgun Gothic", Dotum, Verdana;
+	font-size : 13px;
+	background-color : #F2F2F2;
+	border : #DDDDDD solid 1px;
+	border-top-color : #555555;
+	color : #31393F;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+
+.Kool__DataGridItemRenderer {
+	outline : none;
+}
+
+.Kool__DataGridHeaderRenderer {
+	cursor : default;
+	padding-left : 3px;
+	padding-right : 3px;
+	white-space : nowrap;
+	vertical-align : middle;
+	outline : none;
+}
+.Kool__DataGridHeaderRenderer .Kool__UITextField {
+	overflow : hidden;
+	text-overflow : clip;
+}
+.KoolGridHeaderStyles {
+	color : #333333;
+	font-weight : bold;
+}
+
+.Kool__PivotDataGridHeaderRenderer {
+	cursor : default;
+	padding-left : 3px;
+	padding-right : 3px;
+	white-space : nowrap;
+	vertical-align : middle;
+	outline : none;
+}
+.Kool__PivotDataGridHeaderRenderer .Kool__UITextField {
+	overflow : hidden;
+	text-overflow : clip;
+}
+
+.Kool__DataGridGroupItemRenderer {
+	cursor : default;
+	white-space : nowrap;
+}
+.Kool__DataGridGroupItemRenderer .Kool__UITextField {
+	padding-left : 2px;
+	text-overflow : clip;
+}
+
+.Kool__PivotDataGridGroupRenderer {
+	cursor : default;
+	white-space : nowrap;
+	text-align : center;
+}
+.Kool__PivotDataGridGroupRenderer .Kool__UITextField {
+	padding-left : 2px;
+	text-overflow : clip;
+}
+
+.Kool__DataGridLineH {
+	border-bottom : solid 1px;
+	height : 0;
+	padding : 0;
+	position : absolute;
+	line-height : 0;
+}
+
+.Kool__DataGridLineV {
+	width : 0;
+	border-right : solid 1px;
+	padding : 0;
+	position : absolute;
+}
+
+.Kool__DataGridBackground {
+	padding : 0;
+	left : 0;
+	position : absolute;
+}
+
+.Kool__DataGridHeaderBackgroundSkin {
+	border-top-color : #555555;
+	border-top-style : solid;
+	border-top-width : 1px;
+	border-bottom-color : #999999;
+	border-bottom-style : solid;
+	border-bottom-width : 1px;
+	border-left-style : none;
+	border-right-style : none;
+	left : 0;
+}
+
+.Kool__DataGridHeaderSeparator {
+	border-right : #AAB3B3 solid 1px;
+	left : 0;
+	position : absolute;
+}
+
+.Kool__DataGridHeaderHorizontalSeparator {
+	border-left : none;
+	border-bottom : #AAB3B3 solid 1px;
+	line-height : 1px;
+}
+
+.Kool__DataGridColumnResizeSkin {
+	border : #999999 solid 1px ;
+}
+
+.Kool__DataGridSortItemRenderer {
+	color : #0B333C;
+	font-size : 9px;
+	text-align : center;
+	font-weight : normal;
+	padding : 0;
+}
+.Kool__DataGridSortItemRenderer span {
+	position : absolute;
+	left : 2px;
+	top : 0;
+}
+.Kool__DataGridSortItemRenderer img {
+	position : absolute;
+	width : 7px;
+	height : 7px;
+	left : 10px;
+	top : 3px;
+}
+
+.Kool__ComboBoxHeaderRenderer {
+	color : #31393F;
+	padding-left : 1px;
+	padding-right : 1px;
+}
+
+.Kool__DataGridFooter {
+	overflow : hidden;
+	font-weight : bold;
+}
+
+.Kool__CheckBoxEditor {
+	background-color : #FFFFFF;
+	border : #FFFFFF solid 1px;
+}
+
+.Kool__ComboBoxEditor {
+	background-color : #FFFFFF;
+	border-top : #999999 solid 1px;
+	border-bottom : #999999 solid 1px;
+	border-left : #999999 solid 0;
+	border-right : #999999 solid 0;
+}
+
+.Kool__DataGridFilterInput, .Kool__DataGridFilterList {
+	position : absolute;
+	display : block;
+	border : #AAB3B3 solid 1px;
+	background-color : #FAFAFA;
+}
+
+.Kool__ExComboBoxEditor {
+	background-color : #D1E3FA;
+	border : 0 none;
+	position : absolute;
+}
+.Kool__ExComboBoxEditor[disabled] {
+	background-color : #DDDDDD;
+}
+
+.Kool__FilterList {
+	width : 160px;
+	height : 140px;
+	border : #AAB3B3 solid 1px;
+	background-color : #FFFFFF;
+	outline : none;
+}
+
+.Kool__FilterListCheckBoxItemRenderer {
+	text-overflow : ellipsis;
+	white-space : nowrap;
+}
+
+.Kool__ExcelCSVImportUtil {
+	padding : 10px;
+	position : absolute;
+	display : block;
+	border : #AAB3B3 solid 1px;
+	background-color : #FAFAFA;
+	border-radius : 5px;
+
+	-moz-box-sizing : border-box;
+	-webkit-box-sizing : border-box;
+	box-sizing : border-box;
+}
+
+.Kool__ExcelImportUtil {
+	padding : 10px;
+	position : absolute;
+	display : block;
+	border : #AAB3B3 solid 1px;
+	background-color : #FAFAFA;
+	border-radius : 5px;
+
+	-moz-box-sizing : border-box;
+	-webkit-box-sizing : border-box;
+	box-sizing : border-box;
+}
+
+.Kool__CopyPanel {
+	width : 310px;
+	height : 90px;
+	padding : 10px;
+	position : absolute;
+	display : block;
+	border : #AAB3B3 solid 1px;
+	background-color : #FAFAFA;
+	border-radius : 5px;
+
+	-moz-box-sizing : border-box;
+	-webkit-box-sizing : border-box;
+	box-sizing : border-box;
+}
+.Kool__CopyPanel span {
+	width : 290px;
+	left : 20px;
+	top : 30px;
+	position : absolute;
+}
+.Kool__CopyPanel img {
+	width : 16px;
+	height : 16px;
+	cursor : pointer;
+	float : right;
+}
+.Kool__CopyPanel textarea {
+	width : 290px;
+	height : 25px;
+	left : 20px;
+	top : 60px;
+	position : absolute;
+}
+
+.Kool__PastePanel {
+	width : 310px;
+	height : 90px;
+	padding : 10px;
+	position : absolute;
+	display : block;
+	border : #AAB3B3 solid 1px;
+	background-color : #FAFAFA;
+	border-radius : 5px;
+
+	-moz-box-sizing : border-box;
+	-webkit-box-sizing : border-box;
+	box-sizing : border-box;
+}
+.Kool__PastePanel span {
+	width : 290px;
+	left : 20px;
+	top : 30px;
+	position : absolute;
+}
+.Kool__PastePanel img {
+	width : 16px;
+	height : 16px;
+	cursor : pointer;
+	float : right;
+}
+.Kool__PastePanel textarea {
+	width : 290px;
+	height : 25px;
+	left : 20px;
+	top : 60px;
+	position : absolute;
+}
+
+.Kool__DataGridGroupingPanel {
+	background-color : #111111;
+	border-top : #888888 solid 1px;
+	border-left : #888888 solid 1px;
+	border-right : #888888 solid 1px;
+	color : #CCCCCC;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+.Kool__DataGridGroupingPanelIndicator {
+	background-color : #FFFFFF;
+	border : #BBBBBB solid 1px;
+	padding : 2px 6px 4px 6px;
+	text-align : center;
+	color : #31393F;
+	outline : none;
+
+	-ms-user-select : none;
+	-moz-user-select : none;
+	-webkit-user-select : none;
+	user-select: none;
+}
+
+.Kool__TextInput::-ms-clear {
+	display: none;
+}
+
+.Kool__AutocompleteTextInput::-ms-clear {
+	display: none;
+}
+

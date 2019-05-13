@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XHGrid</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="XHGrid for HTML5, XiaoHui Tech 2017">
+<meta name="keywords" content="HTML5,Grid,JavaScript,CSS,Ajax,Graph,XHGrid">
+
+<link rel="stylesheet" type="text/css" href="./style.css">
+<link rel="stylesheet" type="text/css" href="./KoolGridSample.css"/>
+<script type="text/javascript">
+function frameloadHandler(){}
+</script>
+<style>
+.tg td{padding:4px; border:1px solid #dddddd; text-align:center;}
+.ulList {padding:0;}
+.ulList li {list-style-type:none; padding:2px;}
+ul {padding-left:30px;}
+ul li {list-style-type:disc; padding:2px;}
+</style>
+</head>
+<body>
+<div id="overview">
+	<div style="text-align:center; color:#213d64; letter-spacing:-5px;">
+		<div style="font-size:35px;">Powerful Features and Numerous Ready-to-Use Samples</div>
+		<div style="font-size:45px; font-weight:bold;">Easy and Fast - XHGrid</div>
+		<div style="padding:40px 0 15px 0;">
+			<img src="./Images/overview.png">
+		</div>
+	</div>
+	<div style="padding:10px 0 20px 0;">
+		<img src="./Images/hr1.png">
+	</div>
+	<div>
+		<div style="font-size:16px; color:#348fd6; font-weight:bold;">Key Features of XiaoHui Grid</div>
+		<div>
+			<ul class="ulList">
+				<li>Provides core functionalities, such as sorting, moving, merging cells, editing, filtering, searching, and Excel import / export.</li>
+				<li>Controls property for columns, rows and cells.</li>
+				<li>Allows users to edit data using web browser.</li>
+				<li>Row / Column merge and the auto-merge function are supported.</li>
+				<li>Automatic row height adjustment function.</li>
+				<li>Hierarchical data representation (show / hide).</li>
+				<li>Excel: Import (csv, xls, xlsx), Export (xls, xlsx), Copy and Paste between KoolGrid and Excel.</li>
+				<li>Automatic sum features: total, subtotal, change label, etc.</li>
+				<li>Selection control: single line, multiple lines, single cell, multiple cells.</li>
+				<li>Various renderers: CheckBox, Icon, Image, Spark Chart, etc.</li>
+				<li>Allows users to use HTML in headers and cells.</li>
+				<li>Provide columns to indicate if rows are added, modified, or deleted.</li>
+				<li>Footer.</li>
+				<li>Lazy Loading.</li>
+				<li>OLAP pivot function.</li>
+				<li>Web accessibility compliance.</li>
+			</ul>
+		</div>
+	</div>
+	<div style="margin-top:30px">
+		<div style="font-size:16px; color:#348fd6; font-weight:bold;">Grid Layout and Data Integration</div>
+		<div>
+			<ul class="ulList">
+				<li style="padding-bottom:8px;">Creating a grid requires Layout and Data.</li>
+				<li>Layout is an XML-formatted file or string to define the grid's columns, object ID, properties, styles, etc.</li>
+				<li>Data supports JSON, Array, XML, CSV(comma-separated values) and TSV(tab-separated values) formats, and can be passed as a file (URL) or as a string.</li>
+			</ul>
+		</div>
+	</div>
+	<div style="padding:30px 0 20px 0;">
+		<img src="./Images/hr2.png">
+	</div>
+	<table border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; border: none; text-align:center; margin-bottom:70px;">
+		<tr style="font-size:17px; color:#348fd6; font-weight:bold;">
+			<td style="width:128px; height:124px; padding:10px 17px 10px 17px; background-image:url('./Images/circlebg.png'); background-position:center; background-repeat:no-repeat;">
+				Cross-<br/>Browser<br/>Compatible
+			</td>
+			<td style="width:128px; height:124px; padding:10px 17px 10px 17px; background-image:url('./Images/circlebg.png'); background-position:center; background-repeat:no-repeat;">
+				Mobile<br/>Devices<br/><div style="font-size:13px">(HTML5 Grid)</div>
+			</td>
+			<td style="width:128px; height:124px; padding:10px 17px 10px 17px; background-image:url('./Images/circlebg.png'); background-position:center; background-repeat:no-repeat;">
+				Any<br/>Server OS
+			</td>
+			<td style="width:128px; height:124px; padding:10px 17px 10px 17px; background-image:url('./Images/circlebg.png'); background-position:center; background-repeat:no-repeat;">
+				Any<br/>DBMS
+			</td>
+			<td style="width:128px; height:124px; padding:10px 17px 10px 17px; background-image:url('./Images/circlebg.png'); background-position:center; background-repeat:no-repeat;">
+				Any<br/>Server-side Script
+			</td>
+		</tr>
+		<tr>
+			<td style="padding-top:20px">
+				IE, FireFox<br/>Chrome, Safari 
+			</td>
+			<td style="padding-top:20px">
+				Any HTML5-supported<br/>mobile devices
+			</td>
+			<td style="padding-top:20px">
+				No dependence<br/>on server
+			</td>
+			<td style="padding-top:20px">
+				No dependence<br/>on DBMS
+			</td>
+			<td style="padding-top:20px">
+				No dependence<br/>on Server-side Script
+			</td>
+		</tr>
+	</table>
+	<table class="tg" border="0" cellpadding="0" cellspacing="0" style="width:100%; border-collapse:collapse;">
+		<tr>
+			<td colspan="2" style="height:40px; border:1px solid #666666; background-color:#777777; color:#ffffff; font-size:17px; font-weight:bold;">Version Update Information</td>
+		</tr>
+		<tr>
+			<td style="width:125px; font-size:17px; color:#333333;">V 4.0</td>
+			<td style="text-align:left; color:#555555;">
+				<ul>
+					<li>Enhanced filtering and search capabilities (Filtering: Setting multiple conditions, User-defined conditions, etc.  Search: Search for specific columns, etc.)</li> 
+					<li>Components for grid editing (Calendar: Year/Month Selector, Numeric Stepper Editor, Editable ComboBox)</li> 
+					<li>OLAP Pivot (Multidimensional View)</li> 
+					<li>Excel-style editing (Switch Edit Mode with Keystroke, Move between Cells with Arrow Keys, etc.)</li> 
+					<li>Undo and redo functions in edit mode</li> 
+					<li>Edit hierarchical data (Editing, Child Node Manipulation, etc.)</li> 
+					<li>Others (Merge Footer Cells, Select Entire Rows with Selector, Editable HTML in Cell, Select Entire Child Nodes, etc.)</li> 
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:125px; font-size:17px; color:#333333;">V 3.5</td>
+			<td style="text-align:left; color:#555555;">
+				<ul>
+					<li>Improved grid style</li> 
+					<li>JavaDoc-style API documentation</li> 
+					<li>Page-by-page view function using PagingCollection</li> 
+					<li>Ability to change the default properties and styles of the grid using JavaScript includes</li> 
+					<li>Ability to set the default width of the column when changing the grid width</li> 
+					<li>Ability to set the properties of Editor in Layout</li> 
+					<li>Ability to select multiple sheets when importing Excel data</li> 
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:125px; font-size:17px; color:#333333;">V 3.1</td>
+			<td style="text-align:left; color:#555555;">
+				<ul>
+					<li>Improved web accessibility</li> 
+					<li>Improved rendering speed (10%)</li> 
+					<li>Automatic height adjustment of the grid</li> 
+					<li>Ability to export multiple grids in one screen to multiple sheets in one Excel file</li> 
+					<li>Adding the resizable sample in the JQuery UI</li> 
+					<li>Editing function of the Text editor using browser's autocomplete function</li> 
+					<li>Ability to set trueValue/falseValue in addition to true/false when using CheckBoxEditor</li> 
+				</ul>
+			</td>
+		</tr>
+	</table>
+</div>
+<br/><br/><br/>
+</body>
+</html>

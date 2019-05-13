@@ -1,0 +1,253 @@
+html, body {
+	font-family: Arial, "Search Results", Verdana, Helvetica, sans-serif;
+	font-size: 13px;
+	margin: 0;
+	background-color: #ffffff;
+}
+body {
+	padding: 25px 0 20px 80px;
+}
+select, option, input {
+	font-family: Arial, "Search Results";
+}
+
+.header {
+	font-size: 15px;
+	color: #666666;
+	width: 800px;
+	padding: 0 0 15px 0;
+}
+
+.headerTitle {
+	color: #333333;
+	font-size: 20px;
+	font-weight: bold;
+	padding-bottom: 20px;
+}
+
+.headerDesc {
+	padding-bottom: 10px;
+	line-height: 1.6;
+}
+
+.headerButtons {
+	display: inline-block;
+	padding-top: 15px;
+}
+
+.headerButtons img {
+	margin-left: 6px;
+	vertical-align: top;
+}
+
+#gridHolder {
+	width: 800px;
+	height: 405px;
+}
+
+.button {
+	float: right;
+	color: #333333;
+	background-color: #f9f9f9;
+	font-family: Arial, "Search Results";
+	font-size: 13px;
+	text-align: center;
+	margin: 0 7px 0 0;
+	padding: 7px 10px 9px 10px;
+	letter-spacing: 1px;
+	cursor: pointer;
+	border: solid 1px #cccccc;
+	border-radius: 3px;
+	border-bottom: solid 1px #ababab;
+}
+
+.button:hover {
+	color: #454545;
+	background-color: #dcf1fe;
+	border: solid 1px #bddaec;
+}
+
+.button_top {
+	float: left;
+	font-weight: bold;
+}
+
+.button_small {
+	float: left;
+	padding: 7px 10px 9px 10px;
+	font-weight: normal;
+	margin: 2px;
+	font-size: 11px;
+}
+
+.more {
+	color: #f66200;
+	text-decoration: underline;
+}
+
+.textForm {
+	float: left;
+	height:19px;
+	color: #666666;
+	background-color: #f9f9f9;
+	font-family: Arial, "Search Results";
+	font-size: 11px;
+	text-align: center;
+	margin: 0 0 0 5px;
+	padding: 0;
+	letter-spacing: 1px;
+}
+
+.blueProp {
+	color: #11aaee;
+}
+
+.orangeProp {
+	color: #f76a4c;
+}
+
+.greenProp {
+	color: #00aa00;
+}
+
+.classProp {
+	color: #348fd6;
+}
+
+.warnMsg {
+	color: #ff0000;
+}
+
+.execMsg {
+	color: #ffaa00;
+}
+
+#updater {
+	width: 800px;
+	height: 110px;
+	background-color: #f7f7f7;
+	margin-top: 25px;
+}
+
+#updater div {
+	position: relative;
+	box-sizing: border-box;
+	font-family: Arial, "Search Results";
+}
+
+#updater li {
+	position: relative;
+	list-style-type: none;
+	vertical-align: middle;
+}
+
+#updater textarea {
+	position: absolute;
+	left: 22px;
+	top: 17px;
+	width: 640px;
+	height: 32px;
+	font-family: Arial, "Search Results";
+	font-size: 13px;
+	overflow-y: scroll;
+	border: solid 1px #e2e2e2;
+	color: #555555;
+	-webkit-overflow-scrolling: touch;
+}
+
+#updater textarea:hover {
+	border: solid 1px #26a0da;
+}
+
+#updaterTabUl {
+	padding: 0;
+}
+
+#updaterTarea {
+	width: 800px;
+	border-left: solid 1px #e2e2e2;
+	border-bottom-left-radius: 6px;
+	border-bottom: solid 1px #e2e2e2;
+	border-right: solid 1px #e2e2e2;
+	border-bottom-right-radius: 6px;
+}
+
+#updaterTab {
+	width: 800px;
+	height: 37px;
+	background-color: #ffffff;
+}
+
+#updaterTab li {
+	float: left;
+	height: 25px;
+	font-size: 13px;
+	padding: 11px 0 0 0;
+	border-bottom: solid 1px #e2e2e2;
+	text-align: center;
+	color: #666666;
+}
+
+#updaterTabUlLayout {
+	width: 150px;
+	border-top: solid 1px #e2e2e2;
+	border-left: solid 1px #e2e2e2;
+	border-right: solid 1px #e2e2e2;
+	border-top-left-radius: 6px;
+}
+
+#updaterTabUlData {
+	width: 150px;
+	border-top: solid 1px #e2e2e2;
+	border-right: solid 1px #e2e2e2;
+}
+
+#updaterTabUlSource {
+	width: 150px;
+	border-top: solid 1px #e2e2e2;
+	border-right: solid 1px #e2e2e2;
+}
+
+#updaterTabUlBlank {
+	width: 345px;
+	border-top: solid 1px #e2e2e2;
+	border-right: solid 1px #e2e2e2;
+	border-top-right-radius: 6px;
+	cursor: default;
+}
+
+.active_li {
+	cursor: pointer;
+	border-bottom: none;
+	background-color: #f7f7f7;
+}
+
+.non_active_li {
+	cursor: pointer;
+	border-bottom: solid 1px #e2e2e2;
+	background-color: #ffffff;
+}
+
+#btn_update {
+	position: absolute;
+	left: 700px;
+	top: 17px;
+	width: 79px;
+	border: solid 1px #6e6e6e;
+	border-radius: 4px;
+	color: #ffffff;
+	font-size: 13px;
+	cursor: pointer;
+	font-family: Arial, "Search Results";
+	text-align: center;
+	padding-top: 9px;
+	padding-bottom: 10px;
+	background: linear-gradient(#8b8a8a, #626262);
+	/* for safari */
+	background: -webkit-linear-gradient(#8b8a8a, #626262);
+	/* for opera */
+	background: -o-linear-gradient(#8b8a8a, #626262);
+	/* for ff */
+	background: -moz-linear-gradient(#8b8a8a, #626262);
+	filter: progid:DXImageTransform.Microsoft.gradient (startColorstr=#8b8a8a, endColorstr=#626262);
+}

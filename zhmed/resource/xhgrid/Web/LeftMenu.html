@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XHGrid</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="XHGrid for HTML5, XiaoHui Tech 2017">
+<meta name="keywords" content="HTML5,Grid,JavaScript,CSS,Ajax,Graph,XHGrid">
+
+<link href="./style.css" rel="stylesheet">
+<link href="./jQuery/jquery.mCustomScrollbar.css" rel="stylesheet">
+
+<script type="text/javascript" src="./JS/sample_info.js"></script>
+<!-- jQuery -->
+<script src="./jQuery/jquery-1.12.4.min.js"></script>
+<script src="./jQuery/jquery-ui.js"></script>
+<script src="./jQuery/jquery.mCustomScrollbar.js"></script>
+<script src="./jQuery/jquery.mousewheel.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+	// Create a grid sample list
+	createList();
+	// Resize the left submenu
+	leftMenuResize();
+	// Pop-up message for Chrome
+
+	// Add tab menu event
+	$("#tabs").tabs({
+		activate: function(event, ui) {
+			var active = $("#tabs").tabs("option", "active");
+			if (active == 0) {
+				if (opened1)
+					$("#tabs-1-img").attr("src", "./Images/minus.png");
+				else
+					$("#tabs-1-img").attr("src", "./Images/plus.png");
+				if (opened2)
+					$("#tabs-2-img").attr("src", "./Images/minus_01.png");
+				else
+					$("#tabs-2-img").attr("src", "./Images/plus_01.png");
+			} else {
+				if (opened1)
+					$("#tabs-1-img").attr("src", "./Images/minus_01.png");
+				else
+					$("#tabs-1-img").attr("src", "./Images/plus_01.png");
+				if (opened2)
+					$("#tabs-2-img").attr("src", "./Images/minus.png");
+				else
+					$("#tabs-2-img").attr("src", "./Images/plus.png");
+			}
+		}
+	});
+
+	// Add Accordion_1 menu event
+	$("#menu_accordion_1 > li > div").click(function() {
+		if (false == $(this).next().is(':visible')) {
+			$('#menu_accordion_1 ul').slideUp(300);
+			$(".menu_accordion_1_active").removeClass("menu_accordion_1_active");
+		}
+		$(this).next().slideToggle(300);
+		if ($(this).hasClass("menu_accordion_1_active")) {
+			$(".menu_accordion_1_active").removeClass("menu_accordion_1_active");
+		} else {
+			$(".menu_accordion_1_active").removeClass("menu_accordion_1_active");
+			$(this).removeClass("menu_accordion_1");
+			$(this).addClass("menu_accordion_1_active");
+		}
+	});
+
+	// Add Accordion_2 menu event
+	$("#menu_accordion_2 > li > div").click(function() {
+		if (false == $(this).next().is(':visible')) {
+			$('#menu_accordion_2 ul').slideUp(300);
+			$(".menu_accordion_2_active").removeClass("menu_accordion_2_active");
+		}
+		$(this).next().slideToggle(300);
+		if ($(this).hasClass("menu_accordion_2_active")) {
+			$(".menu_accordion_2_active").removeClass("menu_accordion_2_active");
+		} else {
+			$(".menu_accordion_2_active").removeClass("menu_accordion_2_active");
+			$(this).removeClass("menu_accordion_2");
+			$(this).addClass("menu_accordion_2_active");
+		}
+	});
+
+	// Add a class when sub-menu is clicked
+	$("#menu_accordion_1 > li > ul > li").click(function() {
+		$(".menu_accordion_depth_1_active").removeClass("menu_accordion_depth_1_active ");
+		$(this).addClass("menu_accordion_depth_1_active ");
+	});
+
+	// Add a class when sub-menu is clicked
+	$("#menu_accordion_2 > li > ul > li").click(function() {
+		$(".menu_accordion_depth_1_active").removeClass("menu_accordion_depth_1_active ");
+		$(this).addClass("menu_accordion_depth_1_active ");
+	});
+
+	// Open menu
+	//$('#menu_accordion_1 ul').show();
+	// View Tab 1 menu
+	var opened1 = false;
+	$("#tabs_1_open").click(function(event) {
+		$("#tabs").tabs({active: 0});
+		if (opened1) {
+			$("#tabs-1-img").attr("src", "./Images/plus.png");
+			$('#menu_accordion_1 li:has(ul)').children("#menu_accordion_1 > li > ul").slideUp();
+			opened1 = false;
+		} else {
+			$("#tabs-1-img").attr("src", "./Images/minus.png");
+			$('#menu_accordion_1 li:has(ul)').children("#menu_accordion_1 > li > ul").slideDown();
+			opened1 = true;
+		}
+		if (opened2)
+			$("#tabs-2-img").attr("src", "./Images/minus_01.png");
+		else
+			$("#tabs-2-img").attr("src", "./Images/plus_01.png");
+		
+		event.preventDefault();
+	});
+	var opened2 = false;
+	$("#tabs_2_open").click(function(event) {
+		$("#tabs").tabs({active: 1});
+		if (opened2) {
+			$("#tabs-2-img").attr("src", "./Images/plus.png");
+			$('#menu_accordion_2 li:has(ul)').children("#menu_accordion_2 > li > ul").slideUp();
+			opened2 = false;
+		} else {
+			$("#tabs-2-img").attr("src", "./Images/minus.png");
+			$('#menu_accordion_2 li:has(ul)').children("#menu_accordion_2 > li > ul").slideDown();
+			opened2 = true;
+		}
+		if (opened1)
+			$("#tabs-1-img").attr("src", "./Images/minus_01.png");
+		else
+			$("#tabs-1-img").attr("src", "./Images/plus_01.png");
+		event.preventDefault();
+	});
+
+	// Apply CSS for scrolling
+	$(".menu_depth_2_wrap").mCustomScrollbar({ theme: "light-2" });
+
+	// Dynamically change the height of the left menu when resizing window
+	$(".menu_depth_2_wrap").height($(window).height() - $("#title").outerHeight(false) - $("#manual").outerHeight(false) - $("#tabs").outerHeight(false) - 15 - 15 - 7 - 1);
+
+	// Apply scrolling of the left menu when resizing window
+	$(window).resize(function() {
+		leftMenuResize();
+	});
+})
+
+// Resizing the height of the left menu  
+function leftMenuResize() {
+	$(".menu_depth_2_wrap").height($(window).height() - $("#title").outerHeight(false) - $("#manual").outerHeight(false) - $("#tabs").outerHeight(false) - 15 - 15 - 7 - 1);
+}
+
+// Create sample list
+function createList() {
+	for (var n = 1; 3 > n; n++) {
+		var types;
+		if (n == 1)
+			types = default_types_1
+		else
+			types = default_types_2
+
+		var menuAccordion = _$("menu_accordion_"+n);
+		for (var i = 0; i < types.length; i++) {
+			var accMenuLi = _C("li"), accDiv = _C("div"), accUl = _C("ul");
+
+			for (var j = 0; j < types[i].c.length; j++ ) {
+				var accSubLi = _C("li"), accAnchor = _C("a"), liMenu = types[i].c[j];
+				accAnchor.innerHTML = liMenu.n;
+				accAnchor.href = "../"+liMenu.u+".html";
+				accAnchor.target = "sampleFrame";
+				accSubLi.appendChild(accAnchor);
+				accUl.appendChild(accSubLi);
+			}
+
+			accDiv.setAttribute("class", "menu_depth_2_accordion");
+			accDiv.innerHTML = types[i].n;
+			accMenuLi.appendChild(accDiv);
+			accMenuLi.appendChild(accUl);
+
+			menuAccordion.appendChild(accMenuLi);
+		}
+	}
+}
+
+// Import elements of the ID
+function _$(id){
+	return document.getElementById(id);
+}
+
+function _C(elem) {
+	return document.createElement(elem);
+}
+
+function getAPI() {
+	var popupWindow = window.open("../../Docs/api/index.html", "_blank");
+	if (popupWindow)
+		popupWindow.focus();
+}
+
+function getPDF() {
+	var popupWindow = window.open("../../Docs/KoolGrid_4.0.pdf", "_blank");
+	if (popupWindow)
+		popupWindow.focus();
+}
+
+function goOverView() {
+	parent.sampleFrame.location.href = "./Overview.html";
+}
+
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="menu">
+			<div id="title">
+				<div id="title_kor" onClick="goOverView()">XHGrid</div>
+				<div id="title_sub">(XHGrid for HTML5 v4.0)</div>
+			</div>
+			<div id="menu_content">
+				<div id="tabs" class="menu_depth_1_selector">
+					<ul class="menu_depth_1_List">
+						<li><div class="menu_depth_1"><a href="#tabs-1">Features</a><a href="#tabs_1_open" id="tabs_1_open"><img id="tabs-1-img" src="./Images/plus.png"></a></div></li>
+						<li><div class="menu_depth_1" style="margin-left:-1px;"><a href="#tabs-2">Use Cases</a><a href="#tabs_2_open" id="tabs_2_open"><img id="tabs-2-img" src="./Images/plus_01.png"></a></div></li>
+					</ul>
+					<div id="tabs-1" class="menu_depth_2_wrap">
+						<ul id="menu_accordion_1">
+						</ul>
+					</div>
+					<div id="tabs-2" class="menu_depth_2_wrap">
+						<ul id="menu_accordion_2">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br>
+</body>
+</html>

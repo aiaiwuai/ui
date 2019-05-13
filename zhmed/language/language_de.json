@@ -57,6 +57,9 @@
       "locationinfo":"location calibration",
       "buttoncalimodeyes":"Calibration Mode",
       "buttoncalimodeno":"Normal Mode"
+    },
+    "history":{
+      "historyinfo":"Operation history"
     }
   },
   "alarmview":{
