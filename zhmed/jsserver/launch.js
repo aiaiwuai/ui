@@ -15,7 +15,6 @@ var localmqtt = {
 }
 
 
-
 var sio = require('socket.io');
 /**
  * const structure which will comes from json and build as base structure
@@ -31,7 +30,7 @@ var client = mqtt.connect('mqtt://127.0.0.1', {
 });
 
 req.prepareconf();
-http.createServer(function(request, response) {
+http.createServer(function (request, response) {
     //console.log(request.url);
     var pathname = url.parse(request.url, false).pathname;
     var ext = pathname.match(/(\.[^.]+|)$/)[0];
@@ -74,7 +73,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/x-ico';
                 response.contentLength = stat.size;
@@ -92,7 +91,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/png';
                 response.contentLength = stat.size;
@@ -110,7 +109,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/jpg';
                 response.contentLength = stat.size;
@@ -128,7 +127,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/gif';
                 response.contentLength = stat.size;
@@ -144,7 +143,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var swf = fs.readFileSync(file);
                 response.contentType = 'application/x-shockwave-flash';
                 response.contentLength = stat.size;
@@ -160,7 +159,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/font-woff';
                 response.contentLength = stat.size;
@@ -176,7 +175,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'font/woff2';
                 response.contentLength = stat.size;
@@ -192,7 +191,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'video/mpeg4';
                 response.contentLength = stat.size;
@@ -208,7 +207,7 @@ http.createServer(function(request, response) {
             //response.write(Data);
             //response.end();
             var file = ".." + pathname;
-            fs.stat(file, function(err, stat) {
+            fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/x-font-ttf';
                 response.contentLength = stat.size;
@@ -242,14 +241,14 @@ http.createServer(function(request, response) {
 
                 var str = "";
                 var res = req.msg;
-                request.on("data", function(chunk) {
+                request.on("data", function (chunk) {
                     str += chunk;
                     var timestamp = new Date().getTime();
                     console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
                     console.log("requestObj")
                     console.log(requestObj)
-                    if (requestObj.action == "ZH_Medicine_sys_config") {
+                    if (requestObj.action == "ZH_Medicine_sys_config" || requestObj.action == "ZH_Medicine_sys_config_save") {
                         console.log("start ")
                         console.log(new Date())
                         jsonInput = {};
@@ -259,16 +258,22 @@ http.createServer(function(request, response) {
                         jsonInput['destId'] = 'HUICOBUS_MQTT_CLIENTID_TUPENTRY';
                         jsonInput['topicId'] = 'HUICOBUS_MQTT_TOPIC_UIR2TUP';
                         jsonInput['hlContent'] = str;
-                        jsonInput['cmdValue'] = 30;
-                        jsonInput['cmdId'] = 0x0A86;
+                        if (requestObj.action == "ZH_Medicine_sys_config") {
+                            jsonInput['cmdValue'] = 30;
+                            jsonInput['cmdId'] = 0x0A86;
+                        } else {
+                            jsonInput['cmdValue'] = 30;
+                            jsonInput['cmdId'] = 0x0A88;
+                        }
+
                         var client = mqtt.connect(localmqtt.server, {
                             username: 'username',
                             password: 'password',
-                            clientid:new Date().getTime()
+                            clientid: new Date().getTime()
                         });
 
 
-                        client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function(err) {
+                        client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function (err) {
                             console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
                             console.log(err);
                             if (!err) {
@@ -276,14 +281,14 @@ http.createServer(function(request, response) {
                             }
                         })
                         client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP', JSON.stringify(jsonInput),
-                            function(Error) {
+                            function (Error) {
                                 console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP")
                                 Error ? console.log(Error) : null;
                             })
-                        client.on("error", function() {
+                        client.on("error", function () {
                             console.log("connect mqtt error");
                         })
-                        client.on("message", function(topic, message) {
+                        client.on("message", function (topic, message) {
                             console.log("ON message:" + topic)
                             if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIR') {
                                 var resfromtup = JSON.parse(message.toString());
@@ -295,7 +300,7 @@ http.createServer(function(request, response) {
                                 var ret = res[requestObj.action];
                                 console.log("resfromtup.src")
                                 console.log(resfromtup.src)
-                                console.log("requestObj.action"+requestObj.action)
+                                console.log("requestObj.action" + requestObj.action)
                                 // console.log(requestObj.action)
                                 // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
                                 if (resfromtup.src && resfromtup.src == requestObj.action) {
@@ -310,7 +315,7 @@ http.createServer(function(request, response) {
                                     client.end();
                                     console.log("end  response");
                                     response.end();
-                                     console.log("end  response");
+                                    console.log("end  response");
                                     // req.mqttclient.end(true);
 
 
@@ -364,12 +369,12 @@ http.createServer(function(request, response) {
                 console.log("User want to upload file: usr id=" + id);
                 var chunks = [];
                 var size = 0;
-                request.on('data', function(chunk) {
+                request.on('data', function (chunk) {
                     chunks.push(chunk);
                     size += chunk.length;
                 });
 
-                request.on("end", function() {
+                request.on("end", function () {
                     var buffer = Buffer.concat(chunks, size);
                     if (!size) {
                         res.writeHead(404);
@@ -450,16 +455,17 @@ http.createServer(function(request, response) {
 var socket = sio.listen(http);
 //req.req_test();
 console.log("server start......");
-client.on('connect', function() {
+client.on('connect', function () {
     console.log('Mqtt connected.....');
     client.subscribe('MQTT_ZH_Medicine_UI');
     fakelog(); //TODO: This function need to remove from the real environment
     realtimepic();
 });
-client.on('message', function(topic, message) {
+client.on('message', function (topic, message) {
     var msg = JSON.parse(message.toString());
     req.mqttdatabase(msg);
 });
+
 /*
 var socket = sio.listen(http);
 var bstring;
@@ -490,21 +496,21 @@ var handle=setInterval(function(){
     });
 },100);*/
 function realtimepic() {
-    setInterval(function() {
+    setInterval(function () {
         //console.log("what is calimode:"+req.is_calibration());
         if (!req.is_calibration()) return;
         var x = req.GetRandomNum(0, 22);
         var msg = {
-                action: "ZH_Medicine_Realtime_Picture_Update",
-                msg: "./jpg/" + x + ".jpg"
-            }
-            //console.log("send pic:"+"./jpg/"+x+".jpg");
+            action: "ZH_Medicine_Realtime_Picture_Update",
+            msg: "./jpg/" + x + ".jpg"
+        }
+        //console.log("send pic:"+"./jpg/"+x+".jpg");
         client.publish('MQTT_ZH_Medicine_UI', JSON.stringify(msg));
     }, 100);
 }
 
 function fakelog() {
-    setInterval(function() {
+    setInterval(function () {
         var x = req.GetRandomNum(5, 50);
         var str = "[" + x + "]:";
         for (var i = 0; i < x; i++) {

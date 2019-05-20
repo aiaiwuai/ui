@@ -289,10 +289,11 @@ function database(data,client) {
             // return JSON.stringify(ret);
             break;
         case "ZH_Medicine_sys_config_save":
-            var ret = msg.ZH_Medicine_sys_config_save;
-            sysconf = jsondeepcopy(data.body);
-            ret.status = "true";
-            return JSON.stringify(ret);
+            // var ret = msg.ZH_Medicine_sys_config_save;
+            // sysconf = jsondeepcopy(data.body);
+            // ret.status = "true";
+            // return JSON.stringify(ret);
+            break
         case "ZH_Medicine_sys_language":
             var ret = msg.ZH_Medicine_sys_language;
             var defaultlanguage = data.body.default;
