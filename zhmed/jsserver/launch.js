@@ -14,7 +14,7 @@ var localmqtt = {
     "server": "mqtt://mqtt:1883"
 }
 
-
+var resb = {}
 var sio = require('socket.io');
 /**
  * const structure which will comes from json and build as base structure
@@ -242,15 +242,20 @@ http.createServer(function (request, response) {
                 var str = "";
                 var res = req.msg;
                 request.on("data", function (chunk) {
+
                     str += chunk;
+
                     var timestamp = new Date().getTime();
                     console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
                     console.log("requestObj")
                     console.log(requestObj)
                     if (requestObj.action == "ZH_Medicine_sys_config" || requestObj.action == "ZH_Medicine_sys_config_save") {
+                        var resfromtup = {}
                         console.log("start ")
                         console.log(new Date())
+                        var ts = new Date().getTime();
+                        resb [ts] = response;
                         jsonInput = {};
                         jsonInput['srcNode'] = 'HUICOBUS_MQTT_NODEID_TUPSVR';
                         jsonInput['destNode'] = 'HUICOBUS_MQTT_NODEID_TUPSVR';
@@ -258,24 +263,25 @@ http.createServer(function (request, response) {
                         jsonInput['destId'] = 'HUICOBUS_MQTT_CLIENTID_TUPENTRY';
                         jsonInput['topicId'] = 'HUICOBUS_MQTT_TOPIC_UIR2TUP';
                         jsonInput['hlContent'] = str;
+                        jsonInput['cmdValue'] = 30;
                         if (requestObj.action == "ZH_Medicine_sys_config") {
-                            jsonInput['cmdValue'] = 30;
                             jsonInput['cmdId'] = 0x0A86;
                         } else {
-                            jsonInput['cmdValue'] = 30;
-                            jsonInput['cmdId'] = 0x0A88;
+                            jsonInput['cmdId'] = 0x0A87;
                         }
 
+                        jsonInput['ts'] = ts
+                        console.log(JSON.stringify(jsonInput))
                         var client = mqtt.connect(localmqtt.server, {
-                            username: 'username',
+                            username: 'usernameui',
                             password: 'password',
-                            clientid: new Date().getTime()
+                            clientid: ts
                         });
 
 
                         client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function (err) {
                             console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
-                            console.log(err);
+
                             if (!err) {
 
                             }
@@ -289,10 +295,17 @@ http.createServer(function (request, response) {
                             console.log("connect mqtt error");
                         })
                         client.on("message", function (topic, message) {
+
                             console.log("ON message:" + topic)
                             if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIR') {
-                                var resfromtup = JSON.parse(message.toString());
-                                response.writeHead(200, {
+                                resfromtup = JSON.parse(message.toString());
+                                console.log(resfromtup)
+
+                                var respc;
+
+                                if(resb[resfromtup["ts"]] !=null){
+                                   respc=resb[resfromtup["ts"]];
+                                    respc.writeHead(200, {
                                     'Content-Type': 'text/html;charset=utf-8'
                                 });
                                 console.log("resfromtup")
@@ -304,22 +317,27 @@ http.createServer(function (request, response) {
                                 // console.log(requestObj.action)
                                 // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
                                 if (resfromtup.src && resfromtup.src == requestObj.action) {
-                                    console.log("DDD");
                                     ret.ret = resfromtup.hlContent;
                                     ret.status = true;
                                     // response.send(JSON.stringify(ret));
                                     console.log("write response");
-                                    response.write(JSON.stringify(ret));
+                                    respc.write(JSON.stringify(ret));
                                     console.log("end  mqtt client");
 
                                     client.end();
                                     console.log("end  response");
-                                    response.end();
+                                    respc.end();
                                     console.log("end  response");
                                     // req.mqttclient.end(true);
 
 
-                                } else {
+                                }
+
+                                }
+                                // else{
+
+                                // }
+                                else {
                                     //此处不应该end,因为mqtt client on 是某个topic下的所有消息,此处容易和其他消息混淆处理
                                     // response.end();
                                 }
