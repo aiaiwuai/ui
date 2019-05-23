@@ -248,12 +248,11 @@ http.createServer(function (request, response) {
                     var timestamp = new Date().getTime();
                     console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
-                    console.log("requestObj")
-                    console.log(requestObj)
+                    console.log("requestObj");
+                    console.log(requestObj);
                     if (requestObj.action == "ZH_Medicine_sys_config" || requestObj.action == "ZH_Medicine_sys_config_save") {
-                        var resfromtup = {}
-                        console.log("start ")
-                        console.log(new Date())
+                        var resfromtup = {};
+                        console.log("start ");
                         var ts = new Date().getTime();
                         resb [ts] = response;
                         jsonInput = {};
