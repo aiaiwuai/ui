@@ -244,6 +244,8 @@ http.createServer(function (request, response) {
                 request.on("data", function (chunk) {
 
                     str += chunk;
+				});
+				request.on("end", function (chunk) {
 
                     var timestamp = new Date().getTime();
                     console.log("post data:" + str);
@@ -280,14 +282,14 @@ http.createServer(function (request, response) {
 
                         client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function (err) {
                             console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
-
+							err ? console.log(err) : null;
                             if (!err) {
 
                             }
                         })
                         client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP', JSON.stringify(jsonInput),
                             function (Error) {
-                                console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP")
+                                console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP");
                                 Error ? console.log(Error) : null;
                             })
                         client.on("error", function () {
@@ -298,7 +300,7 @@ http.createServer(function (request, response) {
                             console.log("ON message:" + topic)
                             if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIR') {
                                 resfromtup = JSON.parse(message.toString());
-                                console.log(resfromtup)
+                                // console.log(resfromtup)
 
                                 var respc;
 
@@ -307,19 +309,19 @@ http.createServer(function (request, response) {
                                     respc.writeHead(200, {
                                     'Content-Type': 'text/html;charset=utf-8'
                                 });
-                                console.log("resfromtup")
-                                console.log(resfromtup)
+                                console.log("resfromtup");
+                                console.log(resfromtup);
                                 var ret = res[requestObj.action];
-                                console.log("resfromtup.src")
-                                console.log(resfromtup.src)
-                                console.log("requestObj.action" + requestObj.action)
+                                console.log("resfromtup.src");
+                                console.log(resfromtup.src);
+                                console.log("requestObj.action" + requestObj.action);
                                 // console.log(requestObj.action)
                                 // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
                                 if (resfromtup.src && resfromtup.src == requestObj.action) {
                                     ret.ret = resfromtup.hlContent;
                                     ret.status = true;
                                     // response.send(JSON.stringify(ret));
-                                    console.log("write response");
+                                    console.log("write response" + JSON.stringify(ret));
                                     respc.write(JSON.stringify(ret));
                                     console.log("end  mqtt client");
 
