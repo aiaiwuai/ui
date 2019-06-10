@@ -322,7 +322,7 @@ http.createServer(function (request, response) {
                                 // console.log(requestObj.action)
                                 // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
                                 if (resfromtup.src && resfromtup.src == requestObj.action) {
-                                    ret.ret = resfromtup.hlContent;
+                                    ret.ret = resfromtup.parameter;
                                     ret.status = true;
                                     // response.send(JSON.stringify(ret));
                                     console.log("write response" + JSON.stringify(ret));
