@@ -56,10 +56,19 @@
     "location":{
       "locationinfo":"location calibration",
       "buttoncalimodeyes":"Calibration Mode",
-      "buttoncalimodeno":"Normal Mode"
+      "buttoncalimodeno":"Save and Leave",
+      "buttoncalimodecancel":"Cancel and Leave"
     },
     "history":{
       "historyinfo":"Operation history"
+    },
+    "localpicture":{
+      "pictureinfo":"Local Picture",
+      "consoletitle":"Realtime log"
+    },
+    "realpicture":{
+      "pictureinfo":"Realtime view",
+      "consoletitle":"Realtime log"
     }
   },
   "alarmview":{

@@ -4,24 +4,41 @@
   "parameter": {
     "groups":[
       {
-        "groupname": "group1",
+        "groupname": "运动刻度及方向",
         "list": [
-          {"paraname":"Move1","type":"button","action":"Move1"},
-          {"paraname":"Move2","type":"button","action":"Move2"},
-          {"paraname":"Move3","type":"button","action":"Move3"},
-          {"paraname":"Move4","type":"button","action":"Move4"},
-          {"paraname":"Move5","type":"button","action":"Move5"},
-          {"paraname":"Move6","type":"button","action":"Move6"}
-                  ]
-      },{
-        "groupname": "group2",
+          {"paraname":"托盘类型","type":"choice","max":"","min":"","value":"0","items":["10um","100um","200us","500us","1mm","2mm","5mm","1cm","2cm","5cm"],"note":"choice info"},
+          {"type":"block"},
+          {"type":"block"},
+          {"type":"block"},
+          {"paraname":"up","type":"button","action":"Move1"},
+          {"type":"block"},
+          {"type":"block"},
+          {"paraname":"left","type":"button","action":"Move2"},
+          {"type":"block"},
+          {"paraname":"right","type":"button","action":"Move3"},
+          {"type":"block"},
+          {"type":"block"},
+          {"paraname":"down","type":"button","action":"Move4"},
+          {"type":"block"},
+          {"type":"block"},
+          {"paraname":"设定左下","type":"button","action":"leftdown"},
+          {"type":"block"},
+          {"paraname":"设定右上","type":"button","action":"rightup"},
+          {"type":"block"}
+        ]
+      },
+      {
+        "groupname": "运动设置",
         "list": [
-          {"paraname":"focus1","type":"button","action":"focus1"},
-          {"paraname":"focus2","type":"button","action":"focus2"},
-          {"paraname":"focus3","type":"button","action":"focus3"},
-          {"paraname":"focus4","type":"button","action":"focus4"},
-          {"paraname":"focus5","type":"button","action":"focus5"},
-          {"paraname":"focus6","type":"button","action":"focus6"}
+          {"paraname":"移动到起点","type":"button","action":"MoveToStart"},
+          {"paraname":"移动到某点","type":"button","action":"MoveNPoint"},
+          {"paraname":"移动到:","type":"int","max":"384","min":"1","value":"1","note":"孔序号"},
+          {"paraname":"立即拍照","type":"button","action":"shoot"},
+          {"type":"block"},
+          {"type":"block"},
+          {"type":"block"},
+          {"paraname":"巡游开始","type":"button","action":"pilotstart"},
+          {"paraname":"巡游结束","type":"button","action":"pilotstop"}
         ]
       }]
   }

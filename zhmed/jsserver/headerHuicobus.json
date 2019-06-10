@@ -1,0 +1,27 @@
+{
+    "TUP_HHD_HLC_MESSAGE_HEADER": {
+        "srcNode": "HUICOBUS_MQTT_NODEID_LOCALHOST",
+        "destNode": "HUICOBUS_MQTT_NODEID_LOCALHOST",
+        "srcId": "HUICOBUS_MQTT_CLIENTID_HCUENTRY",
+        "destId": "HUICOBUS_MQTT_CLIENTID_ UIROUTER",
+        "topicId": "HUICOBUS_MQTT_TOPIC_HCU2UIR",
+        "cmdId": 391,
+        "cmdValue": 2,
+        "hlContent": {}
+    },
+    "TUP_HHD_HLC_SYS_GET_CONFIG_REQ": {
+        "action": "ZH_Medicine_sys_get_config_req",
+        "src": "ZH_Medicine_sys_config",
+        "type": "query",
+        "lang": "ch",
+        "user": "null",
+        "ts": 0
+    },
+    "TUP_HHD_HLC_SYS_SET_CONFIG_REQ": {
+        "action": "ZH_Medicine_sys_set_config_req",
+        "src": "ZH_Medicine_sys_config",
+        "name": "configure",
+        "owner": "system",
+        "parameter": {}
+    }
+}

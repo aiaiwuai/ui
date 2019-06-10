@@ -4,6 +4,7 @@ const url = require('url');
 const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
+const header=require("./headerHuicobus.json")
 const querystring = require('querystring');
 const {
     AsyncClient
@@ -253,33 +254,36 @@ http.createServer(function (request, response) {
                     console.log("requestObj");
                     console.log(requestObj);
                     if (requestObj.action == "ZH_Medicine_sys_config" || requestObj.action == "ZH_Medicine_sys_config_save") {
+
                         var resfromtup = {};
                         console.log("start ");
                         var ts = new Date().getTime();
                         resb [ts] = response;
-                        jsonInput = {};
-                        jsonInput['srcNode'] = 'HUICOBUS_MQTT_NODEID_TUPSVR';
-                        jsonInput['destNode'] = 'HUICOBUS_MQTT_NODEID_TUPSVR';
-                        jsonInput['srcId'] = 'HUICOBUS_MQTT_CLIENTID_TUPROUTER';
-                        jsonInput['destId'] = 'HUICOBUS_MQTT_CLIENTID_TUPENTRY';
-                        jsonInput['topicId'] = 'HUICOBUS_MQTT_TOPIC_UIR2TUP';
-                        jsonInput['hlContent'] = str;
-                        jsonInput['cmdValue'] = 30;
-                        if (requestObj.action == "ZH_Medicine_sys_config") {
-                            jsonInput['cmdId'] = 0x0A86;
-                        } else {
-                            jsonInput['cmdId'] = 0x0A87;
+                        
+                        jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER"];
+                        // console.log(jsonInput);
+                        switch(requestObj.action){
+                            case "ZH_Medicine_sys_config":
+                                jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_GET_CONFIG_REQ"];
+                            break;
+                            case "ZH_Medicine_sys_config_save":
+                                jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_SET_CONFIG_REQ"];
+                                jsonInput['hlContent']["parameter"] = str;
                         }
-
-                        jsonInput['ts'] = ts
+                        // if (requestObj.action == "ZH_Medicine_sys_config") {
+                        //     jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_GET_CONFIG_REQ"];
+                        //     // jsonInput['cmdId'] = 0x0A86;
+                        // } else {
+                        //     jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_SET_CONFIG_REQ"];
+                        //     jsonInput['cmdId'] = 0x0A87;
+                        // }
+                        jsonInput['hlContent']["ts"] =ts;
                         console.log(JSON.stringify(jsonInput))
                         var client = mqtt.connect(localmqtt.server, {
                             username: 'usernameui',
                             password: 'password',
                             clientid: ts
                         });
-
-
                         client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function (err) {
                             console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
 							err ? console.log(err) : null;

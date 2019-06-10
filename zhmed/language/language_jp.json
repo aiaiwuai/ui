@@ -56,10 +56,19 @@
     "location":{
       "locationinfo":"位置校准",
       "buttoncalimodeyes":"进入校准模式",
-      "buttoncalimodeno":"离开校准模式"
+      "buttoncalimodeno":"保存并离开",
+      "buttoncalimodecancel":"放弃并离开"
     },
     "history":{
       "historyinfo":"操作历史"
+    },
+    "localpicture":{
+      "pictureinfo":"本地图片",
+      "consoletitle":"实时日志"
+    },
+    "realpicture":{
+      "pictureinfo":"实时成像",
+      "consoletitle":"实时日志"
     }
   },
   "alarmview":{
