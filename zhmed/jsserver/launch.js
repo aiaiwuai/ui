@@ -246,27 +246,26 @@ http.createServer(function (request, response) {
                     str += chunk;
                 });
                 request.on("end", function (chunk) {
-
                     var timestamp = new Date().getTime();
                     console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
                     console.log("requestObj");
                     console.log(requestObj);
                     var action=requestObj.action;
+                    //下列action 需要走mqtt
                     if (action == "ZH_Medicine_sys_config" || action == "ZH_Medicine_sys_config_save") {
-
                         var resfromtup = {};
                         console.log("start ");
                         var ts = new Date().getTime();
+                        //request bundle
                         resb[ts] = response;
                         var tupcmd=header["uicmdmaptup"][requestObj.action];
                         jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
                         jsonInput.cmdId=parseInt(header["cmdidlist"][tupcmd],16);
                         jsonInput['hlContent']=header[tupcmd];
-                        console.log(jsonInput);
                         switch (requestObj.action) {
                             case "ZH_Medicine_sys_config":
-                                break;
+                            break;
                             case "ZH_Medicine_sys_config_save":
                                 jsonInput['hlContent']["parameter"] = str;
                         }
@@ -304,10 +303,8 @@ http.createServer(function (request, response) {
                             console.log("ON message:" + topic)
                             if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIP') {
                                 resfromtup = JSON.parse(message.toString());
-                                console.log(resb)
-
+                                //当前response
                                 var respc;
-
                                 if (resb[resfromtup['hlContent']["session_id"]] != null) {
                                     respc = resb[resfromtup["hlContent"]["session_id"]];
                                     respc.writeHead(200, {
@@ -332,35 +329,12 @@ http.createServer(function (request, response) {
                                         console.log("end  response");
                                         respc.end();
                                         console.log("end  response");
-                                        // req.mqttclient.end(true);
-
-
+                                        // req.mqttclient.end(true)
                                     }
-
                                 }
-                                // else{
-
-                                // }
                                 else {
-                                    //此处不应该end,因为mqtt client on 是某个topic下的所有消息,此处容易和其他消息混淆处理
-                                    // response.end();
                                 }
-                                // if(resfromtup.msg=="Hello, World"){
-                                //      response.end();
-                                // }
-                                // } else {
-                                //     ret.status = false;
-                                //     try {
-                                //         response.write(JSON.stringify(ret));
-                                //         response.end();
-                                //     } catch (e) {
-                                //         // statements
-                                //         console.log(e);
-                                //          response.end();
-                                //     }
 
-
-                                // }
 
 
                             }
