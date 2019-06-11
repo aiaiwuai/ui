@@ -4,7 +4,7 @@ const url = require('url');
 const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
-const header=require("./headerHuicobus.json")
+const header = require("./headerHuicobus.json")
 const querystring = require('querystring');
 const {
     AsyncClient
@@ -239,35 +239,35 @@ http.createServer(function (request, response) {
             console.log("Client require PHP file :" + filename);
             if (filename == "request") {
                 // console.log("Client require :"+pathname);
-
                 var str = "";
                 var res = req.msg;
                 request.on("data", function (chunk) {
 
                     str += chunk;
-				});
-				request.on("end", function (chunk) {
+                });
+                request.on("end", function (chunk) {
 
                     var timestamp = new Date().getTime();
                     console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
                     console.log("requestObj");
                     console.log(requestObj);
-                    if (requestObj.action == "ZH_Medicine_sys_config" || requestObj.action == "ZH_Medicine_sys_config_save") {
+                    var action=requestObj.action;
+                    if (action == "ZH_Medicine_sys_config" || action == "ZH_Medicine_sys_config_save") {
 
                         var resfromtup = {};
                         console.log("start ");
                         var ts = new Date().getTime();
-                        resb [ts] = response;
-                        
+                        resb[ts] = response;
+                        var tupcmd=header["uicmdmaptup"][requestObj.action];
                         jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
-                        // console.log(jsonInput);
-                        switch(requestObj.action){
+                        jsonInput.cmdId=parseInt(header["cmdidlist"][tupcmd],16);
+                        jsonInput['hlContent']=header[tupcmd];
+                        console.log(jsonInput);
+                        switch (requestObj.action) {
                             case "ZH_Medicine_sys_config":
-                                jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_GET_CONFIG_REQ"];
-                            break;
+                                break;
                             case "ZH_Medicine_sys_config_save":
-                                jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_SET_CONFIG_REQ"];
                                 jsonInput['hlContent']["parameter"] = str;
                         }
                         // if (requestObj.action == "ZH_Medicine_sys_config") {
@@ -277,7 +277,7 @@ http.createServer(function (request, response) {
                         //     jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_SET_CONFIG_REQ"];
                         //     jsonInput['cmdId'] = 0x0A87;
                         // }
-                        jsonInput['hlContent']["ts"] =ts;
+                        jsonInput['hlContent']["session_id"] = ts;
                         console.log(JSON.stringify(jsonInput))
                         var client = mqtt.connect(localmqtt.server, {
                             username: 'usernameui',
@@ -286,7 +286,7 @@ http.createServer(function (request, response) {
                         });
                         client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIP', function (err) {
                             console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
-							err ? console.log(err) : null;
+                            err ? console.log(err) : null;
                             if (!err) {
 
                             }
@@ -304,39 +304,38 @@ http.createServer(function (request, response) {
                             console.log("ON message:" + topic)
                             if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIP') {
                                 resfromtup = JSON.parse(message.toString());
-                                // console.log(resfromtup)
+                                console.log(resb)
 
                                 var respc;
 
-                                if(resb[resfromtup["ts"]] !=null){
-                                   respc=resb[resfromtup["ts"]];
+                                if (resb[resfromtup['hlContent']["session_id"]] != null) {
+                                    respc = resb[resfromtup["hlContent"]["session_id"]];
                                     respc.writeHead(200, {
-                                    'Content-Type': 'text/html;charset=utf-8'
-                                });
-                                console.log("resfromtup");
-                                console.log(resfromtup);
-                                var ret = res[requestObj.action];
-                                console.log("resfromtup.src");
-                                console.log(resfromtup.src);
-                                console.log("requestObj.action" + requestObj.action);
-                                // console.log(requestObj.action)
-                                // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
-                                if (resfromtup.src && resfromtup.src == requestObj.action) {
-                                    ret.ret = resfromtup.parameter;
-                                    ret.status = true;
-                                    // response.send(JSON.stringify(ret));
-                                    console.log("write response" + JSON.stringify(ret));
-                                    respc.write(JSON.stringify(ret));
-                                    console.log("end  mqtt client");
+                                        'Content-Type': 'text/html;charset=utf-8'
+                                    });
+                                    console.log("resfromtup");
+                                    console.log(resfromtup);
+                                    var ret = res[requestObj.action];
+                                  
+                                    console.log("requestObj.action:" +action);
+                                    // console.log(requestObj.action)
+                                    // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
+                                    if (resfromtup.destId == jsonInput.srcId ) {
+                                        ret.ret={};
+                                        ret.ret.parameter = resfromtup.hlContent.parameter;
+                                        ret.status = true;
+                                        // response.send(JSON.stringify(ret));
+                                        console.log("write response" + JSON.stringify(ret));
+                                        respc.write(JSON.stringify(ret));
+                                        console.log("end  mqtt client");
+                                        client.end();
+                                        console.log("end  response");
+                                        respc.end();
+                                        console.log("end  response");
+                                        // req.mqttclient.end(true);
 
-                                    client.end();
-                                    console.log("end  response");
-                                    respc.end();
-                                    console.log("end  response");
-                                    // req.mqttclient.end(true);
 
-
-                                }
+                                    }
 
                                 }
                                 // else{
