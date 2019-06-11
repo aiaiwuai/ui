@@ -260,7 +260,7 @@ http.createServer(function (request, response) {
                         var ts = new Date().getTime();
                         resb [ts] = response;
                         
-                        jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER"];
+                        jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
                         // console.log(jsonInput);
                         switch(requestObj.action){
                             case "ZH_Medicine_sys_config":
@@ -284,14 +284,14 @@ http.createServer(function (request, response) {
                             password: 'password',
                             clientid: ts
                         });
-                        client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIR', function (err) {
+                        client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIP', function (err) {
                             console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
 							err ? console.log(err) : null;
                             if (!err) {
 
                             }
                         })
-                        client.publish('HUICOBUS_MQTT_TOPIC_UIR2TUP', JSON.stringify(jsonInput),
+                        client.publish('HUICOBUS_MQTT_TOPIC_UIP2TUP', JSON.stringify(jsonInput),
                             function (Error) {
                                 console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP");
                                 Error ? console.log(Error) : null;
@@ -302,7 +302,7 @@ http.createServer(function (request, response) {
                         client.on("message", function (topic, message) {
 
                             console.log("ON message:" + topic)
-                            if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIR') {
+                            if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIP') {
                                 resfromtup = JSON.parse(message.toString());
                                 // console.log(resfromtup)
 

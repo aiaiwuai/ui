@@ -1,10 +1,10 @@
 {
-    "TUP_HHD_HLC_MESSAGE_HEADER": {
-        "srcNode": "HUICOBUS_MQTT_NODEID_LOCALHOST",
-        "destNode": "HUICOBUS_MQTT_NODEID_LOCALHOST",
-        "srcId": "HUICOBUS_MQTT_CLIENTID_HCUENTRY",
-        "destId": "HUICOBUS_MQTT_CLIENTID_ UIROUTER",
-        "topicId": "HUICOBUS_MQTT_TOPIC_HCU2UIR",
+    "TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP": {
+        "srcNode": "HUICOBUS_MQTT_NODEID_TUPSVR",
+        "destNode": "HUICOBUS_MQTT_NODEID_TUPSVR",
+        "srcId": "HUICOBUS_MQTT_CLIENTID_TUPROUTER",
+        "destId": "HUICOBUS_MQTT_CLIENTID_TUPENTRY",
+        "topicId": "HUICOBUS_MQTT_TOPIC_UIP2TUP",
         "cmdId": 391,
         "cmdValue": 2,
         "hlContent": {}
