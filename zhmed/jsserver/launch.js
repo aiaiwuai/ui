@@ -261,7 +261,7 @@ http.createServer(function (request, response) {
                         //request bundle
                         resb[ts] = response;
                         var tupcmd=headcommandbetweenuianduip["uicmdmaptup"][requestObj.action];
-                        var headparameterkey=headcommandbetweenuianduip["parametermap"][requestObj.action];
+                        var headparameterkey=tupcmd.replace("CMDID","HLC");
                         console.log(tupcmd)
                         jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
                         jsonInput.cmdId=header["cmdidlist"][tupcmd];

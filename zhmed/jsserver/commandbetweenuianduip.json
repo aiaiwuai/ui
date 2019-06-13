@@ -2,9 +2,5 @@
     "uicmdmaptup":{
         "ZH_Medicine_sys_config":"TUP_HHD_CMDID_SYS_GET_CONFIG_REQ",
         "ZH_Medicine_sys_config_save":"TUP_HHD_CMDID_SYS_SET_CONFIG_REQ"
-    },
-    "parametermap":{
-        "ZH_Medicine_sys_config":"TUP_HHD_HLC_SYS_GET_CONFIG_REQ",
-        "ZH_Medicine_sys_config_save":"TUP_HHD_HLC_SYS_SET_CONFIG_REQ"
     }
 }
