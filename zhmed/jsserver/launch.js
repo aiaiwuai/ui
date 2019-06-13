@@ -4,6 +4,8 @@ const url = require('url');
 const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
+const _ =require("lodash")
+console.log(req)
 const header = require("./headerHuicobus.json")
 const headcommandbetweenuianduip =require("./commandbetweenuianduip.json")
 const querystring = require('querystring');
@@ -40,7 +42,7 @@ http.createServer(function (request, response) {
     switch (ext) {
         case ".css":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync(".." + pathname, 'utf-8');
+            Data = fs.readFileSync("." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "text/css"
             });
@@ -49,7 +51,7 @@ http.createServer(function (request, response) {
             break;
         case ".js":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync(".." + pathname, 'utf-8');
+            Data = fs.readFileSync("." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "application/javascript"
             });
@@ -58,7 +60,7 @@ http.createServer(function (request, response) {
             break;
         case ".map":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync(".." + pathname, 'utf-8');
+            Data = fs.readFileSync("." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "application/javascript"
             });
@@ -74,7 +76,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/x-ico';
@@ -92,7 +94,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/png';
@@ -110,7 +112,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/jpg';
@@ -128,7 +130,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/gif';
@@ -144,7 +146,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var swf = fs.readFileSync(file);
                 response.contentType = 'application/x-shockwave-flash';
@@ -160,7 +162,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/font-woff';
@@ -176,7 +178,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'font/woff2';
@@ -192,7 +194,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'video/mpeg4';
@@ -208,7 +210,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = ".." + pathname;
+            var file = "." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/x-font-ttf';
@@ -218,7 +220,7 @@ http.createServer(function (request, response) {
             break;
         case ".html":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync(".." + pathname, 'utf-8');
+            Data = fs.readFileSync("." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "text/html"
             });
@@ -227,7 +229,7 @@ http.createServer(function (request, response) {
             break;
         case ".svg":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync(".." + pathname, 'utf-8');
+            Data = fs.readFileSync("." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "image/svg+xml"
             });
@@ -254,20 +256,32 @@ http.createServer(function (request, response) {
                     console.log(requestObj);
                     var action=requestObj.action;
                     //下列action 需要走mqtt
-                    if (action == "ZH_Medicine_sys_config" || action == "ZH_Medicine_sys_config_save") {
+                    actionsMqttArray=[
+                        // "ZH_Medicine_cali_config",
+                        "ZH_Medicine_cali_command",
+                        "ZH_Medicine_sys_config",
+                        "ZH_Medicine_sys_config_save"]
+ 
+                    if (_.indexOf(actionsMqttArray,action)>=0) {
                         var resfromtup = {};
                         console.log("start ");
                         var ts = new Date().getTime();
                         //request bundle
                         resb[ts] = response;
-                        var tupcmd=headcommandbetweenuianduip["uicmdmaptup"][requestObj.action];
+                        switch(action){
+                            case "ZH_Medicine_cali_command":
+                                    action=tupcmd+"_"+requestObj.body.command
+
+                        }
+                        var tupcmd=headcommandbetweenuianduip["uicmdmaptup"][action];
+
                         var headparameterkey=tupcmd.replace("CMDID","HLC");
                         console.log(tupcmd)
                         jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
                         jsonInput.cmdId=header["cmdidlist"][tupcmd];
                         jsonInput['hlContent']=header[headparameterkey];
                         console.log(jsonInput)
-                        switch (requestObj.action) {
+                        switch (action) {
                             case "ZH_Medicine_sys_config":
                             break;
                             case "ZH_Medicine_sys_config_save":
@@ -316,7 +330,7 @@ http.createServer(function (request, response) {
                                     });
                                     console.log("resfromtup");
                                     console.log(resfromtup);
-                                    var ret = res[requestObj.action];
+                                    var ret = {};
                                   
                                     console.log("requestObj.action:" +action);
                                     // console.log(requestObj.action)
@@ -442,7 +456,7 @@ http.createServer(function (request, response) {
             break;
         default:
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync('../index.html', 'utf-8');
+            Data = fs.readFileSync('./index.html', 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "text/html"
             });

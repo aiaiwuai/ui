@@ -1,6 +1,14 @@
 {
     "uicmdmaptup":{
         "ZH_Medicine_sys_config":"TUP_HHD_CMDID_SYS_GET_CONFIG_REQ",
-        "ZH_Medicine_sys_config_save":"TUP_HHD_CMDID_SYS_SET_CONFIG_REQ"
+        "ZH_Medicine_sys_config_save":"TUP_HHD_CMDID_SYS_SET_CONFIG_REQ",
+        "ZH_Medicine_cali_config":"TUP_HHD_CMDID_SYS_CALI_START_REQ",
+        "ZH_Medicine_cali_command_MoveToStart":"TUP_HHD_CMDID_SYS_CALI_MOMV_START_REQ",
+        "ZH_Medicine_cali_command_Move1":"TUP_HHD_CMDID_SYS_CALI_MOMV_DIR_REQ",
+        "ZH_Medicine_cali_command_Move2":"TUP_HHD_CMDID_SYS_CALI_MOMV_DIR_REQ",
+        "ZH_Medicine_cali_command_Move3":"TUP_HHD_CMDID_SYS_CALI_MOMV_DIR_REQ",
+        "ZH_Medicine_cali_command_Move4":"TUP_HHD_CMDID_SYS_CALI_MOMV_DIR_REQ"
+
+
     }
 }

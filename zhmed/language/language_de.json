@@ -85,6 +85,10 @@
     "systeminfo":"System info",
     "consoletitle":"Realtime log"
   },
+  "debug":{
+    "systeminfo":"Debug command",
+    "consoletitle":"Realtime log"
+  },
   "message":{
     "alert1":"System Error, please contract Admin!",
     "alert2":"Login Fail, please try again!",

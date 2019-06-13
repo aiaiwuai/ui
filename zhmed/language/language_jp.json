@@ -85,6 +85,10 @@
     "systeminfo":"系统信息",
     "consoletitle":"实时日志"
   },
+  "debug":{
+    "systeminfo":"调试命令",
+    "consoletitle":"实时日志"
+  },
   "message":{
     "alert1":"系统错误，请联系管理员",
     "alert2":"登陆失败，请再次尝试",

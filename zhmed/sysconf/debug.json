@@ -1,0 +1,24 @@
+{
+  "name": "debug",
+  "owner": "system",
+  "buttons":[
+    {"paraname":"up","type":"button","action":"Move1"},
+    {"paraname":"left","type":"button","action":"Move2"},
+    {"paraname":"right","type":"button","action":"Move3"},
+    {"paraname":"down","type":"button","action":"Move4"},
+    {"paraname":"设定左下","type":"button","action":"leftdown"},
+    {"paraname":"设定右上","type":"button","action":"rightup"}
+  ],
+  "parameter": {
+    "groups":[
+      {
+        "groupname": "debug parameter",
+        "list": [
+          {"paraname":"para1","type":"checkbox","max":"","min":"","value":false,"note":"Note info"},
+          {"paraname":"para2","type":"checkbox","max":"","min":"","value":true,"note":"Note info"},
+          {"paraname":"para3","type":"checkbox","max":"","min":"","value":true,"note":"Note info"},
+          {"paraname":"para4","type":"int","max":"100","min":"0","value":"60","note":"单位：分钟"}
+        ]
+      }]
+  }
+}

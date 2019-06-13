@@ -154,6 +154,18 @@
     },
     "msg":"12345"
   },
+  "ZH_Medicine_debug_config":{
+    "status":"false",
+    "auth":"true",
+    "ret":{
+    },
+    "msg":"12345"
+  },
+  "ZH_Medicine_debug_command":{
+    "status":"false",
+    "auth":"true",
+    "msg":"12345"
+  },
   "ZH_Medicine_default":{
     "status":"false",
     "auth":"true",
