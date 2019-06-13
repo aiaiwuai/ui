@@ -5,6 +5,7 @@ const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
 const header = require("./headerHuicobus.json")
+const headcommandbetweenuianduip =require("./commandbetweenuianduip.json")
 const querystring = require('querystring');
 const {
     AsyncClient
@@ -259,10 +260,13 @@ http.createServer(function (request, response) {
                         var ts = new Date().getTime();
                         //request bundle
                         resb[ts] = response;
-                        var tupcmd=header["uicmdmaptup"][requestObj.action];
+                        var tupcmd=headcommandbetweenuianduip["uicmdmaptup"][requestObj.action];
+                        var headparameterkey=headcommandbetweenuianduip["parametermap"][requestObj.action];
+                        console.log(tupcmd)
                         jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
-                        jsonInput.cmdId=parseInt(header["cmdidlist"][tupcmd],16);
-                        jsonInput['hlContent']=header[tupcmd];
+                        jsonInput.cmdId=header["cmdidlist"][tupcmd];
+                        jsonInput['hlContent']=header[headparameterkey];
+                        console.log(jsonInput)
                         switch (requestObj.action) {
                             case "ZH_Medicine_sys_config":
                             break;
