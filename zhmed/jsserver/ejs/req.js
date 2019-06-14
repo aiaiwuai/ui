@@ -268,7 +268,7 @@
             return JSON.stringify(ret);
         case "ZH_Medicine_mqtt_conf":
             var ret = msg.ZH_Medicine_mqtt_conf;
-            ret.ret=mqttconfig;
+            ret.ret=directrespons[key];
             ret.status="true";
             return JSON.stringify(ret);
         case "ZH_Medicine_cali_config":

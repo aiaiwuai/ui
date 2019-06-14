@@ -7,7 +7,7 @@ const respheader = require("./huicobustest.json")
 const querystring = require('querystring');
 const _ = require("lodash")
 var localmqtt = {
-    "server": "mqtt://mqtt:1883"
+    "server": "mqtt://127.0.0.1:1883"
 }
 var timestamp = new Date().getTime();
 var client = mqtt.connect(localmqtt.server, {
@@ -33,6 +33,8 @@ client.on("message", function (topic, message) {
     resp=respheader["resp"];
     if (topic == 'HUICOBUS_MQTT_TOPIC_UIP2TUP') {
         resfromtup = JSON.parse(message.toString());
+        console.log(resfromtup);
+
         // console.log(resfromtup["cmdId"])
         resp["hlContent"]=respheader[respheader.responsemap[resfromtup["cmdId"]]]
         // console.log(resp)

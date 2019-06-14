@@ -1,7 +1,11 @@
 {
     "responsemap":{
         "2560":"2560",
-        "2561":"2560"
+        "2561":"2560",
+        "2593":"empty",
+        "2598":"empty",
+        "2597":"empty",
+        "2599":"empty"
     },
     "resp": {
         "srcNode": "HUICOBUS_MQTT_NODEID_TUPSVR",
@@ -12,6 +16,10 @@
         "cmdId": 391,
         "cmdValue": 2,
         "hlContent": {}
+    },
+    "empty":{
+        "parameter": {},
+        "session_id": 0
     },
     "2560": {
         "parameter": {

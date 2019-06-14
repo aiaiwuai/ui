@@ -4,10 +4,11 @@ const url = require('url');
 const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
-const _ =require("lodash")
-console.log(req)
+const _ = require("lodash")
+const directrespons = require("./directRespons.json")
+
 const header = require("./headerHuicobus.json")
-const headcommandbetweenuianduip =require("./commandbetweenuianduip.json")
+const headcommandbetweenuianduip = require("./commandbetweenuianduip.json")
 const querystring = require('querystring');
 const {
     AsyncClient
@@ -15,7 +16,7 @@ const {
 
 
 var localmqtt = {
-    "server": "mqtt://mqtt:1883"
+    "server": "mqtt://127.0.0.1:1883"
 }
 
 var resb = {}
@@ -27,12 +28,96 @@ var sio = require('socket.io');
 
 var connect = false;
 var start = 0;
-var client = mqtt.connect('mqtt://127.0.0.1', {
+var client = mqtt.connect('mqtt://127.0.0.1:9001', {
     username: 'username',
     password: 'password',
     clientId: 'MQTT_ZH_Medicine_NODE'
 });
 
+function getMoveDistanceValue(reqbody) {
+    let parameter = _.find(reqbody.parameter.parameter.groups, function (o) {
+        return o.groupkey == "movescaleanddir"
+    });
+    let item = _.find(parameter.list, (o) => {
+        return o.itemkey == "distance";
+    });
+    let value = item.values[item.value];
+    return value;
+}
+
+function generateMqttToTup(requestbody) {
+    let action = requestbody.action;
+    switch (action) {
+        case "ZH_Medicine_cali_command":
+            action = action + "_" + requestbody.body.command;
+            break;
+    }
+    // console.log("action:" + action);
+    var tupcmd = headcommandbetweenuianduip["uicmdmaptup"][action];
+    // console.log("TUPCMD:" + tupcmd);
+    var headparameterkey = tupcmd.replace("CMDID", "HLC");
+    // console.log(tupcmd)
+    jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
+    jsonInput.cmdId = header["cmdidlist"][tupcmd];
+    // jsonInput['hlContent']=header[headparameterkey];
+    jsonInput['hlContent'] = getHlcontent(requestbody.action, requestbody.body, headparameterkey); // header[headparameterkey];
+    return jsonInput;
+    // console.log(jsonInput)
+}
+
+function getHlcontent(action, body, headparameterkey) {
+    let hlContentDefined = header[headparameterkey];
+    console.log("action:" + action)
+    switch (action) {
+        case "ZH_Medicine_cali_command":
+            switch (body.command) {
+                case "up":
+                    hlContentDefined.parameter.expected_delta_y_um = getMoveDistanceValue(body)
+                    break;
+                case "left":
+                    hlContentDefined.parameter.expected_delta_x_um = -getMoveDistanceValue(body)
+                    break;
+                case "down":
+                    hlContentDefined.parameter.expected_delta_y_um = -getMoveDistanceValue(body)
+                    break;
+                case "right":
+                    hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
+                    break;
+                case "right":
+                    hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
+                    break;
+                case "right":
+                    hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
+                    break;
+                case "MoveNPoint":
+                        let parameter = _.find(body.parameter.parameter.groups, function (o) {
+                            return o.groupkey == "movesetting"
+                        });
+                        let item = _.find(parameter.list, (o) => {
+                            return o.itemkey == "movetoxhole";
+                        });
+                        hlContentDefined.parameter.target_hole_n=item.value;
+                    break;
+            }
+            break;
+        default:
+            return header[headparameterkey];
+
+    }
+    // console.log("hlContentDefined:");
+    // console.log(hlContentDefined);
+
+    return hlContentDefined;
+    // console.log("action:" + action);
+    // var tupcmd = headcommandbetweenuianduip["uicmdmaptup"][action];
+    // console.log("TUPCMD:" + tupcmd);
+    // var headparameterkey = tupcmd.replace("CMDID", "HLC");
+    // console.log(tupcmd)
+    // jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
+    // jsonInput.cmdId = header["cmdidlist"][tupcmd];
+    // jsonInput['hlContent'] = header[headparameterkey];
+
+}
 req.prepareconf();
 http.createServer(function (request, response) {
     //console.log(request.url);
@@ -114,10 +199,15 @@ http.createServer(function (request, response) {
             //response.end();
             var file = "." + pathname;
             fs.stat(file, function (err, stat) {
-                var img = fs.readFileSync(file);
-                response.contentType = 'image/jpg';
-                response.contentLength = stat.size;
-                response.end(img, 'binary');
+                try {
+                    var img = fs.readFileSync(file);
+                    response.contentType = 'image/jpg';
+                    response.contentLength = stat.size;
+                    response.end(img, 'binary');
+                } catch (error) {
+
+                }
+
             });
             break;
         case ".gif":
@@ -239,7 +329,7 @@ http.createServer(function (request, response) {
         case ".php":
             //2 different PHP file:dump.php&request.php
             var filename = pathname.replace(/^.*\/|\..*$/g, "");
-            console.log("Client require PHP file :" + filename);
+            // console.log("Client require PHP file :" + filename);
             if (filename == "request") {
                 // console.log("Client require :"+pathname);
                 var str = "";
@@ -250,43 +340,44 @@ http.createServer(function (request, response) {
                 });
                 request.on("end", function (chunk) {
                     var timestamp = new Date().getTime();
-                    console.log("post data:" + str);
+                    // console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
-                    console.log("requestObj");
-                    console.log(requestObj);
-                    var action=requestObj.action;
+                    var action = requestObj.action;
                     //下列action 需要走mqtt
-                    actionsMqttArray=[
+                    actionsMqttArray = [
                         // "ZH_Medicine_cali_config",
                         "ZH_Medicine_cali_command",
                         "ZH_Medicine_sys_config",
-                        "ZH_Medicine_sys_config_save"]
- 
-                    if (_.indexOf(actionsMqttArray,action)>=0) {
+                        "ZH_Medicine_sys_config_save"
+                    ]
+
+                    if (_.indexOf(actionsMqttArray, action) >= 0) {
                         var resfromtup = {};
                         console.log("start ");
                         var ts = new Date().getTime();
                         //request bundle
                         resb[ts] = response;
-                        switch(action){
-                            case "ZH_Medicine_cali_command":
-                                    action=tupcmd+"_"+requestObj.body.command
+                        jsonInput = generateMqttToTup(requestObj);
 
-                        }
-                        var tupcmd=headcommandbetweenuianduip["uicmdmaptup"][action];
-
-                        var headparameterkey=tupcmd.replace("CMDID","HLC");
-                        console.log(tupcmd)
-                        jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
-                        jsonInput.cmdId=header["cmdidlist"][tupcmd];
-                        jsonInput['hlContent']=header[headparameterkey];
-                        console.log(jsonInput)
-                        switch (action) {
-                            case "ZH_Medicine_sys_config":
-                            break;
-                            case "ZH_Medicine_sys_config_save":
-                                jsonInput['hlContent']["parameter"] = str;
-                        }
+                        // switch (action) {
+                        //     case "ZH_Medicine_cali_command":
+                        //         action = action + "_" + requestObj.body.command
+                        // }
+                        // console.log("action:" + action);
+                        // var tupcmd = headcommandbetweenuianduip["uicmdmaptup"][action];
+                        // console.log("TUPCMD:" + tupcmd);
+                        // var headparameterkey = tupcmd.replace("CMDID", "HLC");
+                        // console.log(tupcmd)
+                        // jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
+                        // jsonInput.cmdId = header["cmdidlist"][tupcmd];
+                        // jsonInput['hlContent'] = header[headparameterkey];
+                        // console.log(jsonInput)
+                        // switch (action) {
+                        //     case "ZH_Medicine_sys_config":
+                        //         break;
+                        //     case "ZH_Medicine_sys_config_save":
+                        //         jsonInput['hlContent']["parameter"] = str;
+                        // }
                         // if (requestObj.action == "ZH_Medicine_sys_config") {
                         //     jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_GET_CONFIG_REQ"];
                         //     // jsonInput['cmdId'] = 0x0A86;
@@ -331,16 +422,16 @@ http.createServer(function (request, response) {
                                     console.log("resfromtup");
                                     console.log(resfromtup);
                                     var ret = {};
-                                  
-                                    console.log("requestObj.action:" +action);
+
+                                    console.log("requestObj.action:" + action);
                                     // console.log(requestObj.action)
                                     // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
-                                    if (resfromtup.destId == jsonInput.srcId ) {
-                                        ret.ret={};
+                                    if (resfromtup.destId == jsonInput.srcId) {
+                                        ret.ret = {};
                                         ret.ret.parameter = resfromtup.hlContent.parameter;
                                         ret.status = true;
                                         // response.send(JSON.stringify(ret));
-                                        console.log("write response" + JSON.stringify(ret));
+                                        // console.log("write response" + JSON.stringify(ret));
                                         respc.write(JSON.stringify(ret));
                                         console.log("end  mqtt client");
                                         client.end();
@@ -349,9 +440,7 @@ http.createServer(function (request, response) {
                                         console.log("end  response");
                                         // req.mqttclient.end(true)
                                     }
-                                }
-                                else {
-                                }
+                                } else {}
 
 
 
