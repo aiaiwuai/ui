@@ -19,7 +19,8 @@ var localmqtt = {
     "server": "mqtt://127.0.0.1:1883"
 }
 
-var resb = {}
+var responssaved = {}
+var requestssave = {}
 var sio = require('socket.io');
 /**
  * const structure which will comes from json and build as base structure
@@ -45,14 +46,48 @@ function getMoveDistanceValue(reqbody) {
     return value;
 }
 
+function getResponseRet(requestObj, resfromtup) {
+    let ret = {};
+    ret.ret = {};
+    // ret.ret = responseret;
+    // ret.ret.parameter = resfromtup.hlContent.parameter;
+    ret.status = "true";
+    ret.auth = "true";
+    let responsret = {};
+    switch (requestObj.action) {
+        //{"status":"true","auth":"true","ret":"false","msg":"12345"}
+        case "ZH_Medicine_cali_mode":
+            if (requestObj.body.triger == "true") {
+                if (resfromtup.hlContent.parameter) {
+                    responsret = resfromtup.hlContent.parameter;
+                } else {
+                    responsret = "ture";
+                }
+            } else {
+                responsret = "false";
+            }
+            // ret.auth=true;
+            break;
+        default:
+            responsret.parameter = resfromtup.hlContent.parameter;
+    }
+    ret.ret = responsret;
+    return ret;
+}
+
 function generateMqttToTup(requestbody) {
     let action = requestbody.action;
     switch (action) {
         case "ZH_Medicine_cali_command":
             action = action + "_" + requestbody.body.command;
             break;
+        case "ZH_Medicine_cali_mode":
+            if (requestbody.body.triger == "true") {
+                action = action + "_start";
+            }
+            break;
     }
-    // console.log("action:" + action);
+    console.log("action:" + action);
     var tupcmd = headcommandbetweenuianduip["uicmdmaptup"][action];
     // console.log("TUPCMD:" + tupcmd);
     var headparameterkey = tupcmd.replace("CMDID", "HLC");
@@ -69,6 +104,20 @@ function getHlcontent(action, body, headparameterkey) {
     let hlContentDefined = header[headparameterkey];
     console.log("action:" + action)
     switch (action) {
+        case "ZH_Medicine_cali_mode":
+            if (body.triger == true) {
+                hlContentDefined = "true";
+            } else {
+                switch (body.action) {
+                    case "save":
+                        hlContentDefined.parameter.saveornot = true;
+                        break;
+                    default:
+                        hlContentDefined.parameter.saveornot = false;
+                }
+                break;
+            }
+            break;
         case "ZH_Medicine_cali_command":
             switch (body.command) {
                 case "up":
@@ -90,13 +139,13 @@ function getHlcontent(action, body, headparameterkey) {
                     hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
                     break;
                 case "MoveNPoint":
-                        let parameter = _.find(body.parameter.parameter.groups, function (o) {
-                            return o.groupkey == "movesetting"
-                        });
-                        let item = _.find(parameter.list, (o) => {
-                            return o.itemkey == "movetoxhole";
-                        });
-                        hlContentDefined.parameter.target_hole_n=item.value;
+                    let parameter = _.find(body.parameter.parameter.groups, function (o) {
+                        return o.groupkey == "movesetting"
+                    });
+                    let item = _.find(parameter.list, (o) => {
+                        return o.itemkey == "movetoxhole";
+                    });
+                    hlContentDefined.parameter.target_hole_n = item.value;
                     break;
             }
             break;
@@ -348,7 +397,8 @@ http.createServer(function (request, response) {
                         // "ZH_Medicine_cali_config",
                         "ZH_Medicine_cali_command",
                         "ZH_Medicine_sys_config",
-                        "ZH_Medicine_sys_config_save"
+                        "ZH_Medicine_sys_config_save",
+                        "ZH_Medicine_cali_mode"
                     ]
 
                     if (_.indexOf(actionsMqttArray, action) >= 0) {
@@ -356,7 +406,8 @@ http.createServer(function (request, response) {
                         console.log("start ");
                         var ts = new Date().getTime();
                         //request bundle
-                        resb[ts] = response;
+                        responssaved[ts] = response;
+                        requestssave[ts] = requestObj;
                         jsonInput = generateMqttToTup(requestObj);
 
                         // switch (action) {
@@ -408,31 +459,35 @@ http.createServer(function (request, response) {
                             console.log("connect mqtt error");
                         })
                         client.on("message", function (topic, message) {
-
                             console.log("ON message:" + topic)
                             if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIP') {
                                 resfromtup = JSON.parse(message.toString());
                                 //当前response
                                 var respc;
-                                if (resb[resfromtup['hlContent']["session_id"]] != null) {
-                                    respc = resb[resfromtup["hlContent"]["session_id"]];
+                                if (responssaved[resfromtup['hlContent']["session_id"]] != null) {
+                                    respc = responssaved[resfromtup["hlContent"]["session_id"]];
                                     respc.writeHead(200, {
                                         'Content-Type': 'text/html;charset=utf-8'
                                     });
                                     console.log("resfromtup");
                                     console.log(resfromtup);
-                                    var ret = {};
+                                    // var ret = {};
 
                                     console.log("requestObj.action:" + action);
                                     // console.log(requestObj.action)
                                     // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
                                     if (resfromtup.destId == jsonInput.srcId) {
-                                        ret.ret = {};
-                                        ret.ret.parameter = resfromtup.hlContent.parameter;
-                                        ret.status = true;
+                                        // ret.ret = {};
+                                        let responseret = getResponseRet(requestssave[resfromtup['hlContent']["session_id"]], resfromtup);
+                                        // ret.ret = responseret;
+                                        // ret.ret.parameter = resfromtup.hlContent.parameter;
+                                        // ret.status = true;
                                         // response.send(JSON.stringify(ret));
                                         // console.log("write response" + JSON.stringify(ret));
-                                        respc.write(JSON.stringify(ret));
+                                        respc.writeHead(200, {
+                                            'Content-Type': 'text/plain;charset=utf-8'
+                                        });
+                                        respc.write(JSON.stringify(responseret));
                                         console.log("end  mqtt client");
                                         client.end();
                                         console.log("end  response");

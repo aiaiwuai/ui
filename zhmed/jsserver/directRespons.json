@@ -128,9 +128,7 @@
                             "type": "button",
                             "action": "shoot"
                         },
-                        {
-                            "type": "block"
-                        },
+                     
                         {
                             "paraname": "巡游开始",
                             "type": "button",
@@ -140,6 +138,11 @@
                             "paraname": "巡游结束",
                             "type": "button",
                             "action": "pilotstop"
+                        },
+                        {
+                            "paraname": "保存校准",
+                            "type": "block",
+                            "action": "savecli"
                         }
                     ]
                 }
