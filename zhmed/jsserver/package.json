@@ -1,0 +1,6 @@
+{
+"scripts": {
+    "server": "nodemon ./server.js localhost 5000",  
+    "test": "nodemon --ext js --watch ./ --exec 'mocha ./test' --delay 1"  
+ }
+}

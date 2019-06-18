@@ -61,8 +61,13 @@ client.subscribe('HUICOBUS_MQTT_TOPIC_UIP2TUP', function (err) {
     }
 })
 client.on("message", function (topic, message) {
+    console.log("=========================");
     console.log("ON message:" + topic)
     resp=respheader["resp"];
+    resfromtup = JSON.parse(message.toString());
+    console.log(resfromtup);
+    console.log("=========================");
+
     if (topic == 'HUICOBUS_MQTT_TOPIC_UIP2TUP') {
         resfromtup = JSON.parse(message.toString());
         console.log(resfromtup);
