@@ -7,7 +7,8 @@
         "2597":"empty",
         "2599":"empty",
         "2594":"empty",
-        "2592":"empty"
+        "2592":"empty",
+        "2626":"empty"
     },
     "resp": {
         "srcNode": "HUICOBUS_MQTT_NODEID_TUPSVR",

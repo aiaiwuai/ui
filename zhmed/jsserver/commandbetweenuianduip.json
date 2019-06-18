@@ -15,7 +15,8 @@
         "ZH_Medicine_cali_command_leftdown":"TUP_HHD_CMDID_SYS_CALI_LEFT_BOT_SET_REQ",
         "ZH_Medicine_cali_command_rightup":"TUP_HHD_CMDID_SYS_CALI_RIGHT_UP_SET_REQ",
         "ZH_Medicine_cali_mode":"TUP_HHD_CMDID_SYS_CALI_EXIT_REQ",
-        "ZH_Medicine_cali_mode_start":"TUP_HHD_CMDID_SYS_CALI_START_REQ"
+        "ZH_Medicine_cali_mode_start":"TUP_HHD_CMDID_SYS_CALI_START_REQ",
+        "ZH_Medicine_debug_command":"TUP_HHD_CMDID_SYS_MENG_COMMAND_REQ"
 
     }
 }

@@ -9,9 +9,9 @@
     var systeminfo;
     var identifyparameter;
     var mqttconfig;
-    var calibration;
+    var calibration=require("./syscnf/calibration.json");
     var history;
-    var debug;
+    var debug=require("./syscnf/debug.json");
     var if_cali = "false";
     function database(data){
     var key = data.action;
@@ -273,7 +273,7 @@
             return JSON.stringify(ret);
         case "ZH_Medicine_cali_config":
             var ret = msg.ZH_Medicine_cali_config;
-            ret.ret=directrespons[key];
+            ret.ret=calibration;
             ret.status="true";
             return JSON.stringify(ret);
         case "ZH_Medicine_cali_command":
@@ -344,9 +344,9 @@
         systeminfo= JSON.parse(jsReadFiles("./sysconf/systeminfo.json"));
         identifyparameter= JSON.parse(jsReadFiles("./sysconf/IdentifyParameter.json"));
         mqttconfig = JSON.parse(jsReadFiles("./sysconf/mqtt.json"));
-        calibration = JSON.parse(jsReadFiles("./sysconf/calibration.json"));
+        // calibration = JSON.parse(jsReadFiles("./sysconf/calibration.json"));
         history = JSON.parse(jsReadFiles("./sysconf/history.json"));
-        debug = JSON.parse(jsReadFiles("./sysconf/debug.json"));
+        // debug = JSON.parse(jsReadFiles("./sysconf/debug.json"));
         console.log("config load finish");
         //console.log("baseconf:");
         //console.log(JSON.stringify(baseconf));

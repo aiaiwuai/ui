@@ -6,34 +6,69 @@ const path = require('path');
 const req = require('./ejs/req');
 const _ = require("lodash")
 const directrespons = require("./directRespons.json")
-
 const header = require("./headerHuicobus.json")
 const headcommandbetweenuianduip = require("./commandbetweenuianduip.json")
 const querystring = require('querystring');
 const {
     AsyncClient
 } = require("async-mqtt");
+const argv = require('minimist')(process.argv.slice(2));
 
+let mqtthost = "" //default as docker
+let mqttport = ""
+let mqttwebsocletport = ""
+const flagfolder = "/rootfs"
 
-var localmqtt = {
-    "server": "mqtt://127.0.0.1:1883"
+console.log("使用说明： \n \
+nodejs launch.js -m 127.0.0.1 -h 1883 \n \
+-m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
+-p: mqtt port  docker + 主机环境默认1883  \n \
+-w: mqtt web socket  port  docker + 主机环境默认9001 \n ");
+if (argv["m"]) {
+    mqtthost = argv["m"];
+} else {
+    try {
+        fs.statSync(flagfolder, fs.constants.F_OK)
+        mqtthost = "mqtt"
+    } catch (error) {
+        mqtthost = "127.0.0.1"
+    }
 }
-
-var responssaved = {}
-var requestssave = {}
-var sio = require('socket.io');
-/**
- * const structure which will comes from json and build as base structure
- */
-
-
+if (argv["p"]) {
+    mqttport = argv["p"];
+} else {
+    try {
+        fs.statSync(flagfolder, fs.constants.F_OK)
+        mqttport = "1883"
+    } catch (error) {
+        mqttport = "1883"
+    }
+}
+if (argv["w"]) {
+    mqttwebsocletport = argv["w"];
+} else {
+    try {
+        fs.statSync(flagfolder, fs.constants.F_OK)
+        mqttwebsocletport = "9001"
+    } catch (error) {
+        mqttwebsocletport = "9001"
+    }
+}
+var localmqtt = {
+    "server": "mqtt://" + mqtthost + ":" + mqttport
+}
+console.log(`current mqtt connecte string:`)
+console.log(localmqtt);
 var connect = false;
 var start = 0;
-var client = mqtt.connect('mqtt://127.0.0.1:9001', {
+var client = mqtt.connect('mqtt://' + mqtthost + ':' + mqttwebsocletport, {
     username: 'username',
     password: 'password',
     clientId: 'MQTT_ZH_Medicine_NODE'
 });
+var responssaved = {}
+var requestssave = {}
+var sio = require('socket.io');
 
 function getMoveDistanceValue(reqbody) {
     let parameter = _.find(reqbody.parameter.parameter.groups, function (o) {
@@ -102,8 +137,19 @@ function generateMqttToTup(requestbody) {
 
 function getHlcontent(action, body, headparameterkey) {
     let hlContentDefined = header[headparameterkey];
-    console.log("action:" + action)
+    // console.log("action:" + action)
     switch (action) {
+        case "ZH_Medicine_debug_command":
+            hlContentDefined.parameter.cmdid = body.command;
+           ["par1","par2","par3","par4"].forEach(key => {
+                let item = _.find(body.parameter.parameter.groups[0].list, (o) => {
+                    return o.parakey == key
+                })
+
+                hlContentDefined.parameter[key] = item.items[item.value];
+                // console.log(key)
+            });
+            break;
         case "ZH_Medicine_cali_mode":
             if (body.triger == true) {
                 hlContentDefined = "true";
@@ -398,7 +444,8 @@ http.createServer(function (request, response) {
                         "ZH_Medicine_cali_command",
                         "ZH_Medicine_sys_config",
                         "ZH_Medicine_sys_config_save",
-                        "ZH_Medicine_cali_mode"
+                        "ZH_Medicine_cali_mode",
+                        "ZH_Medicine_debug_command"
                     ]
 
                     if (_.indexOf(actionsMqttArray, action) >= 0) {

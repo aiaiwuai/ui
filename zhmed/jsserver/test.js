@@ -1,4 +1,5 @@
 const url = require('url');
+const fs=require("fs");
 const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
@@ -6,9 +7,40 @@ const header = require("./headerHuicobus.json")
 const respheader = require("./huicobustest.json")
 const querystring = require('querystring');
 const _ = require("lodash")
-var localmqtt = {
-    "server": "mqtt://127.0.0.1:1883"
+const flagfolder="/rootfs"
+const argv = require('minimist')(process.argv.slice(2));
+let mqtthost="" //default as docker
+let mqttport=""
+console.log("使用说明： \n \
+nodejs test.js -m 127.0.0.1 -h 1883 \n \
+-m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
+-p: mqtt port  docker + 主机环境默认1883  \n ")
+if(argv["m"]){
+    mqtthost=argv["m"];
+}else{
+    try {
+        fs.statSync(flagfolder, fs.constants.F_OK)
+        mqtthost="mqtt"
+    } catch (error) {
+        mqtthost="127.0.0.1"
+    }
 }
+if(argv["p"]){
+    mqttport=argv["p"];
+}else{
+    try {
+        fs.statSync(flagfolder, fs.constants.F_OK)
+        mqttport="1883"
+    } catch (error) {
+        mqttport="1883"
+    }
+}
+var localmqtt = {
+    "server": "mqtt://"+mqtthost+":"+mqttport
+}
+console.log(`current mqtt connecte string:`)
+console.log(localmqtt);
+// '${localmqtt.toString()}`)
 var timestamp = new Date().getTime();
 var client = mqtt.connect(localmqtt.server, {
     username: 'usernameui',
