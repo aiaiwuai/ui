@@ -141,7 +141,7 @@ function getHlcontent(action, body, headparameterkey) {
     switch (action) {
         case "ZH_Medicine_debug_command":
             hlContentDefined.parameter.cmdid = body.command;
-           ["par1","par2","par3","par4"].forEach(key => {
+            ["par1", "par2", "par3", "par4"].forEach(key => {
                 let item = _.find(body.parameter.parameter.groups[0].list, (o) => {
                     return o.parakey == key
                 })
@@ -167,21 +167,23 @@ function getHlcontent(action, body, headparameterkey) {
         case "ZH_Medicine_cali_command":
             switch (body.command) {
                 case "up":
+                    hlContentDefined.parameter.actual_delta_z_um = 0;
+                    hlContentDefined.parameter.expected_delta_x_um = 0;
                     hlContentDefined.parameter.expected_delta_y_um = getMoveDistanceValue(body)
                     break;
                 case "left":
+                    hlContentDefined.parameter.actual_delta_z_um = 0;
+                    hlContentDefined.parameter.expected_delta_y_um = 0;
                     hlContentDefined.parameter.expected_delta_x_um = -getMoveDistanceValue(body)
                     break;
                 case "down":
+                    hlContentDefined.parameter.actual_delta_z_um = 0;
+                    hlContentDefined.parameter.expected_delta_x_um = 0;
                     hlContentDefined.parameter.expected_delta_y_um = -getMoveDistanceValue(body)
                     break;
                 case "right":
-                    hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
-                    break;
-                case "right":
-                    hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
-                    break;
-                case "right":
+                    hlContentDefined.parameter.actual_delta_z_um = 0;
+                    hlContentDefined.parameter.expected_delta_y_um = 0;
                     hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
                     break;
                 case "MoveNPoint":
