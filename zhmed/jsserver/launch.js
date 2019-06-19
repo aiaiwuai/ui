@@ -5,6 +5,7 @@ const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
 const _ = require("lodash")
+const APP_PATH = path.resolve('.');
 const directrespons = require("./directRespons.json")
 const header = require("./headerHuicobus.json")
 const headcommandbetweenuianduip = require("./commandbetweenuianduip.json")
@@ -20,7 +21,7 @@ let mqttwebsocletport = ""
 const flagfolder = "/rootfs"
 
 console.log("使用说明： \n \
-nodejs launch.js -m 127.0.0.1 -h 1883 \n \
+nodejs launch.js -m 127.0.0.1 -h 1883 -w 9001 \n \
 -m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
 -p: mqtt port  docker + 主机环境默认1883  \n \
 -w: mqtt web socket  port  docker + 主机环境默认9001 \n ");
@@ -201,18 +202,9 @@ function getHlcontent(action, body, headparameterkey) {
             return header[headparameterkey];
 
     }
-    // console.log("hlContentDefined:");
-    // console.log(hlContentDefined);
 
     return hlContentDefined;
-    // console.log("action:" + action);
-    // var tupcmd = headcommandbetweenuianduip["uicmdmaptup"][action];
-    // console.log("TUPCMD:" + tupcmd);
-    // var headparameterkey = tupcmd.replace("CMDID", "HLC");
-    // console.log(tupcmd)
-    // jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
-    // jsonInput.cmdId = header["cmdidlist"][tupcmd];
-    // jsonInput['hlContent'] = header[headparameterkey];
+
 
 }
 req.prepareconf();
@@ -224,7 +216,7 @@ http.createServer(function (request, response) {
     switch (ext) {
         case ".css":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync("." + pathname, 'utf-8');
+            Data = fs.readFileSync(APP_PATH+"/.." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "text/css"
             });
@@ -233,7 +225,7 @@ http.createServer(function (request, response) {
             break;
         case ".js":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync("." + pathname, 'utf-8');
+            Data = fs.readFileSync(APP_PATH+"/.." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "application/javascript"
             });
@@ -242,7 +234,7 @@ http.createServer(function (request, response) {
             break;
         case ".map":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync("." + pathname, 'utf-8');
+            Data = fs.readFileSync(APP_PATH+"/.." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "application/javascript"
             });
@@ -258,7 +250,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/x-ico';
@@ -276,7 +268,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/png';
@@ -294,7 +286,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 try {
                     var img = fs.readFileSync(file);
@@ -317,7 +309,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/gif';
@@ -333,7 +325,7 @@ http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var swf = fs.readFileSync(file);
                 response.contentType = 'application/x-shockwave-flash';
@@ -349,7 +341,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/font-woff';
@@ -365,7 +357,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'font/woff2';
@@ -381,7 +373,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'video/mpeg4';
@@ -397,7 +389,7 @@ http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = "." + pathname;
+            var file = APP_PATH+"/.." + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/x-font-ttf';
@@ -407,7 +399,7 @@ http.createServer(function (request, response) {
             break;
         case ".html":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync("." + pathname, 'utf-8');
+            Data = fs.readFileSync(APP_PATH+"/.." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "text/html"
             });
@@ -416,7 +408,7 @@ http.createServer(function (request, response) {
             break;
         case ".svg":
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync("." + pathname, 'utf-8');
+            Data = fs.readFileSync(APP_PATH+"/.." + pathname, 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "image/svg+xml"
             });
@@ -649,7 +641,7 @@ http.createServer(function (request, response) {
             break;
         default:
             // console.log("Client require :"+pathname);
-            Data = fs.readFileSync('./index.html', 'utf-8');
+            Data = fs.readFileSync(APP_PATH+'/../index.html', 'utf-8');
             response.writeHead(200, {
                 "Content-Type": "text/html"
             });
@@ -729,4 +721,7 @@ function fakelog() {
         }
         client.publish('MQTT_ZH_Medicine_UI', JSON.stringify(msg));
     }, 40000);
+}
+module.exports={
+    generateMqttToTup
 }

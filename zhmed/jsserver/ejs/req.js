@@ -1,16 +1,16 @@
 ﻿const directrespons=require("../directRespons.json")
 
     var fs = require('fs');
-    var msg;
-    var baseconf;
-    var sysconf;
-    var languagelist;
-    var language;
-    var systeminfo;
-    var identifyparameter;
+    var msg=require("./msg/message.json");
+    var baseconf=require("./baseconf/pannel.json");
+    var sysconf= require("./syscnf/configure.json");
+    var languagelist=require("./syscnf/supportlanguage.json");
+    var language=require("./language/language_ch.json");
+    var systeminfo =require("./syscnf/systeminfo.json");
+    var identifyparameter=require("./syscnf/IdentifyParameter.json");
     var mqttconfig;
     var calibration=require("./syscnf/calibration.json");
-    var history;
+    var history=require("./syscnf/history.json");
     var debug=require("./syscnf/debug.json");
     var if_cali = "false";
     function database(data){
@@ -331,21 +331,27 @@
     function prepareconf(){
         console.log("Start to prepare the configuration structure.");
 
-        msg = JSON.parse(jsReadFiles("./msg/message.json"));
-        baseconf={};
-        var templist = getfilelist("./baseconf/plateconf/");
-        for(var i=0;i<templist.length;i++){
-            baseconf[templist[i].split(".")[0]]=JSON.parse(jsReadFiles("./baseconf/plateconf/"+templist[i]));
-        }
-        sysconf = JSON.parse(jsReadFiles("./sysconf/configure.json"));
-        languagelist = JSON.parse(jsReadFiles("./sysconf/supportlanguage.json"));
+        // msg = JSON.parse(jsReadFiles("./msg/message.json"));
+        // msg = require("../../msg/message.json");
+        // baseconf={};
+        // var templist = getfilelist("./baseconf/plateconf/");
+        // var templist = require("./baseconf/plateconf/");
 
-        language=JSON.parse(jsReadFiles("./language/language_"+languagelist.default+".json"));
-        systeminfo= JSON.parse(jsReadFiles("./sysconf/systeminfo.json"));
-        identifyparameter= JSON.parse(jsReadFiles("./sysconf/IdentifyParameter.json"));
-        mqttconfig = JSON.parse(jsReadFiles("./sysconf/mqtt.json"));
+        // for(var i=0;i<templist.length;i++){
+        //     baseconf[templist[i].split(".")[0]]=JSON.parse(jsReadFiles("./baseconf/plateconf/"+templist[i]));
+        // }
+        // console.log(baseconf)
+        // fs.writeFileSync('./data.json', JSON.stringify(baseconf, null, 2) , 'utf-8');
+
+        // sysconf = JSON.parse(jsReadFiles("./sysconf/configure.json"));
+        // languagelist = JSON.parse(jsReadFiles("./sysconf/supportlanguage.json"));
+
+        // language=JSON.parse(jsReadFiles("./language/language_"+languagelist.default+".json"));
+        // systeminfo= JSON.parse(jsReadFiles("./sysconf/systeminfo.json"));
+        // identifyparameter= JSON.parse(jsReadFiles("./sysconf/IdentifyParameter.json"));
+        // mqttconfig = JSON.parse(jsReadFiles("./sysconf/mqtt.json"));
         // calibration = JSON.parse(jsReadFiles("./sysconf/calibration.json"));
-        history = JSON.parse(jsReadFiles("./sysconf/history.json"));
+        // history = JSON.parse(jsReadFiles("./sysconf/history.json"));
         // debug = JSON.parse(jsReadFiles("./sysconf/debug.json"));
         console.log("config load finish");
         //console.log("baseconf:");

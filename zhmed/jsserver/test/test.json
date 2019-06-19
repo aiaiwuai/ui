@@ -1,0 +1,12 @@
+{
+    "mqttGen": {
+        "getConf": {
+            "req": {
+                "action": "ZH_Medicine_sys_config",
+                "type": "query",
+                "lang": "ch",
+                "user": null
+            }
+        }
+    }
+}
