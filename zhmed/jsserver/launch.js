@@ -6,13 +6,8 @@ const path = require('path');
 const req = require('./ejs/req');
 const _ = require("lodash")
 const APP_PATH = path.resolve('.');
-const directrespons = require("./directRespons.json")
 const header = require("./headerHuicobus.json")
 const headcommandbetweenuianduip = require("./commandbetweenuianduip.json")
-const querystring = require('querystring');
-const {
-    AsyncClient
-} = require("async-mqtt");
 const argv = require('minimist')(process.argv.slice(2));
 
 let mqtthost = "" //default as docker
