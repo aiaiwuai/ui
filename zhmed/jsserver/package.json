@@ -1,6 +1,10 @@
 {
-"scripts": {
-    "server": "nodemon ./server.js localhost 5000",  
-    "test": "nodemon --ext js --watch ./ --exec 'mocha ./test' --delay 1"  
- }
+    "scripts": {
+        "server": "nodemon ./server.js localhost 5000",
+        "test": "nodemon --ext js --watch ./ --exec 'mocha ./test' --delay 1"
+    },
+    "dependencies": {
+        "chai": "^4.2.0",
+        "g": "^2.0.1"
+    }
 }

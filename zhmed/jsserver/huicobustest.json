@@ -24,188 +24,240 @@
         "parameter": {},
         "session_id": 0
     },
-    "2560": {
+    "2560":{
         "parameter": {
-            "groups": [
-                {
+            "groups": {
+                "hb_selct": {
                     "groupname": "版型选择",
+                    "groupkey": "hb_selct",
                     "list": [
                         {
                             "paraname": "托盘类型",
+                            "parakey": "hb_type",
                             "type": "choice",
                             "max": "",
                             "min": "",
-                            "value": "0",
+                            "value": 0,
                             "items": [
-                                "96孔板",
-                                "48孔板",
-                                "24孔板",
-                                "12孔板",
-                                "6孔板",
-                                "384孔板"
+                                "96_STANDARD",
+                                "48_STANDARD",
+                                "24_STANDARD",
+                                "12_STANDARD",
+                                "6_STANDARD",
+                                "384_STANDARD"
                             ],
                             "note": "choice info"
                         }
                     ]
                 },
-                {
+                "glpar_set": {
                     "groupname": "全局参数设置",
+                    "groupkey": "glpar_set",
                     "list": [
                         {
                             "paraname": "拍照后自动识别",
+                            "parakey": "autocfy",
                             "type": "checkbox",
                             "max": "",
                             "min": "",
-                            "value": "True",
+                            "value": true,
                             "note": "Note info"
                         }
                     ]
                 },
-                {
+                "ctrs_set": {
                     "groupname": "计划任务设置",
+                    "groupkey": "ctrs_set",
                     "list": [
                         {
-                            "paraname": "启动计划任务",
+                            "paraname": "定点拍照",
+                            "parakey": "fixpoint",
                             "type": "checkbox",
                             "max": "",
                             "min": "",
-                            "value": "False",
+                            "value": true,
+                            "note": "Note info"
+                        },
+                        {
+                            "paraname": "二次曝光设置",
+                            "parakey": "autoexpo",
+                            "type": "checkbox",
+                            "max": "",
+                            "min": "",
+                            "value": true,
+                            "note": "Note info"
+                        },
+                        {
+                            "paraname": "拍后自动识别",
+                            "parakey": "pic2cfy",
+                            "type": "checkbox",
+                            "max": "",
+                            "min": "",
+                            "value": true,
+                            "note": "Note info"
+                        },
+                        {
+                            "paraname": "启动即工作",
+                            "parakey": "startauto",
+                            "type": "checkbox",
+                            "max": "",
+                            "min": "",
+                            "value": false,
                             "note": "Note info"
                         },
                         {
                             "paraname": "定时自动拍照",
+                            "parakey": "timeauto",
                             "type": "checkbox",
                             "max": "",
                             "min": "",
-                            "value": "True",
+                            "value": true,
                             "note": "Note info"
                         },
                         {
-                            "paraname": "定点拍照",
-                            "type": "checkbox",
-                            "max": "",
-                            "min": "",
-                            "value": "True",
-                            "note": "Note info"
+                            "paraname": "模糊度门限",
+                            "parakey": "blulim",
+                            "type": "float",
+                            "max": 10000.1,
+                            "min": 0,
+                            "value": 1.1,
+                            "note": "单位：无"
                         },
                         {
                             "paraname": "定时拍照时间间隔",
-                            "type": "int",
-                            "max": "100",
-                            "min": "0",
-                            "value": 1,
+                            "parakey": "pictti",
+                            "type": "float",
+                            "max": 100.1,
+                            "min": 0,
+                            "value": 1.1,
                             "note": "单位：秒"
                         }
                     ]
                 },
-                {
+                "axis_set": {
                     "groupname": "坐标系设置",
+                    "groupkey": "axis_set",
                     "list": [
                         {
                             "paraname": "左下X坐标",
+                            "parakey": "leftdown_x",
                             "type": "int",
-                            "max": "37000",
-                            "min": "0",
+                            "max": 37000,
+                            "min": 0,
                             "value": 100,
                             "note": "单位：UM"
                         },
                         {
                             "paraname": "左下Y坐标",
+                            "parakey": "leftdown_y",
                             "type": "int",
-                            "max": "37000",
-                            "min": "0",
+                            "max": 37000,
+                            "min": 0,
                             "value": 30,
                             "note": "单位：UM"
                         },
                         {
                             "paraname": "右上X坐标",
+                            "parakey": "rightup_x",
                             "type": "int",
-                            "max": "157000",
-                            "min": "120000",
+                            "max": 157000,
+                            "min": 12,
                             "value": 20,
                             "note": "单位：UM"
                         },
                         {
                             "paraname": "右上Y坐标",
+                            "parakey": "rightup_y",
                             "type": "int",
-                            "max": "127000",
-                            "min": "90000",
+                            "max": 127000,
+                            "min": 9,
                             "value": 10,
                             "note": "单位：UM"
                         }
                     ]
                 },
-                {
+                "piccfy_set": {
                     "groupname": "图片识别参数设置",
+                    "groupkey": "piccfy_set",
                     "list": [
                         {
                             "paraname": "小尺寸门限",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 100,
-                            "note": "单位：像素"
+                            "parakey": "smalldown_thd",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0.1,
+                            "value": 100.1,
+                            "note": "单位：无"
                         },
                         {
                             "paraname": "小-中尺寸门限",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 200,
-                            "note": "单位：像素"
+                            "parakey": "smallmid_thd",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0.1,
+                            "value": "200.1",
+                            "note": "单位：无"
                         },
                         {
                             "paraname": "中-大尺寸门限",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 500,
-                            "note": "单位：像素"
+                            "parakey": "midbig_thd",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0.1,
+                            "value": "500.1",
+                            "note": "单位：无"
                         },
                         {
                             "paraname": "大尺寸门限",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 1000,
-                            "note": "单位：像素"
+                            "parakey": "bigup_thd",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0.1,
+                            "value": 100.1,
+                            "note": "单位：无"
                         },
                         {
                             "paraname": "输出图像叠加标定",
+                            "parakey": "addup",
                             "type": "checkbox",
                             "max": "",
                             "min": "",
-                            "value": "True",
+                            "value": true,
                             "note": "Note info"
                         }
                     ]
                 },
-                {
+                "video_set": {
                     "groupname": "视频参数设置",
+                    "groupkey": "video_set",
                     "list": [
                         {
                             "paraname": "开启视频记录",
+                            "parakey": "openvideo",
                             "type": "checkbox",
                             "max": "",
                             "min": "",
-                            "value": "True",
+                            "value": true,
                             "note": "Note info"
                         },
                         {
                             "paraname": "视频时长",
-                            "type": "int",
-                            "max": "60",
-                            "min": "0",
-                            "value": 3,
+                            "parakey": "videotti",
+                            "type": "float",
+                            "max": 60.1,
+                            "min": 0.1,
+                            "value": 3.1,
                             "note": "单位：秒"
                         }
                     ]
                 },
-                {
+                "picsave_set": {
                     "groupname": "图片存储位置",
+                    "groupkey": "picsave_set",
                     "list": [
                         {
                             "paraname": "未识别照片目录",
+                            "parakey": "uncfy",
                             "type": "string",
                             "max": "",
                             "min": "",
@@ -214,6 +266,7 @@
                         },
                         {
                             "paraname": "已识别照片目录",
+                            "parakey": "cfied",
                             "type": "string",
                             "max": "",
                             "min": "",
@@ -222,61 +275,68 @@
                         }
                     ]
                 },
-                {
+                "moto_set": {
                     "groupname": "马达参数",
+                    "groupkey": "moto_set",
                     "list": [
                         {
                             "paraname": "增速加速度",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 10,
+                            "parakey": "acc",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0,
+                            "value": 10.9,
                             "note": "单位：metre every second square second"
                         },
                         {
                             "paraname": "减速加速度",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 20,
+                            "parakey": "deacc",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0,
+                            "value": 20.9,
                             "note": "单位：metre every second square second"
                         },
                         {
                             "paraname": "移动速度",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 20,
+                            "parakey": "spd",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0,
+                            "value": 20.9,
                             "note": "单位：metre every second square second"
                         },
                         {
                             "paraname": "归零速度",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 200,
+                            "parakey": "zerospd",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0,
+                            "value": 200.9,
                             "note": "单位：metre every second"
                         },
                         {
-                            "paraname": "归零减速度",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 100,
+                            "paraname": "归零加速度",
+                            "parakey": "zeroacc",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0,
+                            "value": 100.9,
                             "note": "单位：metre every second"
                         },
                         {
                             "paraname": "回退步数",
-                            "type": "int",
-                            "max": "",
-                            "min": "",
-                            "value": 22,
+                            "parakey": "backsteps",
+                            "type": "float",
+                            "max": 999.9,
+                            "min": 0,
+                            "value": 22.9,
                             "note": "单位：步"
                         }
                     ]
                 }
-            ]
+            }
         },
-        "session_id": 0
+        "session_id": 1559381384274
     }
 }
