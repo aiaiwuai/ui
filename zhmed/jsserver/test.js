@@ -9,6 +9,7 @@ const querystring = require('querystring');
 const _ = require("lodash")
 const flagfolder="/rootfs"
 const argv = require('minimist')(process.argv.slice(2));
+const APP_PATH = path.resolve('.');
 const mqttlogfile = APP_PATH + "/mqttlog/reciv/";
 let mqtthost="" //default as docker
 let mqttport=""
