@@ -26,8 +26,8 @@
     },
     "2560":{
         "parameter": {
-            "groups": {
-                "hb_selct": {
+            "groups": [
+                {
                     "groupname": "版型选择",
                     "groupkey": "hb_selct",
                     "list": [
@@ -50,7 +50,7 @@
                         }
                     ]
                 },
-                "glpar_set": {
+                 {
                     "groupname": "全局参数设置",
                     "groupkey": "glpar_set",
                     "list": [
@@ -65,7 +65,7 @@
                         }
                     ]
                 },
-                "ctrs_set": {
+                 {
                     "groupname": "计划任务设置",
                     "groupkey": "ctrs_set",
                     "list": [
@@ -134,7 +134,7 @@
                         }
                     ]
                 },
-                "axis_set": {
+                 {
                     "groupname": "坐标系设置",
                     "groupkey": "axis_set",
                     "list": [
@@ -176,7 +176,7 @@
                         }
                     ]
                 },
-                "piccfy_set": {
+                 {
                     "groupname": "图片识别参数设置",
                     "groupkey": "piccfy_set",
                     "list": [
@@ -227,7 +227,7 @@
                         }
                     ]
                 },
-                "video_set": {
+                {
                     "groupname": "视频参数设置",
                     "groupkey": "video_set",
                     "list": [
@@ -251,7 +251,7 @@
                         }
                     ]
                 },
-                "picsave_set": {
+                {
                     "groupname": "图片存储位置",
                     "groupkey": "picsave_set",
                     "list": [
@@ -275,7 +275,7 @@
                         }
                     ]
                 },
-                "moto_set": {
+                {
                     "groupname": "马达参数",
                     "groupkey": "moto_set",
                     "list": [
@@ -335,7 +335,7 @@
                         }
                     ]
                 }
-            }
+            ]
         },
         "session_id": 1559381384274
     }

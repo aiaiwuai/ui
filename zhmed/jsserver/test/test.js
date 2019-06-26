@@ -10,7 +10,8 @@ chai.use(require('chai-json-equal'));
 chai.use(require('chai-json-schema'));
 const tjson = require("./test.json")
 const path = require("path")
-const pth = path.resolve(__dirname)
+const pth = path.resolve(__dirname);
+const  Ajv = require('ajv');
 const schemadir=pth+"/schema/";
 console.log(pth);
 let url = 'http://127.0.0.1';
@@ -24,7 +25,7 @@ try {
 }
 url = url + ":" + port;
 console.log(url);
-// generateThejsonSchema();
+generateThejsonSchema();
 
 // eslint-disable-next-line no-unused-vars
 describe("Mqtt Test", () => {
@@ -52,10 +53,10 @@ function changeArrayToObj(msg){
             let listarray=msg.hlContent.parameter.groups[ele["groupkey"]]['list'];
             msg.hlContent.parameter.groups[ele["groupkey"]]['list']={};
             _.forEach(listarray,(e)=>{
-                msg.hlContent.parameter.groups[ele["groupkey"]]['list'][e.type]=e;
+                console(e)
+                msg.hlContent.parameter.groups[ele["groupkey"]]['list'][e.parakey]=e;
             })
         })
-     
     return msg;
 }
 function generateMqttJsonConstructor(uiCommand) {
@@ -70,7 +71,7 @@ function generateThejsonSchema() {
     _.forEach(commandmap.uicmdmaptup, (value, key) => {
         let mqttJson = generateMqttJsonConstructor(key);
         let specialArra=["ZH_Medicine_sys_config_save"];
-        if ("ZH_Medicine_sys_config_save"==key) {
+        if ("ZH_Medicine_sys_config_save1"==key) {
             mqttJson=changeArrayToObj(mqttJson);
         }
         let schema = jsonSchemaGenerator(mqttJson);

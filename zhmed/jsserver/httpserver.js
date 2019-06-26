@@ -4,17 +4,21 @@ const url = require('url');
 const mqtt = require('mqtt');
 const path = require('path');
 const req = require('./ejs/req');
+const until=require("./until")
 const _ = require("lodash")
 const APP_PATH = path.resolve('.');
+const schemadir = APP_PATH + "/test/schema/";
 const header = require("./headerHuicobus.json")
 const headcommandbetweenuianduip = require("./commandbetweenuianduip.json")
 const argv = require('minimist')(process.argv.slice(2));
+const Ajv = require('ajv');
 console.log(argv);
 let mqtthost = "" //default as docker
 let mqttport = ""
 let httpport = ""
 let mqttwebsocletport = ""
-const flagfolder = "/rootfs"
+const flagfolder = "/rootfs";
+const mqttlogfile = APP_PATH + "/mqttlog/";
 console.log("使用说明： \n \
 nodejs launch.js -m 127.0.0.1 -h 1883 -w 9001 -p 8888 \n \
 -m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
@@ -126,15 +130,65 @@ function generateMqttToTup(requestbody) {
     // jsonInput['hlContent']=header[headparameterkey];
     jsonInput['hlContent'] = getHlcontent(requestbody.action, requestbody.body, headparameterkey); // header[headparameterkey];
     // console.log(jsonInput)
+    let logfile = mqttlogfile + action + ".log";
+    try {
+        fs.existsSync(logfile) && fs.unlinkSync(logfile)
+    } catch (error) {
+        if (error) throw error;
+        console.log('文件已写入');
+    }
+
+    let schemafilename = schemadir + action + ".json";
+    console.log(schemafilename);
+    
+    var data = fs.readFileSync(schemafilename);
+    let jsonSchemae = JSON.parse(data.toString('utf8'));
+    var ajv = new Ajv({
+        coerceTypes: 'array',
+        schemaId: 'id'
+    });
+    ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-04.json'));
+    var validate = ajv.compile(jsonSchemae);
+    jsonInput=valibefore(jsonInput,action);
+    if(!validate(jsonInput)){
+       console.log(validate.errors);
+    }
+    jsonInput=valiafter(jsonInput,action);
+    // console.log(jsonInput);
+    fs.writeFile(logfile, JSON.stringify(jsonInput,null,4), (error) => {
+        if (error) throw error;
+        console.log('文件已写入');
+    })
     return jsonInput;
     // console.log(jsonInput)
 }
+function valibefore(jinput,action){
+    let json=jinput;
+    switch(action){
+        case "ZH_Medicine_sys_config_save":
+                json=until.config_changeArrayToObj(jinput)
+            break;
 
+    }
+    return json;
+
+}
+function valiafter(jinput,action){
+    let json=jinput;
+    switch(action){
+        case "ZH_Medicine_sys_config_save":
+                json=until.config_changeObjToArray(jinput)
+            break;
+
+    }
+    return json;
+
+}
 function getHlcontent(action, body, headparameterkey) {
     let hlContentDefined = header[headparameterkey];
     // console.log("action:" + action)
     switch (action) {
-        case "ZH_Medicine_sys_config_save1":
+        case "ZH_Medicine_sys_config_save":
             hlContentDefined.parameter = body.parameter;
             break;
         case "ZH_Medicine_debug_command":
@@ -473,7 +527,7 @@ var httpServer = http.createServer(function (request, response) {
                         //     jsonInput['cmdId'] = 0x0A87;
                         // }
                         jsonInput['hlContent']["session_id"] = ts;
-                        console.log(JSON.stringify(jsonInput))
+                        // console.log(JSON.stringify(jsonInput))
                         var client = mqtt.connect(localmqtt.server, {
                             username: 'usernameui',
                             password: 'password',
@@ -520,15 +574,15 @@ var httpServer = http.createServer(function (request, response) {
                                         // ret.status = true;
                                         // response.send(JSON.stringify(ret));
                                         // console.log("write response" + JSON.stringify(ret));
+                                        respc.sta
                                         respc.writeHead(200, {
                                             'Content-Type': 'text/plain;charset=utf-8'
                                         });
                                         try {
-                                            respc.write(JSON.stringify(responseret));
+                                            respc.finished?"":respc.write(JSON.stringify(responseret));
                                         } catch (error) {
                                             return {}
                                         }
-                                       
                                         console.log("end  mqtt client");
                                         client.end();
                                         console.log("end  response");
