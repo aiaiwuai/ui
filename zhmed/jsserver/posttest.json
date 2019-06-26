@@ -1,11 +1,11 @@
 {
-    "TUP_HHD_CMDID_SYS_SET_CONFIG_REQ": {
+    "TUP_HHD_CMDID_SYS_GET_CONFIG_REQ": {
         "action": "ZH_Medicine_sys_config",
         "type": "query",
         "lang": "ch",
         "user": null
     },
-    "ZH_Medicine_sys_config_save": {
+    "TUP_HHD_CMDID_SYS_SET_CONFIG_REQ": {
         "action": "ZH_Medicine_sys_config_save",
         "type": "mod",
         "lang": "ch",

@@ -25,7 +25,7 @@ const schemaOkCmd=[
         "ZH_Medicine_cali_mode_start",
         "ZH_Medicine_debug_command"
 ];
-generateThejsonSchema()
+// generateThejsonSchema()
 function config_changeArrayToObj(msg){
     let originArray=msg.hlContent.parameter.groups;
     msg.hlContent.parameter.groups={};
