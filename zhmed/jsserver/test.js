@@ -9,6 +9,7 @@ const querystring = require('querystring');
 const _ = require("lodash")
 const flagfolder="/rootfs"
 const argv = require('minimist')(process.argv.slice(2));
+const mqttlogfile = APP_PATH + "/mqttlog/reciv/";
 let mqtthost="" //default as docker
 let mqttport=""
 console.log("使用说明： \n \
@@ -68,7 +69,19 @@ client.on("message", function (topic, message) {
     console.log(resfromtup);
     console.log("=========================");
 
-    if (topic == 'HUICOBUS_MQTT_TOPIC_UIP2TUP') {
+    let logfile = mqttlogfile + topic + ".log";
+    try {
+        fs.existsSync(logfile) && fs.unlinkSync(logfile)
+    } catch (error) {
+        if (error) throw error;
+        console.log('文件已写入');
+    }
+
+    fs.writeFile(logfile, JSON.stringify(resfromtup,null,4), (error) => {
+        if (error) throw error;
+        console.log('文件已写入');
+    })
+    if (argv["r"] &&  topic == 'HUICOBUS_MQTT_TOPIC_UIP2TUP') {
         resfromtup = JSON.parse(message.toString());
         console.log(resfromtup);
 

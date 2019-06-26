@@ -1,1 +1,0 @@
-{"srcNode":"HUICOBUS_MQTT_NODEID_TUPSVR","destNode":"HUICOBUS_MQTT_NODEID_TUPSVR","srcId":"HUICOBUS_MQTT_CLIENTID_TUPROUTER","destId":"HUICOBUS_MQTT_CLIENTID_TUPENTRY","topicId":"HUICOBUS_MQTT_TOPIC_UIP2TUP","cmdId":2560,"cmdValue":0,"hlContent":{"parameter":{"type":"query","lang":"ch","user":"null"},"session_id":1561516744983}}

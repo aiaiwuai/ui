@@ -18,7 +18,7 @@ let mqttport = ""
 let httpport = ""
 let mqttwebsocletport = ""
 const flagfolder = "/rootfs";
-const mqttlogfile = APP_PATH + "/mqttlog/";
+const mqttlogfile = APP_PATH + "/mqttlog/send/";
 console.log("使用说明： \n \
 nodejs launch.js -m 127.0.0.1 -h 1883 -w 9001 -p 8888 \n \
 -m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
