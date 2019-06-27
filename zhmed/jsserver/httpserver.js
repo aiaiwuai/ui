@@ -12,19 +12,18 @@ const header = require("./headerHuicobus.json")
 const headcommandbetweenuianduip = require("./commandbetweenuianduip.json")
 const argv = require('minimist')(process.argv.slice(2));
 const Ajv = require('ajv');
-console.log(argv);
 let mqtthost = "" //default as docker
 let mqttport = ""
 let httpport = ""
 let mqttwebsocletport = ""
 const flagfolder = "/rootfs";
 const mqttlogfile = APP_PATH + "/mqttlog/send/";
-console.log("使用说明： \n \
-nodejs launch.js -m 127.0.0.1 -h 1883 -w 9001 -p 8888 \n \
--m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
--h: mqtt port  docker + 主机环境默认1883  \n \
--p: http port  docker + 主机环境默认8888  \n \
--w: mqtt web socket  port  docker + 主机环境默认9001 \n ");
+// console.log("使用说明： \n \
+// nodejs launch.js -m 127.0.0.1 -h 1883 -w 9001 -p 8888 \n \
+// -m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
+// -h: mqtt port  docker + 主机环境默认1883  \n \
+// -p: http port  docker + 主机环境默认8888  \n \
+// -w: mqtt web socket  port  docker + 主机环境默认9001 \n ");
 if (argv["m"]) {
     mqtthost = argv["m"];
 } else {
@@ -63,6 +62,7 @@ if (argv["p"]) {
 var localmqtt = {
     "server": "mqtt://" + mqtthost + ":" + mqttport
 }
+console.info("use mqtt config:"+JSON.stringify(localmqtt))
 var connect = false;
 var start = 0;
 var responssaved = {}

@@ -47,5 +47,6 @@ if (argv["p"]) {
     httpserver.httpport = 8888;
 }
 if (module.parent == null) {
+    console.info("web server on 127.0.0.1:"+httpserver.httpport)
     httpserver.httpServer.listen(httpserver.httpport)
 }
