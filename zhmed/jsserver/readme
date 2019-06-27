@@ -1,0 +1,4 @@
+node版本10+
+cd 到jsserver文件夹
+npm install 
+node launch.js 即可
