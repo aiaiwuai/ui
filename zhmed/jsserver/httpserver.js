@@ -480,6 +480,7 @@ var httpServer = http.createServer(function (request, response) {
                     var timestamp = new Date().getTime();
                     // console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
+                    until.logPostJsonByHuicobuscmd(requestObj);
                     var action = requestObj.action;
                     //下列action 需要走mqtt
                     actionsMqttArray = [

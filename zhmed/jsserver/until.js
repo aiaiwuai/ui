@@ -5,6 +5,7 @@ const jsonSchemaGenerator = require('json-schema-generator');
 const fs = require("fs")
 const path = require("path")
 const pth = path.resolve(__dirname);
+const postjson=require("./posttest.json")
 const schemadir=pth+"/test/schema/";
 const schemaOkCmd=[
     "ZH_Medicine_sys_config",
@@ -81,6 +82,15 @@ function generateThejsonSchema() {
       
     })
 }
+function logPostJsonByHuicobuscmd(requestObj){
+    var action = requestObj.action;
+        postjson[action]=requestObj;
+    fs.writeFile("./posttest.json", JSON.stringify(postjson,null,4), (Error) => {
+        if (Error) {
+            console.log(Error);
+        }
+    })
+}
 module.exports={
-    config_changeArrayToObj,config_changeObjToArray
+    config_changeArrayToObj,config_changeObjToArray,logPostJsonByHuicobuscmd
 } 
