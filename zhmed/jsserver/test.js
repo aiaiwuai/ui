@@ -71,12 +71,7 @@ client.on("message", function (topic, message) {
     console.log("=========================");
 
     let logfile = mqttlogfile + topic + ".log";
-    try {
-        fs.existsSync(logfile) && fs.unlinkSync(logfile)
-    } catch (error) {
-        if (error) throw error;
-        console.log('文件已写入');
-    }
+ 
 
     fs.writeFile(logfile, JSON.stringify(resfromtup,null,4), (error) => {
         if (error) throw error;

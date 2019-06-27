@@ -559,9 +559,8 @@
                                                             "type": "number"
                                                         },
                                                         "value": {
-                                                            "type": "string",
-                                                            "minLength": 1
-                                                        },
+                                                            "type": "number"
+                                                           },
                                                         "note": {
                                                             "type": "string",
                                                             "minLength": 1
@@ -591,8 +590,7 @@
                                                             "type": "number"
                                                         },
                                                         "value": {
-                                                            "type": "string",
-                                                            "minLength": 1
+                                                            "type": "number"
                                                         },
                                                         "note": {
                                                             "type": "string",
@@ -626,8 +624,7 @@
                                                             "type": "number"
                                                         },
                                                         "note": {
-                                                            "type": "string",
-                                                            "minLength": 1
+                                                            "type": "number"
                                                         }
                                                     },
                                                     "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
