@@ -624,7 +624,8 @@
                                                             "type": "number"
                                                         },
                                                         "note": {
-                                                            "type": "number"
+                                                            "type": "string",
+                                                            "minLength": 1
                                                         }
                                                     },
                                                     "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
