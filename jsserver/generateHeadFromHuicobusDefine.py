@@ -1,7 +1,7 @@
 # encode=utf-8
 import sys
 import json
-sys.path.append("../../../med/tup/PkgL2svrHandler")
+sys.path.append("../../med/tup/PkgL2svrHandler")
 import  headHuicobus
 # print(dir(headHuicobus))
 tjson={

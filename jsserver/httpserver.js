@@ -1,3 +1,4 @@
+"use strict"
 const http = require("http");
 const fs = require('fs');
 const url = require('url');
@@ -18,6 +19,7 @@ let httpport = ""
 let mqttwebsocletport = ""
 const flagfolder = "/rootfs";
 const mqttlogfile = APP_PATH + "/mqttlog/send/";
+
 // console.log("使用说明： \n \
 // nodejs launch.js -m 127.0.0.1 -h 1883 -w 9001 -p 8888 \n \
 // -m：mqtt host docker环境默认mqtt，主机环境默认127.0.0.1 \n \
@@ -63,11 +65,27 @@ var localmqtt = {
     "server": "mqtt://" + mqtthost + ":" + mqttport
 }
 console.info("use mqtt config:"+JSON.stringify(localmqtt))
-var connect = false;
-var start = 0;
 var responssaved = {}
 var requestssave = {}
 var sio = require('socket.io');
+
+
+var client = mqtt.connect(localmqtt.server, {
+    username: 'usernameui',
+    password: 'password',
+    clientid: "MQTT CLIENT UIP"
+});
+client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIP', function (err) {
+    console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
+    err ? console.log(err) : null;
+    if (!err) {
+        console.log(err);
+        
+    }
+})
+
+
+
 
 function getMoveDistanceValue(reqbody) {
     let parameter = _.find(reqbody.parameter.parameter.groups, function (o) {
@@ -125,7 +143,7 @@ function generateMqttToTup(requestbody) {
     // console.log("TUPCMD:" + tupcmd);
     var headparameterkey = tupcmd.replace("CMDID", "HLC");
     // console.log(tupcmd)
-    jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
+    let jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
     jsonInput.cmdId = header["cmdidlist"][tupcmd];
     // jsonInput['hlContent']=header[headparameterkey];
     jsonInput['hlContent'] = getHlcontent(requestbody.action, requestbody.body, headparameterkey); // header[headparameterkey];
@@ -179,7 +197,6 @@ function valiafter(jinput,action){
         case "ZH_Medicine_sys_config_save":
                 json=until.config_changeObjToArray(jinput)
             break;
-
     }
     return json;
 
@@ -237,10 +254,10 @@ function getHlcontent(action, body, headparameterkey) {
                     hlContentDefined.parameter.expected_delta_x_um = getMoveDistanceValue(body)
                     break;
                 case "MoveNPoint":
-                    let parameter = _.find(body.parameter.parameter.groups, function (o) {
+                    var  parameter = _.find(body.parameter.parameter.groups, function (o) {
                         return o.groupkey == "movesetting"
                     });
-                    let item = _.find(parameter.list, (o) => {
+                    var  item = _.find(parameter.list, (o) => {
                         return o.itemkey == "movetoxhole";
                     });
                     hlContentDefined.parameter.target_hole_n = item.value;
@@ -262,6 +279,8 @@ var httpServer = http.createServer(function (request, response) {
     var pathname = url.parse(request.url, false).pathname;
     var ext = pathname.match(/(\.[^.]+|)$/)[0];
     var Data = "";
+    var file='';
+    var filename="";
     switch (ext) {
         case ".css":
             // console.log("Client require :"+pathname);
@@ -299,7 +318,7 @@ var httpServer = http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/x-ico';
@@ -317,7 +336,7 @@ var httpServer = http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/png';
@@ -335,7 +354,7 @@ var httpServer = http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 try {
                     var img = fs.readFileSync(file);
@@ -343,7 +362,8 @@ var httpServer = http.createServer(function (request, response) {
                     response.contentLength = stat.size;
                     response.end(img, 'binary');
                 } catch (error) {
-
+                    console.log(error);
+                    
                 }
 
             });
@@ -358,7 +378,7 @@ var httpServer = http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'image/gif';
@@ -374,7 +394,7 @@ var httpServer = http.createServer(function (request, response) {
             //fs.createReadStream(".."+pathname, 'utf-8').pipe(response);
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var swf = fs.readFileSync(file);
                 response.contentType = 'application/x-shockwave-flash';
@@ -390,7 +410,7 @@ var httpServer = http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/font-woff';
@@ -406,7 +426,7 @@ var httpServer = http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'font/woff2';
@@ -422,7 +442,7 @@ var httpServer = http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'video/mpeg4';
@@ -438,7 +458,7 @@ var httpServer = http.createServer(function (request, response) {
             });
             //response.write(Data);
             //response.end();
-            var file = APP_PATH + "/../ui" + pathname;
+            file = APP_PATH + "/../ui" + pathname;
             fs.stat(file, function (err, stat) {
                 var img = fs.readFileSync(file);
                 response.contentType = 'application/x-font-ttf';
@@ -466,24 +486,22 @@ var httpServer = http.createServer(function (request, response) {
             break;
         case ".php":
             //2 different PHP file:dump.php&request.php
-            var filename = pathname.replace(/^.*\/|\..*$/g, "");
+            filename = pathname.replace(/^.*\/|\..*$/g, "");
             // console.log("Client require PHP file :" + filename);
             if (filename == "request") {
                 // console.log("Client require :"+pathname);
                 var str = "";
                 var res = req.msg;
                 request.on("data", function (chunk) {
-
                     str += chunk;
                 });
                 request.on("end", function (chunk) {
-                    var timestamp = new Date().getTime();
                     // console.log("post data:" + str);
                     var requestObj = JSON.parse(str);
                     until.logPostJsonByHuicobuscmd(requestObj);
                     var action = requestObj.action;
                     //下列action 需要走mqtt
-                    actionsMqttArray = [
+                    const  actionsMqttArray = [
                         // "ZH_Medicine_cali_config",
                         "ZH_Medicine_cali_command",
                         "ZH_Medicine_sys_config",
@@ -499,48 +517,10 @@ var httpServer = http.createServer(function (request, response) {
                         //request bundle
                         responssaved[ts] = response;
                         requestssave[ts] = requestObj;
-                        jsonInput = generateMqttToTup(requestObj);
+                        var jsonInput = generateMqttToTup(requestObj);
 
-                        // switch (action) {
-                        //     case "ZH_Medicine_cali_command":
-                        //         action = action + "_" + requestObj.body.command
-                        // }
-                        // console.log("action:" + action);
-                        // var tupcmd = headcommandbetweenuianduip["uicmdmaptup"][action];
-                        // console.log("TUPCMD:" + tupcmd);
-                        // var headparameterkey = tupcmd.replace("CMDID", "HLC");
-                        // console.log(tupcmd)
-                        // jsonInput = header["TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP"];
-                        // jsonInput.cmdId = header["cmdidlist"][tupcmd];
-                        // jsonInput['hlContent'] = header[headparameterkey];
-                        // console.log(jsonInput)
-                        // switch (action) {
-                        //     case "ZH_Medicine_sys_config":
-                        //         break;
-                        //     case "ZH_Medicine_sys_config_save":
-                        //         jsonInput['hlContent']["parameter"] = str;
-                        // }
-                        // if (requestObj.action == "ZH_Medicine_sys_config") {
-                        //     jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_GET_CONFIG_REQ"];
-                        //     // jsonInput['cmdId'] = 0x0A86;
-                        // } else {
-                        //     jsonInput['hlContent'] = header["TUP_HHD_HLC_SYS_SET_CONFIG_REQ"];
-                        //     jsonInput['cmdId'] = 0x0A87;
-                        // }
                         jsonInput['hlContent']["session_id"] = ts;
-                        // console.log(JSON.stringify(jsonInput))
-                        var client = mqtt.connect(localmqtt.server, {
-                            username: 'usernameui',
-                            password: 'password',
-                            clientid: ts
-                        });
-                        client.subscribe('HUICOBUS_MQTT_TOPIC_TUP2UIP', function (err) {
-                            console.log("subscribe HUICOBUS_MQTT_TOPIC_TUP2UIR");
-                            err ? console.log(err) : null;
-                            if (!err) {
-
-                            }
-                        })
+                        
                         client.publish('HUICOBUS_MQTT_TOPIC_UIP2TUP', JSON.stringify(jsonInput),
                             function (Error) {
                                 console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP");
@@ -563,7 +543,6 @@ var httpServer = http.createServer(function (request, response) {
                                     console.log("resfromtup");
                                     console.log(resfromtup);
                                     // var ret = {};
-
                                     console.log("requestObj.action:" + action);
                                     // console.log(requestObj.action)
                                     // console.log(resfromtup.src +"-+-+-"+ resfromtup.src.hlContent +"-+-+-"+ resfromtup.src.hlContent.action +"-+-+-"+requestObj.action)
@@ -575,7 +554,7 @@ var httpServer = http.createServer(function (request, response) {
                                         // ret.status = true;
                                         // response.send(JSON.stringify(ret));
                                         // console.log("write response" + JSON.stringify(ret));
-                                        respc.sta
+                             
                                         respc.writeHead(200, {
                                             'Content-Type': 'text/plain;charset=utf-8'
                                         });
@@ -584,8 +563,7 @@ var httpServer = http.createServer(function (request, response) {
                                         } catch (error) {
                                             return {}
                                         }
-                                        console.log("end  mqtt client");
-                                        client.end();
+                                        
                                         console.log("end  response");
                                         respc.end();
                                         console.log("end  response");
@@ -615,7 +593,7 @@ var httpServer = http.createServer(function (request, response) {
                     str+=chunk;
                 });*/
 
-            } else if (filename = "upload") {
+            } else if (filename == "upload") {
                 var para_name = "id";
                 var reg = new RegExp("(^|&)" + para_name + "=([^&]*)(&|$)", "i");
                 var id = request.url.substring(request.url.indexOf("=") + 1);
@@ -638,7 +616,7 @@ var httpServer = http.createServer(function (request, response) {
 
                     var rems = [];
 
-                    var files_head = [];
+                    files_head = [];
                     for (var i = 0; i < buffer.length - 1; i++) {
                         var v = buffer[i];
                         var v2 = buffer[i + 1];
@@ -662,7 +640,7 @@ var httpServer = http.createServer(function (request, response) {
                     for (var i = 0; i < files_head.length - 1; i++) {
                         var nbuf;
                         var web_head;
-                        var filename;
+                        filename;
                         var j = 0
                         for (; j < rems.length; j++) {
                             if (rems[j] > files_head[i]) break;
@@ -689,7 +667,7 @@ var httpServer = http.createServer(function (request, response) {
                     //response.end('Upload ['+files_head.length+"] files successfully!");
                 });
 
-                var file_obj = request.form;
+                file_obj = request.form;
                 console.log(file_obj);
 
             }
