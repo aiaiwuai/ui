@@ -75,7 +75,7 @@ client.on("message", function (topic, message) {
 
     fs.writeFile(logfile, JSON.stringify(resfromtup,null,4), (error) => {
         if (error) throw error;
-        console.log('文件已写入');
+        console.log(logfile+'文件已写入');
     })
     if (argv["r"] &&  topic == 'HUICOBUS_MQTT_TOPIC_UIP2TUP') {
         resfromtup = JSON.parse(message.toString());
@@ -85,6 +85,7 @@ client.on("message", function (topic, message) {
         resp["hlContent"]=respheader[respheader.responsemap[resfromtup["cmdId"]]]
         // console.log(resp)
         resp["hlContent"]["session_id"]=resfromtup["hlContent"]["session_id"];
+        resp["cmdId"]=respheader.huicombusreqmapresp[resfromtup["cmdId"]];
         console.log(resp)
 
         client.publish('HUICOBUS_MQTT_TOPIC_TUP2UIP', JSON.stringify(resp),

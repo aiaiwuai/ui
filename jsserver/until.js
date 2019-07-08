@@ -8,25 +8,26 @@ const pth = path.resolve(__dirname);
 const postjson=require("./posttest.json")
 const schemadir=pth+"/test/schema/";
 const schemaOkCmd=[
-    "ZH_Medicine_sys_config",
-        "ZH_Medicine_sys_config_save",
-        "ZH_Medicine_cali_config",
-        "ZH_Medicine_cali_command_MoveToStart",
-        "ZH_Medicine_cali_command_MoveNPoint",
-        "ZH_Medicine_cali_command_shoot",
-        "ZH_Medicine_cali_command_pilotstart",
-        "ZH_Medicine_cali_command_pilotstop",
-        "ZH_Medicine_cali_command_up",
-        "ZH_Medicine_cali_command_left",
-        "ZH_Medicine_cali_command_right",
-        "ZH_Medicine_cali_command_down",
-        "ZH_Medicine_cali_command_leftdown",
-        "ZH_Medicine_cali_command_rightup",
+    "TUP_HHD_CMDID_SYS_GET_CONFIG_REQ",
+    "TUP_HHD_CMDID_SYS_SET_CONFIG_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_START_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_LEFT_BOT_SET_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_RIGHT_UP_SET_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_MOMV_START_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_PIC_CAP_HOLEN_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_PILOT_STOP_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_PILOT_START_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_MOMV_DIR_REQ",
+    "TUP_HHD_CMDID_SYS_CALI_EXIT_REQ",
+    "TUP_HHD_CMDID_SYS_MENG_START_REQ",
+    "TUP_HHD_CMDID_SYS_MENG_COMMAND_REQ",
+    "TUP_HHD_CMDID_SYS_MENG_EXIT_REQ",
+     
         "ZH_Medicine_cali_mode",
         "ZH_Medicine_cali_mode_start",
         "ZH_Medicine_debug_command"
 ];
-// generateThejsonSchema()
+// generateThejsonSchema();
 function config_changeArrayToObj(msg){
     let originArray=msg.hlContent.parameter.groups;
     msg.hlContent.parameter.groups={};
@@ -57,33 +58,45 @@ function generateMqttJsonConstructor(uiCommand) {
     let huicobusCommand = commandmap.uicmdmaptup[uiCommand];
     let mqttMsg = huicobus.TUP_HHD_HLC_MESSAGE_HEADER_UIP2TUP;
     mqttMsg.cmdId = huicobus.cmdidlist[huicobusCommand];
-    mqttMsg.hlContent = huicobus[huicobusCommand.replace("_CMDID_", "_HLC_")];
+    mqttMsg.hlContent = huicobus[uiCommand.replace("_CMDID_", "_HLC_")];
     return mqttMsg;
 }
 
 function generateThejsonSchema() {
     _.forEach(commandmap.uicmdmaptup, (value, key) => {
-        let schemafilepath=schemadir + key + ".json";
-        if(_.indexOf(schemaOkCmd,key)==-1){
-            let mqttJson = generateMqttJsonConstructor(key);
-            let specialArra=["ZH_Medicine_sys_config_save"];
-            if ("ZH_Medicine_sys_config_save"==key) {
-                mqttJson=config_changeArrayToObj(mqttJson);
-            }
-            let schema = jsonSchemaGenerator(mqttJson);
-            fs.writeFile(schemafilepath, JSON.stringify(schema,null,4), (Error) => {
-                if (Error) {
-                    console.log(Error);
+        value.forEach(element => {
+            let schemafilepath=schemadir + element + ".json";
+
+            console.log(element);
+            
+            if(_.indexOf(schemaOkCmd,element)==-1){
+                let mqttJson = generateMqttJsonConstructor(element);
+                let specialArra=["ZH_Medicine_sys_config_save"];
+                if ("TUP_HHD_CMDID_SYS_SET_CONFIG_REQ"==element) {
+                    mqttJson=config_changeArrayToObj(mqttJson);
                 }
-            })
-        }else{
-            console.log("命令:"+key+"的schema已经生成，请更改文件:"+schemafilepath);
-        }
+                let schema = jsonSchemaGenerator(mqttJson);
+                console.log("命令:"+element+"的schema正在生成："+schemafilepath);
+                fs.writeFile(schemafilepath, JSON.stringify(schema,null,4), (Error) => {
+                    if (Error) {
+                        console.log(Error);
+                    }
+                })
+            }else{
+                console.log("命令:"+element+"的schema更正，请更改文件:"+schemafilepath);
+            }
+            
+        });
+        
       
     })
 }
 function logPostJsonByHuicobuscmd(requestObj){
+    if(!postjson){
+        postjson={};
+    }
     var action = requestObj.action;
+
         postjson[action]=requestObj;
     fs.writeFile("./posttest.json", JSON.stringify(postjson,null,4), (Error) => {
         if (Error) {

@@ -1,10 +1,221 @@
 {
+    "ZH_Medicine_sys_language_list": {
+        "action": "ZH_Medicine_sys_language_list",
+        "type": "query",
+        "lang": "en",
+        "user": null
+    },
+    "ZH_Medicine_mqtt_conf": {
+        "action": "ZH_Medicine_mqtt_conf",
+        "type": "query",
+        "lang": "en",
+        "user": null
+    },
+    "ZH_Medicine_sys_language": {
+        "action": "ZH_Medicine_sys_language",
+        "type": "query",
+        "lang": "ch",
+        "user": null,
+        "body": {
+            "name": "supportlanguage",
+            "owner": "system",
+            "default": "ch",
+            "national": [
+                {
+                    "name": "CHINESE",
+                    "icon": "China.svg",
+                    "abbreviation": "ch"
+                },
+                {
+                    "name": "ENGLISH",
+                    "icon": "UK.svg",
+                    "abbreviation": "en"
+                },
+                {
+                    "name": "FRENCH",
+                    "icon": "France.svg",
+                    "abbreviation": "fr"
+                },
+                {
+                    "name": "JAPANESE",
+                    "icon": "Japan.svg",
+                    "abbreviation": "jp"
+                },
+                {
+                    "name": "GERMAN",
+                    "icon": "Germany.svg",
+                    "abbreviation": "de"
+                },
+                {
+                    "name": "ARABIC",
+                    "icon": "Arabia.svg",
+                    "abbreviation": "ar"
+                },
+                {
+                    "name": "THAI",
+                    "icon": "Thailand.svg",
+                    "abbreviation": "th"
+                }
+            ]
+        }
+    },
+    "ZH_Medicine_sys_config": {
+        "action": "ZH_Medicine_sys_config",
+        "type": "query",
+        "lang": "ch",
+        "user": null
+    },
+    "ZH_Medicine_cali_config": {
+        "action": "ZH_Medicine_cali_config",
+        "type": "query",
+        "lang": "ch",
+        "user": null
+    },
+    "ZH_Medicine_debug_config": {
+        "action": "ZH_Medicine_debug_config",
+        "type": "query",
+        "lang": "ch",
+        "user": null
+    },
+    "ZH_Medicine_system_info": {
+        "action": "ZH_Medicine_system_info",
+        "type": "query",
+        "lang": "ch",
+        "user": null
+    },
+    "ZH_Medicine_get_identify_conf": {
+        "action": "ZH_Medicine_get_identify_conf",
+        "type": "query",
+        "lang": "ch",
+        "user": null
+    },
+    "ZH_Medicine_Login": {
+        "action": "ZH_Medicine_Login",
+        "type": "query",
+        "lang": "ch",
+        "body": {
+            "username": "5",
+            "password": "rDR41po8gfpi5g9cNpYWWk5easQ"
+        },
+        "user": "null"
+    },
+    "ZH_Medicine_Panel_info": {
+        "action": "ZH_Medicine_Panel_info",
+        "body": "",
+        "type": "query",
+        "lang": "ch",
+        "user": null
+    },
+    "ZH_Medicine_cali_mode": {
+        "action": "ZH_Medicine_cali_mode",
+        "type": "mod",
+        "lang": "ch",
+        "body": "check",
+        "user": "123123123"
+    },
+    "ZH_Medicine_task_info": {
+        "action": "ZH_Medicine_task_info",
+        "type": "query",
+        "body": {
+            "configure": {
+                "basic": {
+                    "longitude": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "20",
+                        "21",
+                        "22",
+                        "23",
+                        "24"
+                    ],
+                    "latitude": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H",
+                        "I",
+                        "J",
+                        "K",
+                        "L",
+                        "M",
+                        "N",
+                        "O",
+                        "P"
+                    ],
+                    "name": "16x24",
+                    "batch": "",
+                    "date": "",
+                    "analysis": "false",
+                    "video": "false",
+                    "parameter": {
+                        "smallsize": 200,
+                        "smallmiddle": 500,
+                        "middlelarge": 2000,
+                        "largesize": 5000,
+                        "extra1": 0,
+                        "extra2": 0,
+                        "extra3": 0,
+                        "extra4": 0
+                    },
+                    "owner": "",
+                    "tupid": "",
+                    "extra": [
+                        {
+                            "title": "",
+                            "value": ""
+                        }
+                    ]
+                },
+                "picture": [],
+                "pictureclass": {
+                    "series": "",
+                    "shoot": [],
+                    "video": "",
+                    "shooting": "false",
+                    "videoing": "false",
+                    "analysising": "false",
+                    "analysis": {
+                        "resultPic": "",
+                        "result": [
+                            {
+                                "title": "",
+                                "value": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "lang": "ch",
+        "user": null
+    },
     "ZH_Medicine_debug_command": {
         "action": "ZH_Medicine_debug_command",
         "type": "mod",
         "lang": "ch",
         "body": {
-            "command": 36,
+            "command": 32,
             "parameter": {
                 "name": "debug",
                 "owner": "system",
@@ -116,7 +327,7 @@
                                     "type": "choice",
                                     "max": "",
                                     "min": "",
-                                    "value": "1",
+                                    "value": "0",
                                     "note": "Note info",
                                     "items": [
                                         10,
@@ -161,7 +372,7 @@
                                     "type": "choice",
                                     "max": "100",
                                     "min": "0",
-                                    "value": "2",
+                                    "value": "0",
                                     "note": "",
                                     "items": [
                                         10,

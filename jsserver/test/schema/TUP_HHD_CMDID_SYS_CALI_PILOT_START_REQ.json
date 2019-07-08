@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "srcNode": {
+            "type": "string",
+            "minLength": 1
+        },
+        "destNode": {
+            "type": "string",
+            "minLength": 1
+        },
+        "srcId": {
+            "type": "string",
+            "minLength": 1
+        },
+        "destId": {
+            "type": "string",
+            "minLength": 1
+        },
+        "topicId": {
+            "type": "string",
+            "minLength": 1
+        },
+        "cmdId": {
+            "type": "number"
+        },
+        "cmdValue": {
+            "type": "number"
+        },
+        "hlContent": {
+            "type": "object",
+            "properties": {
+                "parameter": {
+                    "type": "object",
+                    "properties": {
+                        "work_round": {
+                            "type": "number"
+                        }
+                    },
+                    "required": ["work_round"]
+                },
+                "session_id": {
+                    "type": "number"
+                }
+            },
+            "required": ["parameter", "session_id"]
+        }
+    },
+    "required": ["srcNode", "destNode", "srcId", "destId", "topicId", "cmdId", "cmdValue", "hlContent"]
+}

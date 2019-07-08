@@ -1,0 +1,1044 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "srcNode": {
+            "type": "string",
+            "minLength": 1
+        },
+        "destNode": {
+            "type": "string",
+            "minLength": 1
+        },
+        "srcId": {
+            "type": "string",
+            "minLength": 1
+        },
+        "destId": {
+            "type": "string",
+            "minLength": 1
+        },
+        "topicId": {
+            "type": "string",
+            "minLength": 1
+        },
+        "cmdId": {
+            "type": "number"
+        },
+        "cmdValue": {
+            "type": "number"
+        },
+        "hlContent": {
+            "type": "object",
+            "properties": {
+                "parameter": {
+                    "type": "object",
+                    "properties": {
+                        "groups": {
+                            "type": "object",
+                            "properties": {
+                                "hb_selct": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "hb_type": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "string"
+                                                        },
+                                                        "min": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "items": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "required": ["96_STANDARD"],
+                                                                "properties": {}
+                                                            }
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "items", "note"]
+                                                }
+                                            },
+                                            "required": ["hb_type"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                },
+                                "glpar_set": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "autocfy": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                }
+                                            },
+                                            "required": ["autocfy"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                },
+                                "ctrs_set": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "fixpoint": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                },
+                                                "autoexpo": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                },
+                                                "pic2cfy": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                },
+                                                "startauto": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                },
+                                                "timeauto": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                },
+                                                "blulim": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "pictti": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                }
+                                            },
+                                            "required": ["fixpoint", "autoexpo", "pic2cfy", "startauto", "timeauto", "blulim", "pictti"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                },
+                                "axis_set": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "leftdown_x": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "leftdown_y": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "rightup_x": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "rightup_y": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                }
+                                            },
+                                            "required": ["leftdown_x", "leftdown_y", "rightup_x", "rightup_y"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                },
+                                "piccfy_set": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "smalldown_thd": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "smallmid_thd": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                           },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "midbig_thd": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "bigup_thd": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "addup": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                }
+                                            },
+                                            "required": ["smalldown_thd", "smallmid_thd", "midbig_thd", "bigup_thd", "addup"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                },
+                                "video_set": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "openvideo": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "value": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "value", "note"]
+                                                },
+                                                "videotti": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                }
+                                            },
+                                            "required": ["openvideo", "videotti"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                },
+                                "picsave_set": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "uncfy": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "string"
+                                                        },
+                                                        "min": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "cfied": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "string"
+                                                        },
+                                                        "min": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                }
+                                            },
+                                            "required": ["uncfy", "cfied"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                },
+                                "moto_set": {
+                                    "type": "object",
+                                    "properties": {
+                                        "groupname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "groupkey": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "list": {
+                                            "type": "object",
+                                            "properties": {
+                                                "acc": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "deacc": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "spd": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "zerospd": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "zeroacc": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                },
+                                                "backsteps": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "paraname": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "parakey": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "type": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        },
+                                                        "max": {
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "type": "number"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        },
+                                                        "note": {
+                                                            "type": "string",
+                                                            "minLength": 1
+                                                        }
+                                                    },
+                                                    "required": ["paraname", "parakey", "type", "max", "min", "value", "note"]
+                                                }
+                                            },
+                                            "required": ["acc", "deacc", "spd", "zerospd", "zeroacc", "backsteps"]
+                                        }
+                                    },
+                                    "required": ["groupname", "groupkey", "list"]
+                                }
+                            },
+                            "required": ["hb_selct", "glpar_set", "ctrs_set", "axis_set", "piccfy_set", "video_set", "picsave_set", "moto_set"]
+                        }
+                    },
+                    "required": ["groups"]
+                },
+                "session_id": {
+                    "type": "number"
+                }
+            },
+            "required": ["parameter", "session_id"]
+        }
+    },
+    "required": ["srcNode", "destNode", "srcId", "destId", "topicId", "cmdId", "cmdValue", "hlContent"]
+}

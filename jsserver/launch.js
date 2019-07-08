@@ -1,9 +1,5 @@
 ﻿const httpserver = require("./httpserver");
 const argv = require('minimist')(process.argv.slice(2));
-let mqtthost = "" //default as docker
-let mqttport = ""
-let httpport = ""
-let mqttwebsocletport = ""
 const flagfolder = "/rootfs"
 console.log("使用说明： \n \
 nodejs launch.js -m 127.0.0.1 -h 1883 -w 9001 -p 8888 \n \

@@ -1,4 +1,9 @@
 {
+    "huicombusreqmapresp":{
+        "2624":2752,
+        "2626":2754,
+        "2625":2753
+    },
     "responsemap":{
         "2560":"2560",
         "2561":"2560",
@@ -8,7 +13,9 @@
         "2599":"empty",
         "2594":"empty",
         "2592":"empty",
-        "2626":"empty"
+        "2626":"empty",
+        "2625":"empty",
+        "2624":"2752"
     },
     "resp": {
         "srcNode": "HUICOBUS_MQTT_NODEID_TUPSVR",
@@ -21,6 +28,10 @@
         "hlContent": {}
     },
     "empty":{
+        "parameter": {},
+        "session_id": 0
+    },
+    "2752":{
         "parameter": {},
         "session_id": 0
     },
