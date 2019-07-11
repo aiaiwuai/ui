@@ -21,7 +21,7 @@ const flagfolder = "/rootfs";
 const mqttlogfile = APP_PATH + "/mqttlog/send/";
 //所有缓存的resp
 var responssaved = {}
-var requestssave = {}
+var requestssaved = {}
 var jsoninputsaved={}
 var mqttFromTup={}
 var sio = require('socket.io');
@@ -97,19 +97,20 @@ client.on("message", function (topic, message) {
     var resfromtup = {};
     if (topic == 'HUICOBUS_MQTT_TOPIC_TUP2UIP') {
         resfromtup = JSON.parse(message.toString());
+        let sessionidfromtup=resfromtup['hlContent']["session_id"];
         console.log("resfromtup:");
         console.log(resfromtup);
         
         //当前response
         var respc;
-        if (responssaved[resfromtup['hlContent']["session_id"]] != null) {
-            mqttFromTup[resfromtup['hlContent']["session_id"]]?null:mqttFromTup[resfromtup['hlContent']["session_id"]]={};
-            mqttFromTup[resfromtup['hlContent']["session_id"]][resfromtup.cmdId]=resfromtup;
+        if (responssaved[sessionidfromtup] != null) {
+            mqttFromTup[sessionidfromtup]?null:mqttFromTup[sessionidfromtup]={};
+            mqttFromTup[sessionidfromtup][resfromtup.cmdId]=resfromtup;
             switch(resfromtup.cmdId){
                 case 2752:
-                    var  requestObj=requestssave[resfromtup['hlContent']["session_id"]];
+                    var  requestObj=requestssaved[sessionidfromtup];
                     var jsonInput = generateMqttToTup(requestObj,"TUP_HHD_CMDID_SYS_MENG_COMMAND_REQ");
-                        jsonInput['hlContent']["session_id"] = resfromtup['hlContent']["session_id"];
+                        jsonInput['hlContent']["session_id"] = sessionidfromtup;
                         client.publish('HUICOBUS_MQTT_TOPIC_UIP2TUP', JSON.stringify(jsonInput),
                             function (Error) {
                                 console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP:"+jsonInput);
@@ -117,9 +118,9 @@ client.on("message", function (topic, message) {
                     })
                     return;
                     case 2754:
-                            var  requestObj=requestssave[resfromtup['hlContent']["session_id"]];
-                            var jsonInput = generateMqttToTup(requestObj,"TUP_HHD_CMDID_SYS_MENG_EXIT_REQ");
-                                jsonInput['hlContent']["session_id"] = resfromtup['hlContent']["session_id"];
+                              requestObj=requestssaved[sessionidfromtup];
+                            jsonInput = generateMqttToTup(requestObj,"TUP_HHD_CMDID_SYS_MENG_EXIT_REQ");
+                                jsonInput['hlContent']["session_id"] = sessionidfromtup;
                                 client.publish('HUICOBUS_MQTT_TOPIC_UIP2TUP', JSON.stringify(jsonInput),
                                     function (Error) {
                                         console.log("publish HUICOBUS_MQTT_TOPIC_UIR2TUP:"+jsonInput);
@@ -128,23 +129,27 @@ client.on("message", function (topic, message) {
                         return;
                         case 2753:
                             console.log(mqttFromTup);
-                                resfromtup=mqttFromTup[resfromtup['hlContent']["session_id"]][2754];
+                            resfromtup=mqttFromTup[sessionidfromtup][2754];
             }
-            respc = responssaved[resfromtup["hlContent"]["session_id"]];
+            respc = responssaved[sessionidfromtup];
             respc.writeHead(200, {
                 'Content-Type': 'text/html;charset=utf-8'
             });
             console.log("resfromtup");
             console.log(resfromtup);
             // console.log("requestObj.action:" + action);
-            var jsonInput=jsoninputsaved[resfromtup['hlContent']["session_id"]];
+            jsonInput=jsoninputsaved[sessionidfromtup];
             if (resfromtup.destId == jsonInput.srcId) {
-                let responseret = getResponseRet(requestssave[resfromtup['hlContent']["session_id"]], resfromtup);
+                let responseret = getResponseRet(requestssaved[sessionidfromtup], resfromtup);
                 respc.writeHead(200, {
                     'Content-Type': 'text/plain;charset=utf-8'
                 });
                 try {
                     respc.finished?"":respc.write(JSON.stringify(responseret));
+                    Reflect.deleteProperty(jsoninputsaved, sessionidfromtup); 
+                    Reflect.deleteProperty(responssaved, sessionidfromtup); 
+                    Reflect.deleteProperty(requestssaved, sessionidfromtup); 
+
                 } catch (error) {
                     return {}
                 }
@@ -587,7 +592,7 @@ var httpServer = http.createServer(function (request, response) {
                         var ts = new Date().getTime();
                         //request bundle
                         responssaved[ts] = response;
-                        requestssave[ts] = requestObj;
+                        requestssaved[ts] = requestObj;
                         var jsonInput = generateMqttToTup(requestObj);
                         jsoninputsaved[ts]=jsonInput;
                         jsonInput['hlContent']["session_id"] = ts;

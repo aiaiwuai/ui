@@ -65,10 +65,12 @@ client.subscribe('HUICOBUS_MQTT_TOPIC_UIP2TUP', function (err) {
 client.on("message", function (topic, message) {
     console.log("=========================");
     console.log("ON message:" + topic)
-    resp=respheader["resp"];
-    resfromtup = JSON.parse(message.toString());
-    console.log(resfromtup);
+    let resp=respheader["resp"];
+    let resfromtup = JSON.parse(message.toString());
+    console.log("COMMAND ID:"+resfromtup["cmdId"]);
+    // console.log(resfromtup);
     console.log("=========================");
+    
 
     let logfile = mqttlogfile + topic + ".log";
  
@@ -79,14 +81,14 @@ client.on("message", function (topic, message) {
     })
     if (argv["r"] &&  topic == 'HUICOBUS_MQTT_TOPIC_UIP2TUP') {
         resfromtup = JSON.parse(message.toString());
-        console.log(resfromtup);
+        // console.log(resfromtup);
 
         // console.log(resfromtup["cmdId"])
         resp["hlContent"]=respheader[respheader.responsemap[resfromtup["cmdId"]]]
         // console.log(resp)
         resp["hlContent"]["session_id"]=resfromtup["hlContent"]["session_id"];
         resp["cmdId"]=respheader.huicombusreqmapresp[resfromtup["cmdId"]];
-        console.log(resp)
+        // console.log(resp)
 
         client.publish('HUICOBUS_MQTT_TOPIC_TUP2UIP', JSON.stringify(resp),
                             function (Error) {
