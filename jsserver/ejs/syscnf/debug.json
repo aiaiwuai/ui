@@ -106,7 +106,7 @@
                     {
                         "paraname": "para1",
                         "parakey":"par1",
-                        "type": "choice",
+                        "type": "int",
                         "max": "",
                         "min": "",
                         "value": 0,
@@ -121,7 +121,7 @@
                     {
                         "paraname": "para2",
                         "parakey":"par2",
-                        "type": "choice",
+                        "type": "int",
                         "max": "",
                         "min": "",
                         "value": 0,
@@ -136,7 +136,7 @@
                     {
                         "paraname": "para3",
                         "parakey":"par3",
-                        "type": "choice",
+                        "type": "int",
                         "max": "",
                         "min": "",
                         "value": 0,
@@ -151,7 +151,7 @@
                     {
                         "paraname": "para4",
                         "parakey":"par4",
-                        "type": "choice",
+                        "type": "int",
                         "max": "100",
                         "min": "0",
                         "value": "0",

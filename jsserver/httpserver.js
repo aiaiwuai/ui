@@ -290,7 +290,7 @@ function getHlcontent(action, body, headparameterkey) {
                 let item = _.find(body.parameter.parameter.groups[0].list, (o) => {
                     return o.parakey == key
                 })
-                hlContentDefined.parameter[key] = item.items[item.value];
+                hlContentDefined.parameter[key] = parseInt(item.value,10);
             });
             break;
         case "ZH_Medicine_cali_mode":

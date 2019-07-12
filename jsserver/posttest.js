@@ -1,5 +1,11 @@
 const argv = require('minimist')(process.argv.slice(2));
-const postjson=require("./posttest.json")
+var  postjson={}
+try {
+     postjson=require("./posttest.json")
+
+} catch (error) {
+     postjson={}
+}
 const allpostcmd=Object.keys(postjson);
 const _ = require("lodash");
 var request = require('request');

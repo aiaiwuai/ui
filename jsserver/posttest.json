@@ -94,8 +94,8 @@
         "type": "query",
         "lang": "ch",
         "body": {
-            "username": "1",
-            "password": "NWoZK3kTsExUV00Ywo1G5jlUKKs"
+            "username": "3",
+            "password": "d95o2uzYI7q7tY7bHI4U1xBug7s"
         },
         "user": "null"
     },
@@ -125,10 +125,25 @@
                         "3",
                         "4",
                         "5",
-                        "6"
+                        "6",
+                        "7",
+                        "8",
+                        "9",
+                        "10",
+                        "11",
+                        "12"
                     ],
-                    "latitude": [],
-                    "name": "2x3",
+                    "latitude": [
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "E",
+                        "F",
+                        "G",
+                        "H"
+                    ],
+                    "name": "8x12",
                     "batch": "",
                     "date": "",
                     "analysis": "false",
@@ -174,184 +189,5 @@
         },
         "lang": "ch",
         "user": null
-    },
-    "ZH_Medicine_debug_command": {
-        "action": "ZH_Medicine_debug_command",
-        "type": "mod",
-        "lang": "ch",
-        "body": {
-            "command": 32,
-            "parameter": {
-                "name": "debug",
-                "owner": "system",
-                "buttons": [
-                    {
-                        "paraname": "SPS_SHK_HAND(设备握手)",
-                        "type": "button",
-                        "action": 32
-                    },
-                    {
-                        "paraname": "SPS_SET_WK_MODE(设置工作模式)",
-                        "type": "button",
-                        "action": 33
-                    },
-                    {
-                        "paraname": "SPS_SET_ACC(设置加速度)",
-                        "type": "button",
-                        "action": 34
-                    },
-                    {
-                        "paraname": "SPS_SET_DEACC(设置减速度)",
-                        "type": "button",
-                        "action": 35
-                    },
-                    {
-                        "paraname": "SPS_SET_PPC(设置一圈步伐)",
-                        "type": "button",
-                        "action": 36
-                    },
-                    {
-                        "paraname": "SPS_SET_MV_SPD(设置移动速度)",
-                        "type": "button",
-                        "action": 37
-                    },
-                    {
-                        "paraname": "SPS_SET_ZO_SPD(设置归零速度)",
-                        "type": "button",
-                        "action": 38
-                    },
-                    {
-                        "paraname": "SPS_SET_ZO_ACC(设置归零加速度)",
-                        "type": "button",
-                        "action": 39
-                    },
-                    {
-                        "paraname": "SPS_SET_INT_SP(设置靠边后退步伐)",
-                        "type": "button",
-                        "action": 40
-                    },
-                    {
-                        "paraname": "SPS_MV_PULS(移动步伐)",
-                        "type": "button",
-                        "action": 48
-                    },
-                    {
-                        "paraname": "SPS_MV_SPD(移动速度)",
-                        "type": "button",
-                        "action": 49
-                    },
-                    {
-                        "paraname": "SPS_MV_ZERO(归零)",
-                        "type": "button",
-                        "action": 50
-                    },
-                    {
-                        "paraname": "SPS_STP_IMD(立即停止)",
-                        "type": "button",
-                        "action": 51
-                    },
-                    {
-                        "paraname": "SPS_STP_NOR(缓慢停止)",
-                        "type": "button",
-                        "action": 52
-                    },
-                    {
-                        "paraname": "SPS_INQ_EN(查询激活状态)",
-                        "type": "button",
-                        "action": 53
-                    },
-                    {
-                        "paraname": "SPS_INQ_RUN(查询运行状态)",
-                        "type": "button",
-                        "action": 54
-                    },
-                    {
-                        "paraname": "SPS_INQ_STATUS(查询一般状态)",
-                        "type": "button",
-                        "action": 55
-                    },
-                    {
-                        "paraname": "SPS_TEST_PULES(测试脉冲数)",
-                        "type": "button",
-                        "action": 56
-                    },
-                    {
-                        "paraname": "SPS_SET_EXTI_DELAY_TIME(设置限位器触发迟滞)",
-                        "type": "button",
-                        "action": 57
-                    }
-                ],
-                "parameter": {
-                    "groups": [
-                        {
-                            "groupname": "debug parameter",
-                            "list": [
-                                {
-                                    "paraname": "para1",
-                                    "parakey": "par1",
-                                    "type": "choice",
-                                    "max": "",
-                                    "min": "",
-                                    "value": "0",
-                                    "note": "Note info",
-                                    "items": [
-                                        10,
-                                        100,
-                                        1000,
-                                        10000
-                                    ]
-                                },
-                                {
-                                    "paraname": "para2",
-                                    "parakey": "par2",
-                                    "type": "choice",
-                                    "max": "",
-                                    "min": "",
-                                    "value": "0",
-                                    "note": "Note info",
-                                    "items": [
-                                        10,
-                                        100,
-                                        1000,
-                                        10000
-                                    ]
-                                },
-                                {
-                                    "paraname": "para3",
-                                    "parakey": "par3",
-                                    "type": "choice",
-                                    "max": "",
-                                    "min": "",
-                                    "value": "0",
-                                    "note": "Note info",
-                                    "items": [
-                                        10,
-                                        100,
-                                        1000,
-                                        10000
-                                    ]
-                                },
-                                {
-                                    "paraname": "para4",
-                                    "parakey": "par4",
-                                    "type": "choice",
-                                    "max": "100",
-                                    "min": "0",
-                                    "value": "0",
-                                    "note": "",
-                                    "items": [
-                                        10,
-                                        100,
-                                        1000,
-                                        10000
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        },
-        "user": "123123123"
     }
 }

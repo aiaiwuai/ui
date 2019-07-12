@@ -5,7 +5,13 @@ const jsonSchemaGenerator = require('json-schema-generator');
 const fs = require("fs")
 const path = require("path")
 const pth = path.resolve(__dirname);
-const postjson=require("./posttest.json")
+var  postjson={}
+try {
+    postjson=require("./posttest.json")
+
+} catch (error) {
+    postjson={}
+}
 const schemadir=pth+"/test/schema/";
 const schemaOkCmd=[
     "TUP_HHD_CMDID_SYS_GET_CONFIG_REQ",
